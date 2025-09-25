@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Epic Go‑Live FAQ Assistant</title>
+</head>
+<body>
+  <div id="app">Loading…</div>
+  <script id="faq-data" type="application/json">
+{
+  "version": "2025-09-25 (CardioServer & EVC tabs)",
+  "roles": [
+    {
+      "id": "nursing",
+      "name": "Nursing",
+      "color": "#4db5ff"
+    },
+    {
+      "id": "hospitalist",
+      "name": "Hospitalist",
+      "color": "#2de0a0"
+    },
+    {
+      "id": "edasap",
+      "name": "ED / ASAP",
+      "color": "#ffb020"
+    },
+    {
+      "id": "beaker",
+      "name": "Beaker (Lab)",
+      "color": "#c679ff"
+    },
+    {
+      "id": "willow",
+      "name": "Willow (Pharmacy)",
+      "color": "#ff6b6b"
+    },
+    {
+      "id": "general",
+      "name": "Go-Live (All Users)",
+      "color": "#8892f6"
+    },
+    {
+      "id": "cardioserver",
+      "name": "CardioServer",
+      "color": "#7cb342"
+    },
+    {
+      "id": "evc",
+      "name": "Telehealth (EVC)",
+      "color": "#ff8a65"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "what-if-a-study-doesn-t-match-any-patien",
+      "role": "general",
+      "q": "What if a study doesn’t match any patient/order?",
+      "a": [
+        "Use Link to Order/Reconcile, search by MRN/name, then select correct order."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "can-i-trash-a-study-that-s-already-uncon",
+      "role": "general",
+      "q": "Can I trash a study that’s already Unconfirmed?",
+      "a": [
+        "No — only Preliminary studies can be trashed."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-restore-a-study-i-accidentally-",
+      "role": "general",
+      "q": "How do I restore a study I accidentally deleted?",
+      "a": [
+        "Go to Trash view, select study, click Restore/Untrash within 30 days."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-upload-an-ecg-file-manually",
+      "role": "general",
+      "q": "How do I upload an ECG file manually?",
+      "a": [
+        "Go to Upload",
+        "ECG Upload, browse file, enter MRN, then Upload",
+        "Link",
+        "Assign."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-know-if-a-study-is-final",
+      "role": "general",
+      "q": "How do I know if a study is final?",
+      "a": [
+        "Status shows Confirmed once provider signs."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "can-i-assign-multiple-providers-to-one-s",
+      "role": "general",
+      "q": "Can I assign multiple providers to one study?",
+      "a": [
+        "No — assign one provider.",
+        "If reassignment needed, update Provider field."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-work-across-multiple-facilities",
+      "role": "general",
+      "q": "How do I work across multiple facilities?",
+      "a": [
+        "Use Facility Filter in Worklist",
+        "select multiple",
+        "Apply."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "where-do-i-find-user-guides",
+      "role": "general",
+      "q": "Where do I find user guides?",
+      "a": [
+        "Click Help",
+        "User Manual in CardioServer."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-send-a-patient-a-telehealth-lin",
+      "role": "general",
+      "q": "How do I send a patient a telehealth link?",
+      "a": [
+        "Open EVC Navigator",
+        "Invite Patient",
+        "select Text or Email",
+        "verify info",
+        "Send."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "what-if-the-patient-didn-t-get-the-link",
+      "role": "general",
+      "q": "What if the patient didn’t get the link?",
+      "a": [
+        "Confirm correct phone/email",
+        "resend invite",
+        "check spam folder for email."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "can-multiple-people-join-a-video-visit",
+      "role": "general",
+      "q": "Can multiple people join a video visit?",
+      "a": [
+        "Yes, use Add Participant to invite interpreters, caregivers, or specialists."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "where-do-i-document-the-telehealth-visit",
+      "role": "general",
+      "q": "Where do I document the telehealth visit?",
+      "a": [
+        "Use NoteWriter or a progress note while video is active.",
+        "Insert telehealth compliance SmartPhrase."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "what-if-the-video-freezes-during-visit",
+      "role": "general",
+      "q": "What if the video freezes during visit?",
+      "a": [
+        "End session",
+        "re-launch from Navigator",
+        "resend patient invite."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "do-i-need-to-document-patient-consent-fo",
+      "role": "general",
+      "q": "Do I need to document patient consent for telehealth?",
+      "a": [
+        "Yes, use your site’s consent SmartPhrase or workflow.",
+        "Most organizations require consent at start of encounter."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "can-i-switch-from-video-to-audio-only",
+      "role": "general",
+      "q": "Can I switch from video to audio only?",
+      "a": [
+        "Yes, select Join by Phone or disable camera, depending on integration."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "helpdesk-go-live",
+      "role": "general",
+      "q": "How do I contact the Help Desk during Go-Live?",
+      "a": [
+        "Internal calls: Dial extension 8323.",
+        "External calls: Dial 1-800-418-1828.",
+        "Follow the prompts to route your call to the right resource."
+      ],
+      "tags": [
+        "Help Desk",
+        "Go-Live",
+        "Support"
+      ],
+      "links": []
+    },
+    {
+      "id": "command-center-location",
+      "role": "general",
+      "q": "Where is the Command Center located?",
+      "a": [
+        "Sister Amata Sweeney Auditorium (Lower Level)."
+      ],
+      "tags": [
+        "Command Center",
+        "Location"
+      ],
+      "links": []
+    },
+    {
+      "id": "shift-change",
+      "role": "general",
+      "q": "What are shift change times and process for floor support?",
+      "a": [
+        "Report to the Command Center (or designated Quiet Room area) to sign in/out.",
+        "Incoming support conducts brief handoff with outgoing support, then proceeds to assigned departments.",
+        "Shift changes occur between 6:00–6:30 AM and 6:00–6:30 PM."
+      ],
+      "tags": [
+        "Shifts",
+        "Floor Support",
+        "Command Center"
+      ],
+      "links": []
+    },
+    {
+      "id": "citrix-access",
+      "role": "general",
+      "q": "How do I access Epic via Citrix?",
+      "a": [
+        "On Ascension workstations, open https://maportal.primehealthcare.com",
+        "On Prime Healthcare workstations, follow standard login procedures."
+      ],
+      "tags": [
+        "Citrix",
+        "Access",
+        "Epic"
+      ],
+      "links": [
+        {
+          "text": "Prime MA Portal",
+          "href": "https://maportal.primehealthcare.com"
+        }
+      ]
+    },
+    {
+      "id": "password-reset",
+      "role": "general",
+      "q": "How do I reset my password or resolve login issues?",
+      "a": [
+        "Call the Help Desk to request a password reset.",
+        "If you have login issues, call the Help Desk and open a ServiceNow ticket.",
+        "If you completed training but do not have an Epic account, call the Help Desk and submit a ticket for the security team."
+      ],
+      "tags": [
+        "Password",
+        "Login",
+        "Security",
+        "Help Desk"
+      ],
+      "links": []
+    },
+    {
+      "id": "phi-guidelines",
+      "role": "general",
+      "q": "What are the guidelines for PHI when reporting issues?",
+      "a": [
+        "Share only the minimum patient information necessary to resolve the issue.",
+        "Do not include PHI in email subject lines or group chats (e.g., WhatsApp, Teams).",
+        "Keep track of ServiceNow ticket IDs for follow-up."
+      ],
+      "tags": [
+        "PHI",
+        "Privacy",
+        "ServiceNow"
+      ],
+      "links": []
+    },
+    {
+      "id": "ticket-priority",
+      "role": "general",
+      "q": "How are tickets prioritized during Go-Live?",
+      "a": [
+        "Priority 1: Critical outage or HIPAA violations (e.g., system-wide Epic/PACS outage).",
+        "Priority 2: Workflow obstructed with difficult workaround (e.g., analyzer results not interfacing, whole department access issues).",
+        "Priority 3: Workflow obstructed with workaround available (e.g., label printer down, flowsheet entry issues).",
+        "Priority 4: Default for most issues; minor impact or few users (e.g., single Dragon mic not working, optimization requests)."
+      ],
+      "tags": [
+        "ServiceNow",
+        "Priority",
+        "Go-Live"
+      ],
+      "links": []
+    },
+    {
+      "id": "ticket-entry",
+      "role": "general",
+      "q": "How do I enter a ServiceNow ticket?",
+      "a": [
+        "From Epic Hyperdrive, click **SERVICENOW** in the toolbar header, or browse to https://servicenow.primehealthcare.com",
+        "Click **Report an Issue** and complete all fields.",
+        "Include the phrase **Go Live** in the short description."
+      ],
+      "tags": [
+        "ServiceNow",
+        "Ticketing",
+        "Hyperdrive"
+      ],
+      "links": [
+        {
+          "text": "ServiceNow",
+          "href": "https://servicenow.primehealthcare.com"
+        }
+      ]
+    },
+    {
+      "id": "dress-code",
+      "role": "general",
+      "q": "What is the dress code for floor support?",
+      "a": [
+        "Floor support will wear Prime vests; neutral-colored tennis shoes are allowed.",
+        "All staff must display their badge at all times."
+      ],
+      "tags": [
+        "Dress Code",
+        "Floor Support"
+      ],
+      "links": []
+    },
+    {
+      "id": "access-wifi",
+      "role": "general",
+      "q": "How do I access the hospital and WiFi?",
+      "a": [
+        "Daytime access: Use the main entrance (Lobby 5:00 AM–8:00 PM).",
+        "After-hours: Use the phone at the main entrance to contact security dispatch (24/7).",
+        "WiFi: Prime employees use **PHSI Wireless**; others use **Guest WiFi**."
+      ],
+      "tags": [
+        "Access",
+        "Security",
+        "WiFi"
+      ],
+      "links": []
+    },
+    {
+      "id": "site-logistics-hfil",
+      "role": "general",
+      "q": "Site logistics: Holy Family Medical Center (Des Plaines, IL)",
+      "a": [
+        "Address: 100 North River Road, Des Plaines, IL 60016.",
+        "Parking information: See facility signage and Command Center updates."
+      ],
+      "tags": [
+        "Logistics",
+        "Holy Family Medical Center",
+        "HFIL"
+      ],
+      "links": []
+    },
+    {
+      "id": "covid-policy",
+      "role": "general",
+      "q": "What is the COVID screening policy during Go-Live?",
+      "a": [
+        "Provide vaccination card or approved exemption if required by site.",
+        "Follow current hospital masking protocol.",
+        "Keep your badge visible at all times."
+      ],
+      "tags": [
+        "COVID-19",
+        "Policy"
+      ],
+      "links": []
+    },
+    {
+      "id": "what-if-a-study-doesn-t-match-any-patien-cs",
+      "role": "cardioserver",
+      "q": "What if a study doesn’t match any patient/order?",
+      "a": [
+        "Use Link to Order/Reconcile, search by MRN/name, then select correct order."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "can-i-trash-a-study-that-s-already-uncon-cs",
+      "role": "cardioserver",
+      "q": "Can I trash a study that’s already Unconfirmed?",
+      "a": [
+        "No — only Preliminary studies can be trashed."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-restore-a-study-i-accidentally--cs",
+      "role": "cardioserver",
+      "q": "How do I restore a study I accidentally deleted?",
+      "a": [
+        "Go to Trash view, select study, click Restore/Untrash within 30 days."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-upload-an-ecg-file-manually-cs",
+      "role": "cardioserver",
+      "q": "How do I upload an ECG file manually?",
+      "a": [
+        "Go to Upload",
+        "ECG Upload, browse file, enter MRN, then Upload",
+        "Link",
+        "Assign."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-know-if-a-study-is-final-cs",
+      "role": "cardioserver",
+      "q": "How do I know if a study is final?",
+      "a": [
+        "Status shows Confirmed once provider signs."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "can-i-assign-multiple-providers-to-one-s-cs",
+      "role": "cardioserver",
+      "q": "Can I assign multiple providers to one study?",
+      "a": [
+        "No — assign one provider.",
+        "If reassignment needed, update Provider field."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-work-across-multiple-facilities-cs",
+      "role": "cardioserver",
+      "q": "How do I work across multiple facilities?",
+      "a": [
+        "Use Facility Filter in Worklist",
+        "select multiple",
+        "Apply."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "where-do-i-find-user-guides-cs",
+      "role": "cardioserver",
+      "q": "Where do I find user guides?",
+      "a": [
+        "Click Help",
+        "User Manual in CardioServer."
+      ],
+      "tags": [
+        "CardioServer",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "how-do-i-send-a-patient-a-telehealth-lin-evc",
+      "role": "evc",
+      "q": "How do I send a patient a telehealth link?",
+      "a": [
+        "Open EVC Navigator",
+        "Invite Patient",
+        "select Text or Email",
+        "verify info",
+        "Send."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "what-if-the-patient-didn-t-get-the-link-evc",
+      "role": "evc",
+      "q": "What if the patient didn’t get the link?",
+      "a": [
+        "Confirm correct phone/email",
+        "resend invite",
+        "check spam folder for email."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "can-multiple-people-join-a-video-visit-evc",
+      "role": "evc",
+      "q": "Can multiple people join a video visit?",
+      "a": [
+        "Yes, use Add Participant to invite interpreters, caregivers, or specialists."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "where-do-i-document-the-telehealth-visit-evc",
+      "role": "evc",
+      "q": "Where do I document the telehealth visit?",
+      "a": [
+        "Use NoteWriter or a progress note while video is active.",
+        "Insert telehealth compliance SmartPhrase."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "what-if-the-video-freezes-during-visit-evc",
+      "role": "evc",
+      "q": "What if the video freezes during visit?",
+      "a": [
+        "End session",
+        "re-launch from Navigator",
+        "resend patient invite."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "do-i-need-to-document-patient-consent-fo-evc",
+      "role": "evc",
+      "q": "Do I need to document patient consent for telehealth?",
+      "a": [
+        "Yes, use your site’s consent SmartPhrase or workflow.",
+        "Most organizations require consent at start of encounter."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    },
+    {
+      "id": "can-i-switch-from-video-to-audio-only-evc",
+      "role": "evc",
+      "q": "Can I switch from video to audio only?",
+      "a": [
+        "Yes, select Join by Phone or disable camera, depending on integration."
+      ],
+      "tags": [
+        "EVC",
+        "Module"
+      ],
+      "links": []
+    }
+  ],
+  "quickTags": [
+    "CardioServer",
+    "Citrix",
+    "Command Center",
+    "EVC",
+    "Help Desk",
+    "Logistics",
+    "PHI",
+    "ServiceNow",
+    "Shifts",
+    "Telehealth",
+    "WiFi"
+  ]
+}
+</script>
+  <script>document.getElementById('app').innerHTML='Data file placeholder created';</script>
+</body></html>
