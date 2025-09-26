@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Epic Go-Live FAQ Assistant</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #003366; }
+    select, input { margin: 10px 0; padding: 6px; }
+    .workflow { margin: 20px 0; padding: 10px; background: #f5f9ff; border: 1px solid #cce; border-radius: 6px; }
+    .workflow h2 { margin-top: 0; color: #003366; }
+    .faq-item { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+    .faq-question { font-weight: bold; margin-bottom: 5px; color: #003366; }
+    .faq-answer { white-space: pre-line; }
+  </style>
+</head>
+<body>
+  <h1>Epic Go-Live FAQ Assistant</h1>
+
+  <label for="department">Select Module:</label>
+  <select id="department"></select>
+  <br>
+
+  <label for="search">Search FAQ:</label>
+  <input type="text" id="search" placeholder="Enter keyword...">
+
+  <div id="workflows"></div>
+  <h2>Frequently Asked Questions</h2>
+  <div id="faqs"></div>
+
+  <script>
+    let data = {};
+
+    // Load JSON file
+    fetch('epic_go_live_faq.json')
+      .then(response => response.json())
+      .then(json => {
+        data = json;
+        const deptSelect = document.getElementById('department');
+
+        // Populate department dropdown
+        data.departments.forEach((dept, index) => {
+          const option = document.createElement('option');
+          option.value = dept.name;
+          option.textContent = dept.name;
+          deptSelect.appendChild(option);
+        });
+
+        deptSelect.addEventListener('change', updateContent);
+        document.getElementById('search').addEventListener('input', updateContent);
+
+        // Default load first department
+        deptSelect.value = data.departments[0].name;
+        updateContent();
+      });
+
+    function updateContent() {
+      const deptName = document.getElementById('department').value;
+      const searchTerm = document.getElementById('search').value.toLowerCase();
+      const dept = data.departments.find(d => d.name === deptName);
+      const workflowsDiv = document.getElementById('workflows');
+      const faqsDiv = document.getElementById('faqs');
+
+      // Workflows
+      workflowsDiv.innerHTML = '<h2>Workflow Steps</h2><ol>' +
+        dept.workflow
+          .filter(step => step.toLowerCase().includes(searchTerm) || searchTerm === '')
+          .map(step => `<li>${step}</li>`)
+          .join('') +
+        '</ol>';
+
+      // FAQs
+      faqsDiv.innerHTML = '';
+      dept.faq
+        .filter(q => q.question.toLowerCase().includes(searchTerm) || q.answer.toLowerCase().includes(searchTerm))
+        .forEach(q => {
+          const div = document.createElement('div');
+          div.className = 'faq-item';
+          div.innerHTML = `<div class="faq-question">Q: ${q.question}</div><div class="faq-answer">A: ${q.answer}</div>`;
+          faqsDiv.appendChild(div);
+        });
+    }
+  </script>
+</body>
+</html>
