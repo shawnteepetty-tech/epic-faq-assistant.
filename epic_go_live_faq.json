@@ -1,0 +1,17 @@
+{
+  "departments": [
+    {
+      "name": "General",
+      "faq": [
+        {
+          "question": "What is Epic Go-Live?",
+          "answer": "Epic Go-Live is the transition period when Epic is launched in production for all users."
+        },
+        {
+          "question": "Who do I contact for support?",
+          "answer": "Please contact the Go-Live Command Center or your assigned Super User."
+        }
+      ]
+    }
+  ]
+}
