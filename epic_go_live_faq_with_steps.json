@@ -1,0 +1,126 @@
+[
+  {
+    "module": "Ambulatory",
+    "qa": [
+      {
+        "q": "Where do I find tip sheets for ambulatory workflows?",
+        "a": "Press F1 \u2192 Learning Home Dashboard \u2192 select role-specific section.",
+        "steps": [
+          "Press F1",
+          "Learning Home Dashboard",
+          "select role-specific section."
+        ]
+      },
+      {
+        "q": "How do I set a patient\u2019s preferred lab?",
+        "a": "During rooming, in the Rooming Navigator, select the Preferred Lab field."
+      },
+      {
+        "q": "Why isn\u2019t my Medicare Wellness form showing?",
+        "a": "Scroll to bottom of Screenings Navigator; if missing, go to Flowsheets \u2192 search 'Medicare Wellness'.",
+        "steps": [
+          "Scroll to bottom of Screenings Navigator; if missing, go to Flowsheets",
+          "search 'Medicare Wellness'."
+        ]
+      },
+      {
+        "q": "What\u2019s the difference between internal and external referrals?",
+        "a": "Internal referrals often require prior auth and coordination; external referrals have simpler routing."
+      },
+      {
+        "q": "A provider is missing from referral orders. What should I do?",
+        "a": "Use the FIND tool to enroll the provider into Epic."
+      },
+      {
+        "q": "How do charges drop for immunizations?",
+        "a": "Document in Immunization activity \u2192 both med and admin charges drop automatically.",
+        "steps": [
+          "Document in Immunization activity",
+          "both med and admin charges drop automatically."
+        ]
+      },
+      {
+        "q": "Why didn\u2019t my point-of-care test charge?",
+        "a": "Ensure status = Final in Enter/Edit Results; otherwise no charge posts."
+      },
+      {
+        "q": "How do I schedule a telemedicine appointment?",
+        "a": "Use the Telemedicine Visit Type when scheduling; otherwise Video Connect won\u2019t activate."
+      },
+      {
+        "q": "Patient says they didn\u2019t get their MyChart code. What do I do?",
+        "a": "Regenerate and send via text/email; remind them it\u2019s valid for 14 days."
+      },
+      {
+        "q": "How do I know which pool I belong to?",
+        "a": "Open In Basket \u2192 pool name shows at top (department name); managers assign if unclear.",
+        "steps": [
+          "Open In Basket",
+          "pool name shows at top (department name); managers assign if unclear."
+        ]
+      },
+      {
+        "q": "What if refill requests are still routing to old Ascension Epic?",
+        "a": "Submit a ticket to SureScripts including provider name and MRN."
+      },
+      {
+        "q": "Can I use Epic for PDMP checks?",
+        "a": "Not yet \u2014 log into ILPMP.org until state approves Epic integration."
+      }
+    ]
+  },
+  {
+    "module": "Pharmacy (Willow)",
+    "qa": [
+      {
+        "q": "What is the In Basket used for in pharmacy?",
+        "a": "It\u2019s used for communication between nursing and pharmacy, e.g., med time adjustments, refill requests."
+      },
+      {
+        "q": "What if IV or unit dose cards don\u2019t print automatically?",
+        "a": "Use the Card Status or manually reprint labels via the dispensing button."
+      },
+      {
+        "q": "How do I reprint cart fill labels?",
+        "a": "Go to dispensing button \u2192 reprint labels manually.",
+        "steps": [
+          "Go to dispensing button",
+          "reprint labels manually."
+        ]
+      },
+      {
+        "q": "What if my label printer isn\u2019t working?",
+        "a": "Reroute printing to another printer; open an IT ticket if issue persists."
+      },
+      {
+        "q": "How do I validate barcodes for new meds from Cardinal?",
+        "a": "Use Validate Barcodes workflow; scan med to confirm NDC on central list."
+      },
+      {
+        "q": "What if a medication\u2019s NDC isn\u2019t in the system?",
+        "a": "Submit scan details (med name, strength, NDC, manufacturer, cost) so pharmacy can update or assign IID."
+      },
+      {
+        "q": "How are mixture records handled?",
+        "a": "Select via clinical edit details; switch base if needed (NS vs dextrose). Ticket if missing."
+      },
+      {
+        "q": "How do I manage patient\u2019s own meds?",
+        "a": "Set charge method = no charge, change dispense code to 'patient supply', uncheck patient supply box."
+      },
+      {
+        "q": "Where do I find role-specific tip sheets?",
+        "a": "Press F1 \u2192 Learning Home Dashboard \u2192 select pharmacist or technician.",
+        "steps": [
+          "Press F1",
+          "Learning Home Dashboard",
+          "select pharmacist or technician."
+        ]
+      },
+      {
+        "q": "What if my ADS tab shows blank IID?",
+        "a": "Open IT ticket to request IID for missing medication (except mixtures)."
+      }
+    ]
+  }
+]
