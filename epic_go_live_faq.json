@@ -12,6 +12,19 @@
           "answer": "Please contact the Go-Live Command Center or your assigned Super User."
         }
       ]
+    },
+    {
+      "name": "Scheduling",
+      "faq": [
+        {
+          "question": "Can I still use the old scheduling system?",
+          "answer": "No, all scheduling must be completed in Epic after Go-Live."
+        },
+        {
+          "question": "How do I cancel or reschedule an appointment?",
+          "answer": "Use the Epic Scheduling module and follow the cancellation workflow provided in training."
+        }
+      ]
     }
   ]
 }
