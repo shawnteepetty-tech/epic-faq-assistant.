@@ -8,6 +8,7 @@
     body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
     h1 { color: #003366; }
     h2 { color: #0055aa; margin-top: 20px; }
+    .workflow { margin: 10px 0; font-style: italic; color: #444; }
     .faq-item { 
       margin-bottom: 15px; 
       padding: 10px; 
@@ -36,24 +37,38 @@
       .then(data => {
         const container = document.getElementById('faqs');
         container.innerHTML = '';
-        if (!data.departments || data.departments.length === 0) {
+
+        if (!Array.isArray(data) || data.length === 0) {
           container.innerHTML = '<p>No FAQs available.</p>';
           return;
         }
-        data.departments.forEach(dept => {
+
+        data.forEach(section => {
+          // Section header
           const deptHeader = document.createElement('h2');
-          deptHeader.textContent = dept.name;
+          deptHeader.textContent = section.module;
           container.appendChild(deptHeader);
 
-          dept.faq.forEach(faq => {
-            const div = document.createElement('div');
-            div.className = 'faq-item';
-            div.innerHTML = `
-              <div class="faq-question">Q: ${faq.question}</div>
-              <div class="faq-answer">A: ${faq.answer}</div>
-            `;
-            container.appendChild(div);
-          });
+          // Optional workflow
+          if (section.workflow) {
+            const workflowDiv = document.createElement('div');
+            workflowDiv.className = 'workflow';
+            workflowDiv.textContent = "Workflow: " + section.workflow;
+            container.appendChild(workflowDiv);
+          }
+
+          // FAQs
+          if (section.qa && section.qa.length > 0) {
+            section.qa.forEach(item => {
+              const div = document.createElement('div');
+              div.className = 'faq-item';
+              div.innerHTML = `
+                <div class="faq-question">Q: ${item.q}</div>
+                <div class="faq-answer">A: ${item.a}</div>
+              `;
+              container.appendChild(div);
+            });
+          }
         });
       })
       .catch(err => {
