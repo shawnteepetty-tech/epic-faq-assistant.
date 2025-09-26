@@ -1,296 +1,198 @@
-{
-  "modules": [
-    {
-      "module": "CardioServer \u2013 Tech User",
-      "category": "Cardiology",
-      "roles": [
-        "Tech User"
-      ],
-      "steps": [
-        "Access CardioServer: From Epic \u2192 patient chart \u2192 CardioServer SmartLink/URL, or desktop icon, or Citrix Workspace \u2192 CardioServer. Enter AD username/password. Confirm Role = Tech User.",
-        "Find & Filter Studies: Worklist/Studies view \u2192 filter by Facility, Status (Preliminary, Unconfirmed, Confirmed, Stored), optional Date. Click Apply/Search.",
-        "Link Study to Patient/Order: Select study \u2192 Link to Order/Reconcile \u2192 search MRN/name \u2192 select patient & order \u2192 Save/Link.",
-        "Assign Provider: Open study \u2192 Provider/Assign field \u2192 type/select provider \u2192 Save/Update.",
-        "Trash/Restore Studies: Preliminary only. More Actions \u2192 Move to Trash. To restore: Trash view \u2192 Restore/Untrash within 30 days.",
-        "Manual Upload \u2013 ECG: Upload/Import \u2192 ECG Upload \u2192 Browse file \u2192 enter MRN \u2192 Upload \u2192 Link + Assign.",
-        "Manual Upload \u2013 Stress Test: Upload/Import \u2192 Stress Upload \u2192 Browse file \u2192 enter MRN \u2192 Upload \u2192 Assign.",
-        "Multi-Facility Workflows: Facility Filter \u2192 select 1+ sites \u2192 Apply.",
-        "Study Status Guide: Preliminary = new; Unconfirmed = pending review; Confirmed = signed; Stored = archived; Trash = deleted (30 days).",
-        "Resources: Help \u2192 User Manual \u2192 Tech role topics."
-      ],
-      "qa": [
-        {
-          "q": "What if a study doesn\u2019t match any patient/order?",
-          "a": "Use Link to Order/Reconcile, search MRN/name, then select the correct order."
-        },
-        {
-          "q": "Can I trash a study that\u2019s already Unconfirmed?",
-          "a": "No \u2014 only Preliminary studies can be trashed."
-        },
-        {
-          "q": "How do I restore a study I deleted?",
-          "a": "Go to Trash view, select study, click Restore/Untrash within 30 days."
-        },
-        {
-          "q": "How do I upload an ECG manually?",
-          "a": "Upload \u2192 ECG Upload \u2192 Browse \u2192 enter MRN \u2192 Upload \u2192 Link \u2192 Assign."
-        },
-        {
-          "q": "How do I know if a study is final?",
-          "a": "Status shows Confirmed once provider signs."
-        }
-      ]
-    },
-    {
-      "module": "EVC (Telehealth / Video Consults)",
-      "category": "Telehealth",
-      "roles": [
-        "Provider",
-        "Bedside Staff"
-      ],
-      "steps": [
-        "Launch Consult: Epic MPage 'TV Kit Consults' or Converge website \u2192 select patient \u2192 Start Consult.",
-        "Accept Call: Bedside staff clicks Accept on TV Kit 200S \u2192 verify audio/video.",
-        "Provider Controls: Start/End video, screen share, chat.",
-        "Documentation: Enter consult note in Epic MPage \u2192 link to encounter."
-      ],
-      "qa": [
-        {
-          "q": "How do I start a consult?",
-          "a": "From Epic MPage 'TV Kit Consults' \u2192 select patient \u2192 Start Consult."
-        },
-        {
-          "q": "What if patient can\u2019t hear me?",
-          "a": "Check mute, device volume, and TV Kit connection."
-        },
-        {
-          "q": "Can I use chat?",
-          "a": "Yes, available inside video window."
-        },
-        {
-          "q": "Where do I document the visit?",
-          "a": "In Epic, under the Consult MPage note linked to encounter."
-        }
-      ]
-    },
-    {
-      "module": "ASAP (ED Track Board)",
-      "category": "Emergency Department",
-      "roles": [
-        "Nurse",
-        "Provider"
-      ],
-      "steps": [
-        "Track Board Overview: Shows bed, name, age, complaint, acuity, staff initials. Hover for details.",
-        "Order Status Icons: Icons for EKGs, meds, labs, imaging. Columns: placed, in process, completed.",
-        "Registration & Disposition: Registration = checkmark/X; Disposition = patient destination.",
-        "Layout Customization: Drag-and-drop to rearrange columns.",
-        "Views: Side-by-side, summary, or magnifying glass for details."
-      ],
-      "qa": [
-        {
-          "q": "What does an X in registration mean?",
-          "a": "Registration incomplete. It won\u2019t block discharge."
-        },
-        {
-          "q": "How do I see pending labs?",
-          "a": "Check order columns: placed, in process, completed."
-        },
-        {
-          "q": "Can I move columns?",
-          "a": "Yes \u2014 drag-and-drop to customize."
-        },
-        {
-          "q": "How do I open triage workup report?",
-          "a": "Use side-by-side view or summary toggle."
-        }
-      ]
-    },
-    {
-      "module": "Beaker (Lab Workflow)",
-      "category": "Laboratory",
-      "roles": [
-        "Phlebotomist",
-        "Lab Tech"
-      ],
-      "steps": [
-        "Specimen Collection: Check-in patient \u2192 enter orders \u2192 print labels \u2192 scan wristband/specimen \u2192 transport.",
-        "Receiving/Processing: Scan barcode \u2192 verify orders \u2192 add FYIs \u2192 cancel/redraw if needed.",
-        "Tech Workflow: Use Outstanding List \u2192 repeat tests \u2192 verify results \u2192 document criticals.",
-        "Send-Outs: Create packing list \u2192 add specimens \u2192 assign destination \u2192 mark ready/picked up.",
-        "Reports: Specimen Inquiry for status \u2192 print reports/labels."
-      ],
-      "qa": [
-        {
-          "q": "How do I reprint a specimen label?",
-          "a": "Use Order \u2192 Reprint Label."
-        },
-        {
-          "q": "Where do I check pending tests?",
-          "a": "Use the Outstanding List."
-        },
-        {
-          "q": "How do I batch send-outs at Holy Family?",
-          "a": "End-of-day packing list \u2192 send to Resurrection."
-        },
-        {
-          "q": "How do I document a redraw?",
-          "a": "Cancel test \u2192 order redraw \u2192 collect new specimen."
-        }
-      ]
-    },
-    {
-      "module": "Optime Anesthesia",
-      "category": "Surgery/Anesthesia",
-      "roles": [
-        "Anesthesiologist",
-        "CRNA",
-        "Resident"
-      ],
-      "steps": [
-        "Login: Enter Epic credentials \u2192 confirm Department/Role.",
-        "Consent: Consent \u2192 e-Signature \u2192 select consent type \u2192 capture signatures. Refusal = print, ink, scan, send to HIM.",
-        "Specimen Labeling: Place order \u2192 print labels \u2192 scan wristband + specimen.",
-        "Orders: EKG \u2192 assign reviewing physician. Blood \u2192 order set \u2192 transfusion workflow.",
-        "Intra-Op: Use Sidebar Quick Events (In Room, Procedure Start, etc.).",
-        "Supply Management: Search item name/manufacturer. One-time supply if needed.",
-        "PACU: Enter dressing/laterality \u2192 add PACU comments.",
-        "Scheduling: Snapboard \u2192 service/surgeon/location \u2192 apply preference card.",
-        "Charge Capture: Charge Capture activity \u2192 select CPT \u2192 Save.",
-        "Device Data: Attach device (1 per workstation). PACU \u2192 disassociate at discharge."
-      ],
-      "qa": [
-        {
-          "q": "How do I substitute a signer on consent?",
-          "a": "Enter name + nurse witness."
-        },
-        {
-          "q": "What if patient refuses e-signature?",
-          "a": "Print \u2192 ink signature \u2192 scan \u2192 send to HIM."
-        },
-        {
-          "q": "How do I reprint specimen labels?",
-          "a": "From label screen \u2192 Reprint option."
-        },
-        {
-          "q": "How do I start intra-op documentation?",
-          "a": "Sidebar Quick Events (In Room, Procedure Start)."
-        }
-      ]
-    },
-    {
-      "module": "Inpatient Provider Workflow",
-      "category": "Inpatient",
-      "roles": [
-        "Hospitalist",
-        "Resident",
-        "Consultant"
-      ],
-      "steps": [
-        "Navigation: My Lists \u2192 Storyboard \u2192 demographics, teams, labs.",
-        "Inbox & Fluency Direct: Communication and dictation tool.",
-        "Problem List & Orders: Add/update/resolve problems. Place/review orders.",
-        "Med Reconciliation: Admission, transfer, discharge.",
-        "Discharge: Review allergies/problems \u2192 reconcile meds \u2192 generate AVS.",
-        "Consultant Workflow: Create consult note \u2192 use speed buttons/smart phrases.",
-        "Surgery Workflow: Use Prep for Surgery navigator \u2192 enter consults/orders."
-      ],
-      "qa": [
-        {
-          "q": "Where do I reconcile meds?",
-          "a": "During admission and discharge."
-        },
-        {
-          "q": "What if there\u2019s a hard stop in an order set?",
-          "a": "It must be addressed before proceeding."
-        },
-        {
-          "q": "How do consultants document?",
-          "a": "Consult note \u2192 use smart phrases or templates."
-        }
-      ]
-    },
-    {
-      "module": "Pharmacy (Willow)",
-      "category": "Pharmacy",
-      "roles": [
-        "Pharmacist",
-        "Pharmacy Tech"
-      ],
-      "steps": [
-        "Dashboard: In Basket messages, card status, occupancy.",
-        "Dispense: Prep, cart fill, compounding, repackaging.",
-        "Medication List: ADS tab for IID. Submit ticket if blank.",
-        "Custom Labels: Use smart text for efficiency.",
-        "Cart Fill: Reprint labels if not printed. Reroute printer if down.",
-        "Barcode Validation: Validate Cardinal meds. Handle NDC mismatches with tickets.",
-        "Verification Queue: Select mixture records, change bases, ticket missing records.",
-        "Patient\u2019s Own Meds: Set charge method to 'no charge'. Dispense code = patient supply."
-      ],
-      "qa": [
-        {
-          "q": "How do I access tip sheets?",
-          "a": "Press F1 \u2192 Learning Home Dashboard."
-        },
-        {
-          "q": "What if cart fill labels don\u2019t print?",
-          "a": "Reprint manually via Dispense button."
-        },
-        {
-          "q": "What if printer is down?",
-          "a": "Reroute jobs. Remove rerouted printers later."
-        },
-        {
-          "q": "What if IID is blank?",
-          "a": "Submit ticket for IID assignment."
-        }
-      ]
-    },
-    {
-      "module": "Ambulatory Clinic",
-      "category": "Outpatient/Ambulatory",
-      "roles": [
-        "Physician",
-        "Medical Assistant",
-        "Clinic Staff"
-      ],
-      "steps": [
-        "Learning Home: Access tip sheets/resources via F1.",
-        "Dashboards: MA vs Physician dashboards. Includes Haiku setup.",
-        "Schedule & Status: Use full clinic schedule. Status column shows workflow updates.",
-        "SDOH: Review color-coded risk indicators in Storyboard.",
-        "Rooming: Set preferred lab for orders.",
-        "Screenings: Medicare wellness in screenings section. Custom via Flowsheets.",
-        "Navigator: Dual-pane 'This Visit'. Customizable for charge capture/problem list.",
-        "Charge Capture: Auto vs manual charges (meds, immunizations, tests, procedures).",
-        "Lab Orders: Status (normal/standing/future). Class (lab collect/clinic collect/external).",
-        "Referrals: Internal vs external. Missing provider? Use FIND tool.",
-        "MyChart: Nurse can send text/email code (14 days). Patients must re-enroll.",
-        "Telemedicine: Schedule visit type 'Telemedicine'. Providers join via Epic/Haiku.",
-        "In Basket & Pools: Staff check into pools. Pool names follow Prime standards."
-      ],
-      "qa": [
-        {
-          "q": "Where are tip sheets?",
-          "a": "Learning Home Dashboard via F1."
-        },
-        {
-          "q": "What if MyChart sign-up missing?",
-          "a": "Confirm with team \u2014 it should be there."
-        },
-        {
-          "q": "How do I activate MyChart?",
-          "a": "Send via text/email code (valid 14 days)."
-        },
-        {
-          "q": "How do I schedule telemedicine?",
-          "a": "Use Telemedicine visit type."
-        },
-        {
-          "q": "What if provider missing in referrals?",
-          "a": "Enroll using FIND tool."
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "module": "CardioServer – Tech User",
+    "roles": ["Tech User"],
+    "steps": [
+      {
+        "title": "Access CardioServer",
+        "items": [
+          "In Epic, open the patient chart → click the CardioServer SmartLink/URL.",
+          "Or on desktop, double-click the CardioServer icon.",
+          "Or in Citrix Workspace → CardioServer → Open.",
+          "Login with AD credentials.",
+          "Confirm header shows Role = Tech User."
+        ]
+      },
+      {
+        "title": "Find & Filter Studies",
+        "items": [
+          "Open Worklist / Studies view.",
+          "Set Facility/Location filter.",
+          "Set Status filter: Preliminary / Unconfirmed / Confirmed / Stored.",
+          "Optional: filter by Date.",
+          "Click Apply / Search."
+        ]
+      },
+      {
+        "title": "Link Study to Patient/Order",
+        "items": [
+          "In Worklist, select study.",
+          "Click Link to Order/Reconcile.",
+          "Search MRN or Name → select patient.",
+          "If multiple orders: select correct order.",
+          "Click Save/Link."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "What if a study doesn’t match any patient/order?", "a": "Use Link/Reconcile → search MRN → choose correct order." },
+      { "q": "Can I trash a study that’s already Unconfirmed?", "a": "No, only Preliminary can be trashed." }
+    ]
+  },
+  {
+    "module": "EVC (Telehealth / Video Consults)",
+    "roles": ["Provider", "Bedside Staff"],
+    "steps": [
+      {
+        "title": "Launch Consult",
+        "items": [
+          "From Epic MPage 'TV Kit Consults' or Converge website.",
+          "Select patient.",
+          "Click Start Consult."
+        ]
+      },
+      {
+        "title": "Accept Call (Bedside Staff)",
+        "items": [
+          "On TV Kit 200S, click Accept.",
+          "Verify audio and video are working."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "How do I start a consult?", "a": "From Epic MPage 'TV Kit Consults' → select patient → Start Consult." },
+      { "q": "What if patient can’t hear me?", "a": "Check mute, device volume, and TV Kit connection." }
+    ]
+  },
+  {
+    "module": "ASAP (ED Track Board)",
+    "roles": ["Nurse", "Provider"],
+    "steps": [
+      {
+        "title": "Track Board Overview",
+        "items": [
+          "Open ED Track Board.",
+          "Review columns for Bed, Name, Age, Complaint, Acuity, Staff initials.",
+          "Hover over initials for full staff names."
+        ]
+      },
+      {
+        "title": "Order Status Icons",
+        "items": [
+          "Columns show status of EKGs, Meds, Labs, Imaging.",
+          "Counts under Placed, In Process, Completed."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "What does an X in registration mean?", "a": "Registration incomplete. It won’t block discharge." },
+      { "q": "How do I see pending labs?", "a": "Check order columns: placed, in process, completed." }
+    ]
+  },
+  {
+    "module": "Beaker (Lab Workflow)",
+    "roles": ["Phlebotomist", "Lab Tech"],
+    "steps": [
+      {
+        "title": "Specimen Collection",
+        "items": [
+          "Check-in patient.",
+          "Enter orders.",
+          "Print labels.",
+          "Scan wristband and specimen.",
+          "Transport specimen to lab."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "How do I reprint a specimen label?", "a": "Use Order → Reprint Label." },
+      { "q": "Where do I check pending tests?", "a": "Use the Outstanding List." }
+    ]
+  },
+  {
+    "module": "Optime Anesthesia",
+    "roles": ["Anesthesiologist", "CRNA", "Resident"],
+    "steps": [
+      {
+        "title": "Electronic Consent",
+        "items": [
+          "Consent → e-Signature → select consent type.",
+          "Capture signatures.",
+          "If refusal: Print → ink → scan → send to HIM."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "How do I substitute a signer on consent?", "a": "Enter name + nurse witness." },
+      { "q": "What if patient refuses e-signature?", "a": "Print, ink signature, scan, send to HIM." }
+    ]
+  },
+  {
+    "module": "Inpatient Provider Workflow",
+    "roles": ["Hospitalist", "Resident", "Consultant"],
+    "steps": [
+      {
+        "title": "Navigation",
+        "items": [
+          "Use My Lists and Storyboard.",
+          "Review demographics, teams, labs."
+        ]
+      },
+      {
+        "title": "Discharge Workflow",
+        "items": [
+          "Review allergies and problems.",
+          "Reconcile meds.",
+          "Generate AVS."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "Where do I reconcile meds?", "a": "During admission and discharge." },
+      { "q": "How do consultants document?", "a": "Consult note → use smart phrases or templates." }
+    ]
+  },
+  {
+    "module": "Pharmacy (Willow)",
+    "roles": ["Pharmacist", "Pharmacy Tech"],
+    "steps": [
+      {
+        "title": "Dashboard Functions",
+        "items": [
+          "In Basket messaging.",
+          "Card status printing.",
+          "Occupancy and tech reports."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "What if cart fill labels don’t print?", "a": "Reprint manually via Dispense button." },
+      { "q": "What if printer is down?", "a": "Reroute jobs, remove rerouted printers later." }
+    ]
+  },
+  {
+    "module": "Ambulatory Clinic",
+    "roles": ["Physician", "Medical Assistant", "Clinic Staff"],
+    "steps": [
+      {
+        "title": "Rooming Workflow",
+        "items": [
+          "Set Preferred Lab during rooming.",
+          "Complete vitals and screenings."
+        ]
+      },
+      {
+        "title": "Telemedicine Scheduling",
+        "items": [
+          "Use Telemedicine visit type.",
+          "Provider joins via Epic/Haiku.",
+          "Patient joins via MyChart/text/email."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "Where are tip sheets?", "a": "Learning Home Dashboard via F1." },
+      { "q": "How do I activate MyChart?", "a": "Send via text/email code (valid 14 days)." }
+    ]
+  }
+]
