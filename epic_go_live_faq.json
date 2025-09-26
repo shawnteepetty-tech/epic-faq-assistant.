@@ -1,0 +1,233 @@
+{
+  "departments": [
+    {
+      "name": "Nursing",
+      "workflows": [
+        "Admission & Charting",
+        "Flowsheets & Documentation",
+        "MAR (Medication Administration Record)",
+        "Patient & Family Education",
+        "Care Plans",
+        "Discharge Workflow"
+      ],
+      "qna": [
+        {
+          "question": "How do I see what admission documentation is still required?",
+          "answer": "Open the Required Documentation Report from the Patient List or Brain activity."
+        },
+        {
+          "question": "What if I can\u2019t scan a patient\u2019s wristband for MAR?",
+          "answer": "Use the override \u201cPatient Not Scannable,\u201d then manually verify with two identifiers."
+        },
+        {
+          "question": "How do I add a family member as a co-learner in education?",
+          "answer": "Open the Learning Assessment, click Add Co-Learner, enter their info, and save."
+        },
+        {
+          "question": "How often should I document against Care Plan goals?",
+          "answer": "At least once per shift and whenever there are significant changes."
+        },
+        {
+          "question": "What happens if I forget to resolve education before discharge?",
+          "answer": "Education points will carry forward to future encounters \u2014 always resolve before discharge."
+        },
+        {
+          "question": "Can I edit a medication administration after accepting it in the MAR?",
+          "answer": "Yes. Right-click the administration \u2192 select Edit Administration \u2192 adjust time/details."
+        },
+        {
+          "question": "Where do I find tip sheets if I get stuck?",
+          "answer": "Press F1 \u2192 opens Learning Home Dashboard with role-specific tip sheets."
+        }
+      ]
+    },
+    {
+      "name": "Hospitalist",
+      "workflows": [
+        "System Navigation & Patient Lists",
+        "Chart Review, Results & Problem List",
+        "Note Writing, Macros & Immodal Dictation",
+        "Orders & Reconciliation",
+        "Admission, Transfer & Discharge Workflows",
+        "In Basket & Secure Chat"
+      ],
+      "qna": [
+        {
+          "question": "I don\u2019t see my patient list after logging in.",
+          "answer": "Confirm you are in the correct Department. Change department under login or top toolbar."
+        },
+        {
+          "question": "My role is wrong (shows \u201cAttending\u201d but I\u2019m a Resident).",
+          "answer": "Log out \u2192 Log in \u2192 Select the correct Role on login screen."
+        },
+        {
+          "question": "A result notification won\u2019t clear.",
+          "answer": "Open Chart Review \u2192 Results \u2192 Click result \u2192 Mark as Seen."
+        },
+        {
+          "question": "How do I link a medication to the right problem?",
+          "answer": "Open Problem List \u2192 Select problem \u2192 Use triangle icon \u2192 Associate medication."
+        }
+      ]
+    },
+    {
+      "name": "ED / ASAP",
+      "workflows": [
+        "ED Track Board",
+        "Nursing Workflow in ASAP",
+        "Provider Workflow in ASAP",
+        "Crisis Worker & Intake Coordinator Workflow"
+      ],
+      "qna": [
+        {
+          "question": "How do I know if registration is complete in ED?",
+          "answer": "Look at the Registration column on Track Board. \u2714\ufe0f = complete; \u274c = incomplete."
+        },
+        {
+          "question": "How do I reprint specimen labels if one jams or is lost?",
+          "answer": "Open Specimen Collection Activity, find the order, and click Reprint Label."
+        }
+      ]
+    },
+    {
+      "name": "Beaker (Lab)",
+      "workflows": [
+        "Phlebotomist Workflow",
+        "Receiving & Specimen Processing",
+        "Tech Workflow & Outstanding List",
+        "General Lab Basics",
+        "Send-Outs & Packing Lists",
+        "Training & Resources"
+      ],
+      "qna": [
+        {
+          "question": "How do I reprint a specimen label?",
+          "answer": "Go to Label Reprint Activity, search by patient MRN or order, and select Reprint."
+        },
+        {
+          "question": "What if a specimen barcode won\u2019t scan in Receiving?",
+          "answer": "Select Manual Entry \u2192 enter MRN \u2192 confirm patient and specimen details."
+        }
+      ]
+    },
+    {
+      "name": "Willow (Pharmacy)",
+      "workflows": [
+        "Pharmacy Dashboard & In Basket",
+        "Dispensing & Cart Fill",
+        "Order History & Labels",
+        "Barcode Validation & NDC Updates",
+        "Verification Queue & Mixtures",
+        "Patient\u2019s Own Medications",
+        "Custom Labels & Smart Texts",
+        "Resources & Troubleshooting"
+      ],
+      "qna": [
+        {
+          "question": "What do I do if cart fill labels don\u2019t print automatically?",
+          "answer": "Manually reprint via Dispensing \u2192 Cart Fill, then check printer status."
+        },
+        {
+          "question": "How do I handle a medication not found during barcode validation?",
+          "answer": "Submit drug details \u2192 Pharmacy Team updates list \u2192 IID assigned."
+        }
+      ]
+    },
+    {
+      "name": "Optime Anesthesia",
+      "workflows": [
+        "Log In & Access",
+        "Patient & Case Access",
+        "Electronic Consent",
+        "Specimen Labeling",
+        "EKG Orders",
+        "Blood Orders & Transfusions",
+        "Intra-Op Documentation",
+        "Supply Management",
+        "Site Completion / PACU",
+        "Scheduling",
+        "GI Charge Capture",
+        "Device Data",
+        "Inter-Procedure Navigator",
+        "Post-Procedure & Billing"
+      ],
+      "qna": [
+        {
+          "question": "How do I capture a substitute signer for anesthesia consent?",
+          "answer": "In the e-Signature tab, enter substitute name + nurse witness."
+        },
+        {
+          "question": "What if a patient refuses electronic consent?",
+          "answer": "Print \u2192 Ink Sign \u2192 Scan \u2192 Send to HIM for upload."
+        }
+      ]
+    },
+    {
+      "name": "Cupid (Cardiology)",
+      "workflows": [
+        "Accessing Cupid",
+        "Placing Cardiology Orders",
+        "Managing Cardiology Tests",
+        "Structured Reporting",
+        "Results & Chart Review",
+        "Workflow Integration"
+      ],
+      "qna": [
+        {
+          "question": "How do I schedule a stress test once it\u2019s ordered?",
+          "answer": "Open Cupid Worklist \u2192 filter Ordered \u2192 select patient \u2192 add date/time/location \u2192 Save."
+        },
+        {
+          "question": "Where can I find completed echo results?",
+          "answer": "In Chart Review \u2192 Cardiology tab, click the Echo result. Use the image icon for full study."
+        }
+      ]
+    },
+    {
+      "name": "CardioServer",
+      "workflows": [
+        "Access CardioServer",
+        "Find & Filter Studies",
+        "Link Study to Correct Patient & Order",
+        "Assign Study to Provider",
+        "Trash & Restore Studies",
+        "Manual Upload \u2013 ECG Studies",
+        "Manual Upload \u2013 Stress Tests",
+        "Multi-Facility Workflows",
+        "Study Status Guide",
+        "Resources"
+      ],
+      "qna": [
+        {
+          "question": "What if a study doesn\u2019t match any patient/order?",
+          "answer": "Use Link to Order/Reconcile, search by MRN/name, then select correct order."
+        },
+        {
+          "question": "Can I trash a study that\u2019s already Unconfirmed?",
+          "answer": "No \u2014 only Preliminary studies can be trashed."
+        }
+      ]
+    },
+    {
+      "name": "EVC (Telehealth)",
+      "workflows": [
+        "Launching a Video Consult",
+        "Inviting a Patient",
+        "Adding Other Participants",
+        "Documentation During Visit",
+        "Closing the Visit",
+        "Troubleshooting Video Issues"
+      ],
+      "qna": [
+        {
+          "question": "How do I send a patient a telehealth link?",
+          "answer": "Open EVC Navigator \u2192 Invite Patient \u2192 select Text or Email \u2192 verify info \u2192 Send."
+        },
+        {
+          "question": "Can multiple people join a video visit?",
+          "answer": "Yes, use Add Participant to invite interpreters, caregivers, or specialists."
+        }
+      ]
+    }
+  ]
+}
