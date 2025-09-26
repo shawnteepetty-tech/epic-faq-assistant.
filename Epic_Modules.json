@@ -1,0 +1,246 @@
+[
+  {
+    "module": "CardioServer (Tech Users)",
+    "workflow": "Access CardioServer \u2192 Log in with AD credentials \u2192 Confirm Tech role \u2192 \n        Use Worklist to filter studies \u2192 Link study to correct patient/order \u2192 Assign to provider \u2192 \n        Upload ECG/Stress tests if needed \u2192 Trash/Restore preliminary studies \u2192 Use Facility filter for multi-site \u2192 \n        Check statuses: Preliminary, Unconfirmed, Confirmed, Stored \u2192 Access Help/User Manual",
+    "qa": [
+      {
+        "q": "What if a study doesn\u2019t match any patient/order?",
+        "a": "Use Link/Reconcile \u2192 search MRN \u2192 choose correct order."
+      },
+      {
+        "q": "Can I trash a study that\u2019s already Unconfirmed?",
+        "a": "No, only Preliminary can be trashed."
+      },
+      {
+        "q": "How to restore a deleted study?",
+        "a": "Trash view \u2192 select \u2192 Restore (within 30 days)."
+      },
+      {
+        "q": "How to upload ECG manually?",
+        "a": "Upload \u2192 ECG \u2192 Browse \u2192 MRN \u2192 Upload \u2192 Link \u2192 Assign."
+      },
+      {
+        "q": "How to assign provider?",
+        "a": "Open study \u2192 Provider field \u2192 Search \u2192 Save."
+      },
+      {
+        "q": "Where are manuals?",
+        "a": "Help \u2192 User Manual top menu."
+      }
+    ]
+  },
+  {
+    "module": "EVC (Telehealth / Video Consults)",
+    "workflow": "Open patient encounter in O2 \u2192 Locate Connect section (Rooming or Plan tab) \u2192 \n        Start Video Visit \u2192 Test microphone/camera \u2192 Admit participants \u2192 Manage participants (mute, remove) \u2192 \n        Share screen if needed \u2192 Invite providers/guests via Send Link \u2192 End Call (not Leave)",
+    "qa": [
+      {
+        "q": "Where is Connect section?",
+        "a": "Found on Rooming or Plan tab."
+      },
+      {
+        "q": "How to test devices?",
+        "a": "Hardware Test before joining."
+      },
+      {
+        "q": "Can a removed participant rejoin?",
+        "a": "No, removal is final."
+      },
+      {
+        "q": "How to invite guests?",
+        "a": "Send Direct Link \u2192 enter name + phone/email."
+      },
+      {
+        "q": "What\u2019s the difference between Leave vs End Call?",
+        "a": "Leave keeps call running; End ends for all."
+      }
+    ]
+  },
+  {
+    "module": "Epic ASAP (ED Track Board)",
+    "workflow": "Open ED Track Board \u2192 View patient details (bed, age, complaint, acuity) \u2192 \n        Monitor icons (EKG, meds, labs) \u2192 Check registration & disposition columns \u2192 \n        Customize layout (drag/drop, summary views) \u2192 Use Triage Navigator \u2192 \n        Document in specialty narrators (trauma, stroke, sepsis) \u2192 Collect specimens (barcode/labels) \u2192 \n        Complete disposition/discharge workflows \u2192 Use electronic consents \u2192 Crisis workers use Crisis Navigator",
+    "qa": [
+      {
+        "q": "What does red icon mean?",
+        "a": "Overdue/high-priority item."
+      },
+      {
+        "q": "Can patient discharge proceed with incomplete registration?",
+        "a": "Yes, warning only."
+      },
+      {
+        "q": "How to reprint specimen labels?",
+        "a": "Use collection workflow reprint option."
+      },
+      {
+        "q": "Where are trauma/stroke narrators?",
+        "a": "Specialty Narrators tab."
+      },
+      {
+        "q": "Where are tip sheets?",
+        "a": "Press F1 \u2192 Learning Home."
+      }
+    ]
+  },
+  {
+    "module": "Epic Beaker (Lab Workflow)",
+    "workflow": "Phlebotomy: Check in patient \u2192 Enter order \u2192 Print labels \u2192 Scan wristband + specimen \u2192 Transport. \nReceiving: Scan specimens \u2192 Override/add FYIs \u2192 Cancel/redraw if needed. \nTech Role: Manage Outstanding list \u2192 Perform repeats \u2192 Verify results \u2192 Document critical values \u2192 Run QC. \nGeneral: Enter requisitions \u2192 Inquiry \u2192 Print/reprint \u2192 Send-out bench (packing lists). \nPacking Lists: Create \u2192 Add specimens \u2192 Assign destination (LabCorp/Alverno) \u2192 Mark ready/picked up \u2192 Track status.",
+    "qa": [
+      {
+        "q": "How do I reprint labels?",
+        "a": "From Order/Dispense screen or Receiving."
+      },
+      {
+        "q": "What\u2019s the Outstanding List?",
+        "a": "Pending tests for tech review."
+      },
+      {
+        "q": "What if QC fails?",
+        "a": "Document corrective action."
+      },
+      {
+        "q": "How to batch send-outs at Holy Family?",
+        "a": "End-of-day batching required."
+      },
+      {
+        "q": "What do green/red codes mean?",
+        "a": "Session status; confirm destination fields."
+      }
+    ]
+  },
+  {
+    "module": "Epic Optime (Anesthesia)",
+    "workflow": "Login with Epic credentials \u2192 Confirm Dept + Role \u2192 Open patient/case \u2192 Verify demographics \u2192 \n        Consent via e-signature (Anesthesia, Blood, Spanish if needed) \u2192 Capture signatures or scan paper if refused \u2192 \n        Place specimen orders + print/scan labels \u2192 Enter results \u2192 Complete EKG orders \u2192 \n        Place blood orders + transfuse (dual sign-off) \u2192 Document intra-op quick events \u2192 Manage supplies \u2192 \n        Enter dressing/laterality \u2192 Document PACU comments \u2192 Schedule via Snapboard \u2192 Capture charges (CPT) \u2192 \n        Attach/disassociate devices \u2192 Use Inter-Procedure Navigator (vitals, I/O, meds, EBL) \u2192 \n        Post-procedure billing (I/O, duplicate charges check) \u2192 Submit tickets if errors.",
+    "qa": [
+      {
+        "q": "How to handle refusal of consent?",
+        "a": "Print, get ink signature, scan to HIM."
+      },
+      {
+        "q": "How to reprint specimen labels?",
+        "a": "Reprint option in labeling screen."
+      },
+      {
+        "q": "What is dual sign-off?",
+        "a": "Two staff must verify transfusion."
+      },
+      {
+        "q": "How to log supply?",
+        "a": "Search by item name or manufacturer #."
+      },
+      {
+        "q": "Where to enter PACU comments?",
+        "a": "Site completion/PACU workflow."
+      },
+      {
+        "q": "What if device stays attached?",
+        "a": "Disassociate in PACU when patient leaves."
+      }
+    ]
+  },
+  {
+    "module": "Epic Inpatient (General / Hospitalist & Nursing)",
+    "workflow": "Login \u2192 Confirm Dept/Role \u2192 Patient List (My Patients/My Unit) \u2192 Assign/unassign \u2192 \n        Chart Review (labs, notes, imaging) \u2192 Write Notes (new note, templates, macros, dictation) \u2192 \n        Manage Orders (place, modify, discontinue, sets, reconciliation) \u2192 \n        Admission Navigator (history, allergies, meds, order sets) \u2192 \n        Transfer Navigator (orders, team updates, reconcile) \u2192 \n        Discharge Navigator (reconcile problems/meds, prescribe, AVS, instructions) \u2192 \n        In Basket (cosign requests, incomplete notes, results) \u2192 Secure Chat (with chart attach)",
+    "qa": [
+      {
+        "q": "How do I add/remove patient from list?",
+        "a": "Right-click patient \u2192 Add/Remove."
+      },
+      {
+        "q": "Where are old notes?",
+        "a": "Chart Review tab."
+      },
+      {
+        "q": "How to pend vs sign note?",
+        "a": "Pend = draft/private; Sign = final/visible."
+      },
+      {
+        "q": "What\u2019s medication reconciliation?",
+        "a": "Compare home meds vs current \u2192 continue, discontinue, update."
+      },
+      {
+        "q": "Where do discharge instructions print?",
+        "a": "After Visit Summary (AVS)."
+      },
+      {
+        "q": "Can I attach chart to secure chat?",
+        "a": "Yes, via paperclip in Secure Chat."
+      }
+    ]
+  },
+  {
+    "module": "Pharmacy (Willow)",
+    "workflow": "Login to Willow Dashboard \u2192 Review In Basket messages \u2192 Track IV/unit dose card status \u2192 Run ADT census & tech reports \u2192 \n        Use Dispense button for prep, cart fill, compounding, repackaging \u2192 Manage med lists (ADS tab for Omnicell/Pyxis IDs) \u2192 \n        Create Smart Texts for labels \u2192 Validate barcodes daily \u2192 Resolve NDC mismatches via tickets \u2192 \n        Work Verification Queue (mixture records, med base changes) \u2192 Adjust settings for patient\u2019s own meds (no charge, patient supply). \n        Troubleshoot label printing by reprinting/rerouting \u2192 Escalate persistent printer issues via ticketing.",
+    "qa": [
+      {
+        "q": "Where are tip sheets?",
+        "a": "F1 \u2192 Learning Home Dashboard."
+      },
+      {
+        "q": "How to reprint cart fill labels?",
+        "a": "Dispense \u2192 Reprint option."
+      },
+      {
+        "q": "What if printer fails?",
+        "a": "Reroute print jobs \u2192 escalate if unresolved."
+      },
+      {
+        "q": "What if barcode not found?",
+        "a": "Submit NDC, strength, form, cost to pharmacy team."
+      },
+      {
+        "q": "How to change mixture base?",
+        "a": "Clinical edit details, select new base."
+      },
+      {
+        "q": "How to flag patient\u2019s own meds?",
+        "a": "No charge + Patient Supply settings."
+      }
+    ]
+  },
+  {
+    "module": "Ambulatory (Clinic)",
+    "workflow": "Login \u2192 Access Learning Home (tip sheets: efficiency, chart correction, fax workaround, MyChart, Quick Start) \u2192 \n        Use MA/Physician dashboards (eprescribe, labs, Haiku setup) \u2192 Switch to full clinic schedule view \u2192 \n        Use Status column (check-in, rooming, updates) \u2192 Review Social Determinants on Storyboard \u2192 \n        Perform Rooming workflow (set preferred lab) \u2192 Complete Screenings (Medicare Wellness, custom via Flowsheets) \u2192 \n        Use customizable dual-pane Navigator \u2192 Capture charges (auto vs manual: meds, immunizations, POCT, procedures, supplies) \u2192 \n        Place lab/referral orders with correct status/class \u2192 Document specimen collection for clinic collect \u2192 \n        Handle referrals (internal = more steps, external = fewer) \u2192 Enroll missing providers via FIND \u2192 \n        Support MyChart sign-up (send text/email, regenerate codes, 14-day expiry) \u2192 \n        Telemedicine visits (use Telemed visit type, provider joins via Epic/Haiku) \u2192 \n        In Basket pool management \u2192 Submit tickets with 'Wave 18' + MRN + dept + issue summary \u2192 External PDMP via ILPMP.org until integrated.",
+    "qa": [
+      {
+        "q": "Where are ambulatory tip sheets?",
+        "a": "Learning Home Dashboard (F1)."
+      },
+      {
+        "q": "Why set preferred lab in rooming?",
+        "a": "Ensures correct routing of lab results."
+      },
+      {
+        "q": "Where are Medicare wellness forms?",
+        "a": "Screenings navigator, bottom section."
+      },
+      {
+        "q": "How are immunizations charged?",
+        "a": "Auto: med + admin charges drop when documented."
+      },
+      {
+        "q": "How to document POCT?",
+        "a": "Enter/Edit Results \u2192 mark status 'Final'."
+      },
+      {
+        "q": "Where to enter non-integrated EKG?",
+        "a": "Enter/Edit Results \u2192 scan + attach."
+      },
+      {
+        "q": "How to add missing provider for referral?",
+        "a": "FIND tool enrollment."
+      },
+      {
+        "q": "How to sign up patient for MyChart?",
+        "a": "Send activation via text/email \u2192 code valid 14 days."
+      },
+      {
+        "q": "How to schedule telemed?",
+        "a": "Use Telemedicine visit type."
+      },
+      {
+        "q": "Where to access PDMP?",
+        "a": "External ILPMP.org (not in Epic yet)."
+      }
+    ]
+  }
+]
