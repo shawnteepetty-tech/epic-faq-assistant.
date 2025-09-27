@@ -4,70 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Epic Go-Live FAQ Assistant</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Roboto', sans-serif; margin: 0; background: #f4f6f9; color: #333; }
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: linear-gradient(90deg, #003366, #0055aa);
-      color: #fff;
-      padding: 15px 20px;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-    main { max-width: 900px; margin: 30px auto; padding: 0 20px; }
-    h2 { color: #003366; margin-top: 30px; border-bottom: 2px solid #003366; padding-bottom: 5px; }
-    .roles { font-style: italic; margin: 5px 0 10px; color: #444; }
-    .steps { background: #eef; padding: 10px; border-left: 4px solid #0055aa; border-radius: 4px; margin: 10px 0; }
-    .steps ol { margin: 0; padding-left: 20px; }
-    .faq-item {
-      margin: 10px 0;
-      border-radius: 6px;
-      background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-    .faq-question {
+    body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 0; }
+    header { background: #003366; color: white; padding: 15px; text-align: center; font-size: 1.5em; }
+    main { max-width: 900px; margin: 20px auto; padding: 0 20px; }
+
+    h2 { margin-top: 30px; color: #003366; }
+    .roles { font-style: italic; margin: 5px 0 15px; }
+
+    .collapsible {
       background: #0055aa;
-      color: #fff;
-      padding: 15px;
+      color: white;
       cursor: pointer;
-      font-weight: bold;
-      position: relative;
+      padding: 12px;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;
+      font-size: 1em;
+      margin-top: 10px;
+      border-radius: 4px;
     }
-    .faq-question::after {
-      content: '+';
-      position: absolute;
-      right: 20px;
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
-    }
-    .faq-item.active .faq-question::after { content: '-'; }
-    .faq-answer {
+    .collapsible:after { content: '+'; float: right; }
+    .collapsible.active:after { content: '-'; }
+
+    .content {
+      padding: 0 15px;
       max-height: 0;
       overflow: hidden;
-      padding: 0 15px;
-      background: #fafafa;
-      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: #fff;
+      transition: max-height 0.2s ease-out;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 10px;
     }
-    .faq-item.active .faq-answer {
-      max-height: 1000px;
-      padding: 15px;
-    }
-    ol { margin: 10px 0 0 20px; }
-    .error { color: red; margin-top: 20px; }
+    ol { margin: 10px 0; padding-left: 20px; }
+
+    .faq-item { margin: 10px 0; }
+    .faq-q { cursor: pointer; background: #eee; padding: 10px; border-radius: 4px; }
+    .faq-a { display: none; padding: 10px; background: #fafafa; border-left: 3px solid #0055aa; }
   </style>
 </head>
 <body>
-  <header>
-    Epic Go-Live FAQ Assistant
-  </header>
-
+  <header>Epic Go-Live FAQ Assistant</header>
   <main>
     <div id="faqs">Loading FAQs...</div>
   </main>
@@ -79,56 +58,70 @@
         const container = document.getElementById('faqs');
         container.innerHTML = '';
 
-        // Handle either [ ... ] or { "modules": [ ... ] }
-        const sections = Array.isArray(data) ? data : data.modules;
+        data.forEach(section => {
+          const h2 = document.createElement('h2');
+          h2.textContent = section.module;
+          container.appendChild(h2);
 
-        sections.forEach(section => {
-          // Module header
-          const deptHeader = document.createElement('h2');
-          deptHeader.textContent = section.module;
-          container.appendChild(deptHeader);
-
-          // Roles
-          if (section.roles && section.roles.length > 0) {
+          if (section.roles) {
             const roles = document.createElement('div');
             roles.className = 'roles';
             roles.textContent = "Roles: " + section.roles.join(', ');
             container.appendChild(roles);
           }
 
-          // Steps
-          if (section.steps && section.steps.length > 0) {
-            const stepsDiv = document.createElement('div');
-            stepsDiv.className = 'steps';
-            stepsDiv.innerHTML = "<strong>Workflow Steps:</strong><ol>" +
-              section.steps.map(step => `<li>${step}</li>`).join('') +
-              "</ol>";
-            container.appendChild(stepsDiv);
+          // Render steps with collapsible sections
+          if (section.steps) {
+            section.steps.forEach(stepGroup => {
+              const btn = document.createElement('button');
+              btn.className = 'collapsible';
+              btn.textContent = stepGroup.title;
+              container.appendChild(btn);
+
+              const div = document.createElement('div');
+              div.className = 'content';
+
+              if (stepGroup.items && Array.isArray(stepGroup.items)) {
+                div.innerHTML = "<ol>" +
+                  stepGroup.items.map(i => `<li>${i}</li>`).join('') +
+                  "</ol>";
+              } else {
+                div.innerHTML = "<p>No steps available</p>";
+              }
+
+              container.appendChild(div);
+
+              btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                div.style.maxHeight = div.style.maxHeight ? null : div.scrollHeight + "px";
+              });
+            });
           }
 
-          // Q&A
-          (section.qa || []).forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'faq-item';
-
-            let answerHTML = `<div class="faq-answer">A: ${item.a || "No answer provided"}</div>`;
-
-            div.innerHTML = `
-              <div class="faq-question">Q: ${item.q}</div>
-              ${answerHTML}
-            `;
-
-            div.querySelector('.faq-question').addEventListener('click', () => {
-              div.classList.toggle('active');
+          // Render FAQs
+          if (section.qa) {
+            section.qa.forEach(item => {
+              const faq = document.createElement('div');
+              faq.className = 'faq-item';
+              const q = document.createElement('div');
+              q.className = 'faq-q';
+              q.textContent = "Q: " + item.q;
+              const a = document.createElement('div');
+              a.className = 'faq-a';
+              a.textContent = "A: " + item.a;
+              q.addEventListener('click', () => {
+                a.style.display = (a.style.display === 'block') ? 'none' : 'block';
+              });
+              faq.appendChild(q);
+              faq.appendChild(a);
+              container.appendChild(faq);
             });
-
-            container.appendChild(div);
-          });
+          }
         });
       })
       .catch(err => {
         document.getElementById('faqs').innerHTML =
-          '<p class="error">⚠️ Error loading FAQs: ' + err.message + '</p>';
+          '<p style="color:red;">⚠️ Error loading FAQs: ' + err.message + '</p>';
       });
   </script>
 </body>
