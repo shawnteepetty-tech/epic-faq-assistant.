@@ -62,13 +62,16 @@
   <script>
     async function loadFAQs() {
       try {
-        const response = await fetch("epic_go_live_faq.json"); // ✅ fixed filename
+        const response = await fetch("epic_go_live_faq.json");
         const data = await response.json();
 
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        data.modules.forEach(module => {
+        // ✅ Handle both { modules: [...] } and just [...]
+        const modules = Array.isArray(data) ? data : data.modules;
+
+        modules.forEach(module => {
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
@@ -92,18 +95,4 @@
             module.qa.forEach(item => {
               const qaDetails = document.createElement("details");
               qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
-              moduleDiv.appendChild(qaDetails);
-            });
-          }
-
-          container.appendChild(moduleDiv);
-        });
-      } catch (error) {
-        document.getElementById("content").innerHTML = `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
-      }
-    }
-
-    loadFAQs();
-  </script>
-</body>
-</html>
+              modu
