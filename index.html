@@ -49,6 +49,10 @@
     .steps li {
       margin: 0.3rem 0;
     }
+    .step-title {
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -66,33 +70,35 @@
         if (!response.ok) throw new Error(`HTTP error ${response.status}`);
         const raw = await response.json();
 
-        // Normalize shape
         const modules = raw.modules || raw;
-
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        if (!Array.isArray(modules)) {
-          container.innerHTML = `<p style="color:red;">⚠️ Invalid JSON structure: expected an array of modules.</p>`;
-          return;
-        }
-
         modules.forEach(module => {
           const moduleDiv = document.createElement("div");
-          moduleDiv.innerHTML = `<h2>${module.module || "Untitled Module"}</h2>`;
+          moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // How To section
+          // Handle Steps (structured with titles)
           if (module.steps && module.steps.length > 0) {
             const howToDetails = document.createElement("details");
             howToDetails.innerHTML = `<summary>📘 How To</summary>`;
-            const ul = document.createElement("ul");
-            ul.className = "steps";
-            module.steps.forEach(step => {
-              const li = document.createElement("li");
-              li.textContent = step;
-              ul.appendChild(li);
+
+            module.steps.forEach(stepGroup => {
+              const stepTitle = document.createElement("div");
+              stepTitle.className = "step-title";
+              stepTitle.textContent = stepGroup.title;
+              howToDetails.appendChild(stepTitle);
+
+              const ul = document.createElement("ul");
+              ul.className = "steps";
+              stepGroup.items.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                ul.appendChild(li);
+              });
+              howToDetails.appendChild(ul);
             });
-            howToDetails.appendChild(ul);
+
             moduleDiv.appendChild(howToDetails);
           }
 
