@@ -28,10 +28,9 @@
     }
     h2 {
       color: #003366;
-      margin-top: 2rem;
     }
     details {
-      margin: 0.5rem 0;
+      margin-bottom: 1rem;
       border: 1px solid #ddd;
       border-radius: 6px;
       padding: 0.5rem 1rem;
@@ -42,12 +41,12 @@
       font-weight: bold;
       color: #003366;
     }
-    ul {
+    .steps {
       margin: 0.5rem 0 0.5rem 1rem;
       padding-left: 1rem;
       border-left: 3px solid #003366;
     }
-    ul li {
+    .steps li {
       margin: 0.3rem 0;
     }
   </style>
@@ -65,64 +64,62 @@
       try {
         const response = await fetch("epic_go_live_faq.json");
         const data = await response.json();
+
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        // Ensure Go-Live Preparation is always last
-        const goLive = data.find(m => m.module.includes("Go-Live Preparation"));
-        const others = data.filter(m => !m.module.includes("Go-Live Preparation"));
+        const modules = data.modules || data;
 
-        [...others, goLive].forEach(module => {
-          if (!module) return;
+        modules.forEach(module => {
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // How To (skip for Go-Live Preparation)
-          if (module.steps && module.steps.length > 0 && !module.module.includes("Go-Live Preparation")) {
-            const howToSection = document.createElement("details");
-            howToSection.innerHTML = `<summary>📘 How To</summary>`;
-            module.steps.forEach(stepGroup => {
-              const groupDetails = document.createElement("details");
-              groupDetails.innerHTML = `<summary>${stepGroup.title}</summary>`;
+          // How To section
+          if (module.steps && module.steps.length > 0) {
+            module.steps.forEach(section => {
+              const details = document.createElement("details");
+              details.innerHTML = `<summary>📘 How To: ${section.title}</summary>`;
               const ul = document.createElement("ul");
-              stepGroup.items.forEach(item => {
+              ul.className = "steps";
+              section.items.forEach(item => {
                 const li = document.createElement("li");
                 li.textContent = item;
                 ul.appendChild(li);
               });
-              groupDetails.appendChild(ul);
-              howToSection.appendChild(groupDetails);
+              details.appendChild(ul);
+              moduleDiv.appendChild(details);
             });
-            moduleDiv.appendChild(howToSection);
           }
 
           // FAQs
           if (module.qa && module.qa.length > 0) {
-            const faqSection = document.createElement("details");
-            faqSection.innerHTML = `<summary>❓ FAQs</summary>`;
             module.qa.forEach(item => {
               const qaDetails = document.createElement("details");
-              qaDetails.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
-              faqSection.appendChild(qaDetails);
+              qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
+              moduleDiv.appendChild(qaDetails);
             });
-            moduleDiv.appendChild(faqSection);
           }
 
-          // For Go-Live Preparation (Need to Know only)
-          if (module.steps && module.module.includes("Go-Live Preparation")) {
-            module.steps.forEach(stepGroup => {
-              const infoDetails = document.createElement("details");
-              infoDetails.innerHTML = `<summary>📌 ${stepGroup.title}</summary>`;
-              const ul = document.createElement("ul");
-              stepGroup.items.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item;
-                ul.appendChild(li);
-              });
-              infoDetails.appendChild(ul);
-              moduleDiv.appendChild(infoDetails);
+          // Study Materials
+          const linksSection = document.createElement("details");
+          linksSection.innerHTML = `<summary>📎 Study Materials</summary>`;
+          const ul = document.createElement("ul");
+          ul.className = "steps";
+
+          if (module.links && module.links.length > 0) {
+            module.links.forEach(link => {
+              const li = document.createElement("li");
+              li.innerHTML = `<a href="${link.url}" target="_blank">${link.title}</a>`;
+              ul.appendChild(li);
             });
+          } else {
+            const li = document.createElement("li");
+            li.textContent = "No study materials linked yet.";
+            ul.appendChild(li);
           }
+
+          linksSection.appendChild(ul);
+          moduleDiv.appendChild(linksSection);
 
           container.appendChild(moduleDiv);
         });
