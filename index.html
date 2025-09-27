@@ -75,9 +75,10 @@
           // Steps / How To
           if (module.steps && module.steps.length > 0) {
             if (module.module.includes("Go-Live Preparation")) {
-              // Special case: no How To wrapper
+              // Special case: show step groups directly (no How To wrapper)
               module.steps.forEach(stepGroup => {
                 const stepDetails = document.createElement("details");
+                stepDetails.open = false; // collapsed by default
                 stepDetails.innerHTML = `<summary>📌 ${stepGroup.title}</summary>`;
                 const ul = document.createElement("ul");
                 ul.className = "steps";
@@ -92,10 +93,12 @@
             } else {
               // Default: collapsible "How To" wrapper
               const howToWrapper = document.createElement("details");
+              howToWrapper.open = false; // collapsed by default
               howToWrapper.innerHTML = `<summary>📘 How To</summary>`;
 
               module.steps.forEach(stepGroup => {
                 const stepDetails = document.createElement("details");
+                stepDetails.open = false; // collapsed by default
                 stepDetails.innerHTML = `<summary>${stepGroup.title}</summary>`;
                 const ul = document.createElement("ul");
                 ul.className = "steps";
@@ -116,6 +119,7 @@
           if (module.qa && module.qa.length > 0) {
             module.qa.forEach(item => {
               const qaDetails = document.createElement("details");
+              qaDetails.open = false; // collapsed by default
               qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
               moduleDiv.appendChild(qaDetails);
             });
