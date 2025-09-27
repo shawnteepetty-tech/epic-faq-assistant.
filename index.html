@@ -28,6 +28,7 @@
     }
     h2 {
       color: #003366;
+      margin-top: 2rem;
     }
     details {
       margin-bottom: 1rem;
@@ -49,10 +50,6 @@
     .steps li {
       margin: 0.3rem 0;
     }
-    .step-title {
-      font-weight: bold;
-      margin-top: 0.5rem;
-    }
   </style>
 </head>
 <body>
@@ -67,28 +64,24 @@
     async function loadFAQs() {
       try {
         const response = await fetch("epic_go_live_faq.json");
-        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-        const raw = await response.json();
+        const data = await response.json();
 
-        const modules = raw.modules || raw;
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        modules.forEach(module => {
+        data.forEach(module => {
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // Handle Steps (structured with titles)
+          // Steps / How To
           if (module.steps && module.steps.length > 0) {
-            const howToDetails = document.createElement("details");
-            howToDetails.innerHTML = `<summary>📘 How To</summary>`;
+            const howToWrapper = document.createElement("details");
+            howToWrapper.open = true; // expand by default
+            howToWrapper.innerHTML = `<summary>📘 How To</summary>`;
 
             module.steps.forEach(stepGroup => {
-              const stepTitle = document.createElement("div");
-              stepTitle.className = "step-title";
-              stepTitle.textContent = stepGroup.title;
-              howToDetails.appendChild(stepTitle);
-
+              const stepDetails = document.createElement("details");
+              stepDetails.innerHTML = `<summary>${stepGroup.title}</summary>`;
               const ul = document.createElement("ul");
               ul.className = "steps";
               stepGroup.items.forEach(item => {
@@ -96,10 +89,11 @@
                 li.textContent = item;
                 ul.appendChild(li);
               });
-              howToDetails.appendChild(ul);
+              stepDetails.appendChild(ul);
+              howToWrapper.appendChild(stepDetails);
             });
 
-            moduleDiv.appendChild(howToDetails);
+            moduleDiv.appendChild(howToWrapper);
           }
 
           // FAQs
@@ -114,7 +108,8 @@
           container.appendChild(moduleDiv);
         });
       } catch (error) {
-        document.getElementById("content").innerHTML = `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
+        document.getElementById("content").innerHTML =
+          `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
       }
     }
 
