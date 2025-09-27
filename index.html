@@ -28,9 +28,10 @@
     }
     h2 {
       color: #003366;
+      margin-top: 2rem;
     }
     details {
-      margin-bottom: 1rem;
+      margin: 0.5rem 0;
       border: 1px solid #ddd;
       border-radius: 6px;
       padding: 0.5rem 1rem;
@@ -41,12 +42,12 @@
       font-weight: bold;
       color: #003366;
     }
-    .steps {
+    ul {
       margin: 0.5rem 0 0.5rem 1rem;
       padding-left: 1rem;
       border-left: 3px solid #003366;
     }
-    .steps li {
+    ul li {
       margin: 0.3rem 0;
     }
   </style>
@@ -64,56 +65,70 @@
       try {
         const response = await fetch("epic_go_live_faq.json");
         const data = await response.json();
-
-        const modules = Array.isArray(data) ? data : data.modules || [];
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        // Separate out Go-Live Prep
-        const goLiveModules = modules.filter(m => m.module === "Go-Live Preparation");
-        const otherModules = modules.filter(m => m.module !== "Go-Live Preparation");
+        // Ensure Go-Live Preparation is always last
+        const goLive = data.find(m => m.module.includes("Go-Live Preparation"));
+        const others = data.filter(m => !m.module.includes("Go-Live Preparation"));
 
-        // Render all non-Go-Live modules first
-        [...otherModules, ...goLiveModules].forEach(module => {
+        [...others, goLive].forEach(module => {
+          if (!module) return;
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // Only show How To if steps exist and module is not Go-Live Preparation
-          if (module.steps && module.steps.length > 0 && module.module !== "Go-Live Preparation") {
-            const howToDetails = document.createElement("details"); 
-            howToDetails.innerHTML = `<summary>📘 How To</summary>`;
-            
+          // How To (skip for Go-Live Preparation)
+          if (module.steps && module.steps.length > 0 && !module.module.includes("Go-Live Preparation")) {
+            const howToSection = document.createElement("details");
+            howToSection.innerHTML = `<summary>📘 How To</summary>`;
             module.steps.forEach(stepGroup => {
-              const stepTitle = document.createElement("h4");
-              stepTitle.textContent = stepGroup.title;
-              howToDetails.appendChild(stepTitle);
-
+              const groupDetails = document.createElement("details");
+              groupDetails.innerHTML = `<summary>${stepGroup.title}</summary>`;
               const ul = document.createElement("ul");
-              ul.className = "steps";
               stepGroup.items.forEach(item => {
                 const li = document.createElement("li");
                 li.textContent = item;
                 ul.appendChild(li);
               });
-              howToDetails.appendChild(ul);
+              groupDetails.appendChild(ul);
+              howToSection.appendChild(groupDetails);
             });
-
-            moduleDiv.appendChild(howToDetails);
+            moduleDiv.appendChild(howToSection);
           }
 
           // FAQs
           if (module.qa && module.qa.length > 0) {
+            const faqSection = document.createElement("details");
+            faqSection.innerHTML = `<summary>❓ FAQs</summary>`;
             module.qa.forEach(item => {
               const qaDetails = document.createElement("details");
-              qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
-              moduleDiv.appendChild(qaDetails);
+              qaDetails.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
+              faqSection.appendChild(qaDetails);
+            });
+            moduleDiv.appendChild(faqSection);
+          }
+
+          // For Go-Live Preparation (Need to Know only)
+          if (module.steps && module.module.includes("Go-Live Preparation")) {
+            module.steps.forEach(stepGroup => {
+              const infoDetails = document.createElement("details");
+              infoDetails.innerHTML = `<summary>📌 ${stepGroup.title}</summary>`;
+              const ul = document.createElement("ul");
+              stepGroup.items.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                ul.appendChild(li);
+              });
+              infoDetails.appendChild(ul);
+              moduleDiv.appendChild(infoDetails);
             });
           }
 
           container.appendChild(moduleDiv);
         });
       } catch (error) {
-        document.getElementById("content").innerHTML = `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
+        document.getElementById("content").innerHTML =
+          `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
       }
     }
 
