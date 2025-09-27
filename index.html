@@ -63,19 +63,25 @@
     async function loadFAQs() {
       try {
         const response = await fetch("epic_go_live_faq.json");
-        const data = await response.json();
+        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+        const raw = await response.json();
+
+        // Normalize shape
+        const modules = raw.modules || raw;
 
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        // ✅ Handle both { modules: [...] } and just [...]
-        const modules = Array.isArray(data) ? data : data.modules;
+        if (!Array.isArray(modules)) {
+          container.innerHTML = `<p style="color:red;">⚠️ Invalid JSON structure: expected an array of modules.</p>`;
+          return;
+        }
 
         modules.forEach(module => {
           const moduleDiv = document.createElement("div");
-          moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
+          moduleDiv.innerHTML = `<h2>${module.module || "Untitled Module"}</h2>`;
 
-          // How To section (steps)
+          // How To section
           if (module.steps && module.steps.length > 0) {
             const howToDetails = document.createElement("details");
             howToDetails.innerHTML = `<summary>📘 How To</summary>`;
@@ -95,4 +101,18 @@
             module.qa.forEach(item => {
               const qaDetails = document.createElement("details");
               qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
-              modu
+              moduleDiv.appendChild(qaDetails);
+            });
+          }
+
+          container.appendChild(moduleDiv);
+        });
+      } catch (error) {
+        document.getElementById("content").innerHTML = `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
+      }
+    }
+
+    loadFAQs();
+  </script>
+</body>
+</html>
