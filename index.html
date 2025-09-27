@@ -28,7 +28,6 @@
     }
     h2 {
       color: #003366;
-      margin-top: 2rem;
     }
     details {
       margin-bottom: 1rem;
@@ -75,25 +74,42 @@
 
           // Steps / How To
           if (module.steps && module.steps.length > 0) {
-            const howToWrapper = document.createElement("details");
-            howToWrapper.open = true; // expand by default
-            howToWrapper.innerHTML = `<summary>📘 How To</summary>`;
-
-            module.steps.forEach(stepGroup => {
-              const stepDetails = document.createElement("details");
-              stepDetails.innerHTML = `<summary>${stepGroup.title}</summary>`;
-              const ul = document.createElement("ul");
-              ul.className = "steps";
-              stepGroup.items.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item;
-                ul.appendChild(li);
+            if (module.module.includes("Go-Live Preparation")) {
+              // Special case: no How To wrapper
+              module.steps.forEach(stepGroup => {
+                const stepDetails = document.createElement("details");
+                stepDetails.innerHTML = `<summary>📌 ${stepGroup.title}</summary>`;
+                const ul = document.createElement("ul");
+                ul.className = "steps";
+                stepGroup.items.forEach(item => {
+                  const li = document.createElement("li");
+                  li.textContent = item;
+                  ul.appendChild(li);
+                });
+                stepDetails.appendChild(ul);
+                moduleDiv.appendChild(stepDetails);
               });
-              stepDetails.appendChild(ul);
-              howToWrapper.appendChild(stepDetails);
-            });
+            } else {
+              // Default: collapsible "How To" wrapper
+              const howToWrapper = document.createElement("details");
+              howToWrapper.innerHTML = `<summary>📘 How To</summary>`;
 
-            moduleDiv.appendChild(howToWrapper);
+              module.steps.forEach(stepGroup => {
+                const stepDetails = document.createElement("details");
+                stepDetails.innerHTML = `<summary>${stepGroup.title}</summary>`;
+                const ul = document.createElement("ul");
+                ul.className = "steps";
+                stepGroup.items.forEach(item => {
+                  const li = document.createElement("li");
+                  li.textContent = item;
+                  ul.appendChild(li);
+                });
+                stepDetails.appendChild(ul);
+                howToWrapper.appendChild(stepDetails);
+              });
+
+              moduleDiv.appendChild(howToWrapper);
+            }
           }
 
           // FAQs
