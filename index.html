@@ -28,6 +28,8 @@
     }
     h2 {
       color: #003366;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
     }
     details {
       margin-bottom: 1rem;
@@ -68,68 +70,81 @@
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        // Always move Go-Live Prep to the bottom
-        const goLive = data.find(m => m.module.includes("Go-Live Preparation"));
-        const others = data.filter(m => !m.module.includes("Go-Live Preparation"));
-        const modules = [...others, goLive];
+        // Put Go-Live Preparation last
+        const modules = [...data.modules];
+        const goLive = modules.find(m => m.module.includes("Go-Live Preparation"));
+        const filtered = modules.filter(m => !m.module.includes("Go-Live Preparation"));
+        if (goLive) filtered.push(goLive);
 
-        modules.forEach(module => {
+        filtered.forEach(module => {
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // Steps → How To tab (skip for Go-Live Prep)
-          if (module.steps && module.steps.length > 0 && !module.module.includes("Go-Live Preparation")) {
+          // How To section
+          if (module.steps && module.steps.length > 0 && module.module !== "Go-Live Preparation") {
             const howToDetails = document.createElement("details");
             howToDetails.innerHTML = `<summary>📘 How To</summary>`;
-            module.steps.forEach(stepGroup => {
-              const stepSection = document.createElement("details");
-              stepSection.innerHTML = `<summary>${stepGroup.title}</summary>`;
+            module.steps.forEach(section => {
+              const sectionDetails = document.createElement("details");
+              sectionDetails.innerHTML = `<summary>${section.title}</summary>`;
               const ul = document.createElement("ul");
               ul.className = "steps";
-              stepGroup.items.forEach(item => {
+              section.items.forEach(item => {
                 const li = document.createElement("li");
                 li.textContent = item;
                 ul.appendChild(li);
               });
-              stepSection.appendChild(ul);
-              howToDetails.appendChild(stepSection);
+              sectionDetails.appendChild(ul);
+              howToDetails.appendChild(sectionDetails);
             });
             moduleDiv.appendChild(howToDetails);
           }
 
           // FAQs
           if (module.qa && module.qa.length > 0) {
-            const faqHeader = document.createElement("h3");
-            faqHeader.textContent = "FAQs";
-            moduleDiv.appendChild(faqHeader);
-
+            const faqDetails = document.createElement("details");
+            faqDetails.innerHTML = `<summary>❓ FAQs</summary>`;
             module.qa.forEach(item => {
-              const qaDetails = document.createElement("details");
-              qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
-              moduleDiv.appendChild(qaDetails);
+              const qa = document.createElement("details");
+              qa.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
+              faqDetails.appendChild(qa);
             });
+            moduleDiv.appendChild(faqDetails);
           }
 
-          // Study Materials tab (placeholder)
-          if (module.module.includes("Go-Live Preparation")) {
-            const studyDetails = document.createElement("details");
-            studyDetails.innerHTML = `
-              <summary>📚 Study Materials</summary>
-              <p>Placeholder for study material links (add later).</p>
-            `;
-            moduleDiv.appendChild(studyDetails);
+          // Training Materials (use links field as fallback)
+          if (module.trainingMaterials || module.links) {
+            const mats = module.trainingMaterials || module.links;
+            if (mats.length > 0) {
+              const trainDetails = document.createElement("details");
+              trainDetails.innerHTML = `<summary>📂 Training Materials</summary>`;
+              const ul = document.createElement("ul");
+              ul.className = "steps";
 
-            // Logistics tab
-            const logisticsDetails = document.createElement("details");
-            logisticsDetails.innerHTML = `
-              <summary>📦 Logistics</summary>
-              <p>
-                <a href="https://raw.githubusercontent.com/USERNAME/REPO/main/go_live_logistics.pdf" target="_blank">
-                  📑 Open Logistics PDF
-                </a>
-              </p>
-            `;
-            moduleDiv.appendChild(logisticsDetails);
+              mats.forEach(mat => {
+                const li = document.createElement("li");
+                if (typeof mat === "string") {
+                  li.textContent = mat;
+                } else {
+                  const a = document.createElement("a");
+                  a.textContent = mat.title;
+                  a.href = mat.url;
+                  a.target = "_blank";
+                  li.appendChild(a);
+                }
+                ul.appendChild(li);
+              });
+
+              trainDetails.appendChild(ul);
+              moduleDiv.appendChild(trainDetails);
+            }
+          }
+
+          // Logistics (only for Go-Live)
+          if (module.module.includes("Go-Live Preparation")) {
+            const logDetails = document.createElement("details");
+            logDetails.innerHTML = `<summary>📦 Logistics</summary><p><a href="#" target="_blank">Logistics PDF (placeholder)</a></p>`;
+            moduleDiv.appendChild(logDetails);
           }
 
           container.appendChild(moduleDiv);
