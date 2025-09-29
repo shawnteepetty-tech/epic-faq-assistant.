@@ -28,11 +28,9 @@
     }
     h2 {
       color: #003366;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 0.3rem;
     }
     details {
-      margin: 0.5rem 0;
+      margin-bottom: 1rem;
       border: 1px solid #ddd;
       border-radius: 6px;
       padding: 0.5rem 1rem;
@@ -43,20 +41,13 @@
       font-weight: bold;
       color: #003366;
     }
-    .steps, .faq, .study {
+    .steps {
       margin: 0.5rem 0 0.5rem 1rem;
       padding-left: 1rem;
       border-left: 3px solid #003366;
     }
     .steps li {
       margin: 0.3rem 0;
-    }
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
@@ -74,89 +65,77 @@
         const response = await fetch("epic_go_live_faq.json");
         const data = await response.json();
 
-        let modules = Array.isArray(data) ? data : data.modules;
-
-        // Pull Go-Live Prep out and append to end
-        const goLive = modules.filter(m => m.module.includes("Go-Live Preparation"));
-        modules = modules.filter(m => !m.module.includes("Go-Live Preparation"));
-        if (goLive.length > 0) modules.push(...goLive);
-
         const container = document.getElementById("content");
         container.innerHTML = "";
+
+        // Always move Go-Live Prep to the bottom
+        const goLive = data.find(m => m.module.includes("Go-Live Preparation"));
+        const others = data.filter(m => !m.module.includes("Go-Live Preparation"));
+        const modules = [...others, goLive];
 
         modules.forEach(module => {
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // Special handling for Go-Live Preparation
+          // Steps → How To tab (skip for Go-Live Prep)
+          if (module.steps && module.steps.length > 0 && !module.module.includes("Go-Live Preparation")) {
+            const howToDetails = document.createElement("details");
+            howToDetails.innerHTML = `<summary>📘 How To</summary>`;
+            module.steps.forEach(stepGroup => {
+              const stepSection = document.createElement("details");
+              stepSection.innerHTML = `<summary>${stepGroup.title}</summary>`;
+              const ul = document.createElement("ul");
+              ul.className = "steps";
+              stepGroup.items.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                ul.appendChild(li);
+              });
+              stepSection.appendChild(ul);
+              howToDetails.appendChild(stepSection);
+            });
+            moduleDiv.appendChild(howToDetails);
+          }
+
+          // FAQs
+          if (module.qa && module.qa.length > 0) {
+            const faqHeader = document.createElement("h3");
+            faqHeader.textContent = "FAQs";
+            moduleDiv.appendChild(faqHeader);
+
+            module.qa.forEach(item => {
+              const qaDetails = document.createElement("details");
+              qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
+              moduleDiv.appendChild(qaDetails);
+            });
+          }
+
+          // Study Materials tab (placeholder)
           if (module.module.includes("Go-Live Preparation")) {
-            if (module.steps && module.steps.length > 0) {
-              module.steps.forEach(step => {
-                const stepDetails = document.createElement("details");
-                stepDetails.innerHTML = `<summary>${step.title}</summary>`;
-                const ul = document.createElement("ul");
-                ul.className = "steps";
-                step.items.forEach(item => {
-                  const li = document.createElement("li");
-                  li.textContent = item;
-                  ul.appendChild(li);
-                });
-                stepDetails.appendChild(ul);
-                moduleDiv.appendChild(stepDetails);
-              });
-            }
-
-            if (module.qa && module.qa.length > 0) {
-              module.qa.forEach(item => {
-                const qDetails = document.createElement("details");
-                qDetails.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
-                moduleDiv.appendChild(qDetails);
-              });
-            }
-          } else {
-            // Normal modules → How To / FAQs / Study Materials
-            if (module.steps && module.steps.length > 0) {
-              const howToDetails = document.createElement("details");
-              howToDetails.innerHTML = `<summary>📘 How To</summary>`;
-
-              module.steps.forEach(step => {
-                const stepDetails = document.createElement("details");
-                stepDetails.innerHTML = `<summary>${step.title}</summary>`;
-                const ul = document.createElement("ul");
-                ul.className = "steps";
-                step.items.forEach(item => {
-                  const li = document.createElement("li");
-                  li.textContent = item;
-                  ul.appendChild(li);
-                });
-                stepDetails.appendChild(ul);
-                howToDetails.appendChild(stepDetails);
-              });
-
-              moduleDiv.appendChild(howToDetails);
-            }
-
-            if (module.qa && module.qa.length > 0) {
-              const faqDetails = document.createElement("details");
-              faqDetails.innerHTML = `<summary>❓ FAQs</summary>`;
-              module.qa.forEach(item => {
-                const qDetails = document.createElement("details");
-                qDetails.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
-                faqDetails.appendChild(qDetails);
-              });
-              moduleDiv.appendChild(faqDetails);
-            }
-
             const studyDetails = document.createElement("details");
-            studyDetails.innerHTML = `<summary>📂 Study Materials</summary>
-              <div class="study"><p><a href="#">(Placeholder link to study materials)</a></p></div>`;
+            studyDetails.innerHTML = `
+              <summary>📚 Study Materials</summary>
+              <p>Placeholder for study material links (add later).</p>
+            `;
             moduleDiv.appendChild(studyDetails);
+
+            // Logistics tab
+            const logisticsDetails = document.createElement("details");
+            logisticsDetails.innerHTML = `
+              <summary>📦 Logistics</summary>
+              <p>
+                <a href="https://raw.githubusercontent.com/USERNAME/REPO/main/go_live_logistics.pdf" target="_blank">
+                  📑 Open Logistics PDF
+                </a>
+              </p>
+            `;
+            moduleDiv.appendChild(logisticsDetails);
           }
 
           container.appendChild(moduleDiv);
         });
       } catch (error) {
-        document.getElementById("content").innerHTML = 
+        document.getElementById("content").innerHTML =
           `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
       }
     }
