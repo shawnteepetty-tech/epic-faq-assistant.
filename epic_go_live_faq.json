@@ -18,19 +18,60 @@
         {
           "title": "Find & Filter Studies",
           "items": [
-            "Open Worklist / Studies view.",
+            "Open Worklist / Studies.",
             "Set Facility/Location filter.",
             "Set Status filter: Preliminary / Unconfirmed / Confirmed / Stored.",
-            "Optional: set Date filter (Today, Last 7 Days, Custom).",
+            "Optional: Date filter.",
             "Click Apply / Search."
+          ]
+        },
+        {
+          "title": "Link Study to Patient & Order",
+          "items": [
+            "Click study → Link to Order/Reconcile.",
+            "Search MRN or Name.",
+            "Select patient + correct order.",
+            "Click Save / Link."
+          ]
+        },
+        {
+          "title": "Assign Study to Provider",
+          "items": [
+            "Open study → Provider/Assign field.",
+            "Type/select provider.",
+            "Click Save/Update."
+          ]
+        },
+        {
+          "title": "Trash & Restore Studies",
+          "items": [
+            "Open study with Status = Preliminary.",
+            "Click More Actions → Move to Trash.",
+            "To restore ≤30 days: open Trash → Restore."
+          ]
+        },
+        {
+          "title": "Manual Upload – ECG",
+          "items": [
+            "Click Upload/Import → ECG Upload.",
+            "Browse → select ECG file.",
+            "Enter MRN → Upload/Import.",
+            "Link to order + assign provider."
+          ]
+        },
+        {
+          "title": "Manual Upload – Stress Test",
+          "items": [
+            "Click Upload/Import → Stress Upload.",
+            "Browse → select stress file.",
+            "Enter MRN → Upload/Import.",
+            "Assign provider."
           ]
         }
       ],
       "qa": [
-        {
-          "q": "What if a study doesn’t match any patient/order?",
-          "a": "Use Link/Reconcile → search MRN → select correct order."
-        }
+        { "q": "What if a study doesn’t match a patient?", "a": "Use Link/Reconcile → search MRN → select correct order." },
+        { "q": "Can I trash an Unconfirmed study?", "a": "No, only Preliminary can be trashed." }
       ],
       "trainingMaterials": [
         { "title": "Study Materials Placeholder", "url": "#" }
@@ -42,22 +83,46 @@
       "roles": ["Provider", "Bedside Staff"],
       "steps": [
         {
-          "title": "Launch a Consult",
+          "title": "Accessing & Navigating EVC",
           "items": [
-            "In Epic, open the Connect section from Rooming or Plan tab.",
-            "Select patient encounter.",
-            "Click Start Video Visit."
+            "Open patient encounter in Epic.",
+            "Locate Connect section (Rooming tab or Plan tab).",
+            "Start video visit."
+          ]
+        },
+        {
+          "title": "Inviting Participants",
+          "items": [
+            "Click Send Direct Link.",
+            "Providers: invite via Epic directory.",
+            "Guests: enter name, relationship, and email/phone.",
+            "Verify contact details before sending."
+          ]
+        },
+        {
+          "title": "Joining & Managing Calls",
+          "items": [
+            "Set up mic, webcam, and speakers.",
+            "Admit patient via Admit button or Open menu.",
+            "Mute/unmute or disable webcam as needed.",
+            "Remove participants if necessary."
+          ]
+        },
+        {
+          "title": "Call Controls",
+          "items": [
+            "Use toolbar (mic, webcam, screen share).",
+            "Be cautious with screen sharing.",
+            "End call when session is complete."
           ]
         }
       ],
       "qa": [
-        {
-          "q": "What if patient can’t hear me?",
-          "a": "Check mute, device volume, and network connection."
-        }
+        { "q": "How do I invite a guest?", "a": "Enter guest’s name, relationship, and email/phone." },
+        { "q": "What’s the difference between Leave vs End Call?", "a": "Leave keeps it running; End Call ends it for all (preferred)." }
       ],
       "trainingMaterials": [
-        { "title": "Study Materials Placeholder", "url": "#" }
+        { "title": "EVC Training Placeholder", "url": "#" }
       ]
     },
     {
@@ -69,19 +134,45 @@
           "title": "Track Board Overview",
           "items": [
             "Open ED Track Board.",
-            "Review columns for Bed, Name, Age, Complaint, Acuity, Staff initials.",
-            "Hover over initials for full staff names."
+            "Review columns: bed, name, complaint, acuity, staff.",
+            "Hover initials for details."
+          ]
+        },
+        {
+          "title": "Order Status Icons",
+          "items": [
+            "Check columns for EKG, Meds, Labs, Imaging.",
+            "Counts show Placed, In Process, Completed."
+          ]
+        },
+        {
+          "title": "Registration & Disposition",
+          "items": [
+            "✔ = registration complete.",
+            "X = incomplete (does not block discharge).",
+            "Disposition = destination."
+          ]
+        },
+        {
+          "title": "Layout Customization",
+          "items": [
+            "Drag/drop columns to rearrange.",
+            "Save custom layout if available."
+          ]
+        },
+        {
+          "title": "Views",
+          "items": [
+            "Toggle Side-by-Side or Summary view.",
+            "Click magnifying glass for more details."
           ]
         }
       ],
       "qa": [
-        {
-          "q": "What does an X in registration mean?",
-          "a": "Registration incomplete. It won’t block discharge."
-        }
+        { "q": "What does X in registration mean?", "a": "Registration incomplete; won’t block discharge." }
       ],
       "trainingMaterials": [
-        { "title": "Study Materials Placeholder", "url": "#" }
+        { "title": "ED Track Board Placeholder", "url": "#" }
       ]
     },
     {
@@ -92,21 +183,35 @@
         {
           "title": "Specimen Collection",
           "items": [
-            "Check-in patient → enter orders.",
+            "Check in patient → enter orders.",
             "Print specimen labels.",
             "Scan wristband → scan specimen.",
             "Transport to lab."
           ]
+        },
+        {
+          "title": "Processing",
+          "items": [
+            "Scan barcode in Receiving.",
+            "Verify orders and containers.",
+            "Cancel/redraw as needed."
+          ]
+        },
+        {
+          "title": "Tech Workflow",
+          "items": [
+            "Use Outstanding List.",
+            "Perform repeats if needed.",
+            "Verify results.",
+            "Document critical values."
+          ]
         }
       ],
       "qa": [
-        {
-          "q": "How do I reprint a specimen label?",
-          "a": "Open the Order → select Reprint Label."
-        }
+        { "q": "How do I reprint a specimen label?", "a": "Open Order → Reprint Label." }
       ],
       "trainingMaterials": [
-        { "title": "Study Materials Placeholder", "url": "#" }
+        { "title": "Lab Placeholder", "url": "#" }
       ]
     },
     {
@@ -120,18 +225,30 @@
             "Open Consent activity.",
             "Select consent type.",
             "Capture e-signatures.",
-            "If refusal: print, ink sign, scan, send to HIM."
+            "If refused: print, ink, scan, send to HIM."
+          ]
+        },
+        {
+          "title": "Specimen Labeling",
+          "items": [
+            "Place order.",
+            "Print labels.",
+            "Scan wristband + specimen."
+          ]
+        },
+        {
+          "title": "Intra-Op Workflow",
+          "items": [
+            "Use Sidebar Quick Events (In Room, Procedure Start, etc.).",
+            "Document events as they occur."
           ]
         }
       ],
       "qa": [
-        {
-          "q": "How do I substitute a signer on consent?",
-          "a": "Enter alternate signer name and add a nurse witness."
-        }
+        { "q": "What if patient refuses e-sig?", "a": "Print, ink sign, scan, and send to HIM." }
       ],
       "trainingMaterials": [
-        { "title": "Study Materials Placeholder", "url": "#" }
+        { "title": "Optime Placeholder", "url": "#" }
       ]
     },
     {
@@ -140,68 +257,78 @@
       "roles": ["Hospitalist", "Resident", "Consultant"],
       "steps": [
         {
-          "title": "Navigation",
+          "title": "Navigation & Storyboard",
           "items": [
             "Open My Lists.",
             "Review Storyboard: demographics, team, labs."
           ]
-        }
-      ],
-      "qa": [
+        },
         {
-          "q": "Where do I reconcile medications?",
-          "a": "During admission, transfer, and discharge."
-        }
-      ],
-      "trainingMaterials": [
-        { "title": "Study Materials Placeholder", "url": "#" }
-      ]
-    },
-    {
-      "module": "Pharmacy (Willow)",
-      "category": "Pharmacy",
-      "roles": ["Pharmacist", "Pharmacy Tech"],
-      "steps": [
-        {
-          "title": "Dashboard & In Basket",
+          "title": "Problem List & Orders",
           "items": [
-            "Open Pharmacy Dashboard.",
-            "Check In Basket: refills, reminders, time changes."
+            "Add/update/resolve problems.",
+            "Place/review orders."
+          ]
+        },
+        {
+          "title": "Medication Reconciliation",
+          "items": [
+            "Admission: reconcile home meds.",
+            "Transfer: reconcile again.",
+            "Discharge: finalize reconciliation."
+          ]
+        },
+        {
+          "title": "Discharge & AVS",
+          "items": [
+            "Review allergies, orders, problems.",
+            "Finalize discharge orders.",
+            "Generate AVS → Print/Send."
           ]
         }
       ],
       "qa": [
-        {
-          "q": "What if cart fill labels don’t print?",
-          "a": "Manually reprint via the Dispense button."
-        }
+        { "q": "Where do I reconcile meds?", "a": "At admission, transfer, and discharge." }
       ],
       "trainingMaterials": [
-        { "title": "Study Materials Placeholder", "url": "#" }
+        { "title": "Inpatient Provider Placeholder", "url": "#" }
       ]
     },
     {
-      "module": "Ambulatory Clinic",
-      "category": "Outpatient/Ambulatory",
-      "roles": ["Physician", "Medical Assistant", "Clinic Staff"],
+      "module": "Clinical Documentation (Clin Doc)",
+      "category": "Clinical Documentation",
+      "roles": ["Nursing", "Providers"],
       "steps": [
         {
-          "title": "Learning Home",
+          "title": "SDOH",
           "items": [
-            "Press F1 in Epic.",
-            "Access Learning Home Dashboard.",
-            "Locate tip sheets/resources."
+            "Document SDOH risks in flowsheets.",
+            "BPAs trigger consult orders.",
+            "Case mgmt/social services track follow-up."
+          ]
+        },
+        {
+          "title": "Patient Expiration",
+          "items": [
+            "Open Patient Expiration navigator.",
+            "Document death, donor status, body release.",
+            "Forms generated for signature & scan."
+          ]
+        },
+        {
+          "title": "Belongings & Meds",
+          "items": [
+            "Document belongings in navigator/flowsheets.",
+            "Use e-sig for patient/staff.",
+            "Mark Med List reviewed."
           ]
         }
       ],
       "qa": [
-        {
-          "q": "How do I activate MyChart?",
-          "a": "Send activation via text/email; valid 14 days."
-        }
+        { "q": "What’s required for wound documentation?", "a": "Four Eyes Assessment (2 staff, not always RNs)." }
       ],
       "trainingMaterials": [
-        { "title": "Study Materials Placeholder", "url": "#" }
+        { "title": "Clin Doc Placeholder", "url": "#" }
       ]
     },
     {
@@ -212,23 +339,37 @@
         {
           "title": "Go-Live Overview",
           "items": [
-            "Go-live date: October 1.",
-            "Saint Francis Evanston + Holy Family Medical Center.",
-            "Holy Family is first LTACH (long-term care) in Prime."
+            "Go-Live = October 1.",
+            "Sites: Saint Francis Evanston + Holy Family LTACH."
+          ]
+        },
+        {
+          "title": "New Features",
+          "items": [
+            "Meds to Bed program.",
+            "Epic Narrators for codes & emergencies.",
+            "E-signature replaces paper consents.",
+            "Rovers not used for meds/wounds; use scanners."
+          ]
+        },
+        {
+          "title": "Specialty Workflows",
+          "items": [
+            "Wound Care: Four Eyes Assessment.",
+            "Device association validation.",
+            "Therapies structured in navigators.",
+            "Dietitian + malnutrition documentation."
           ]
         }
       ],
       "qa": [
-        {
-          "q": "What’s unique about Holy Family?",
-          "a": "It’s the first Prime LTACH with distinct workflows."
-        }
+        { "q": "What’s unique about Holy Family?", "a": "First LTACH; workflows for LOA, transfers, and LTCH dataset." }
       ],
       "trainingMaterials": [
-        { "title": "Study Materials Placeholder", "url": "#" }
+        { "title": "Go-Live Placeholder", "url": "#" }
       ],
       "logistics": [
-        { "title": "Go-Live Logistics PDF Placeholder", "url": "#" }
+        { "title": "Go-Live Logistics Placeholder", "url": "#" }
       ]
     }
   ]
