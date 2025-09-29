@@ -28,13 +28,12 @@
     }
     h2 {
       color: #003366;
-      margin-top: 2rem;
     }
     details {
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
       border: 1px solid #ddd;
       border-radius: 6px;
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.8rem;
       background: #fafafa;
     }
     summary {
@@ -69,138 +68,163 @@
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        // All modules except Go-Live Preparation
-        data
-          .filter(m => m.module !== "Go-Live Preparation")
-          .forEach(module => {
-            const moduleDiv = document.createElement("div");
-            moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
+        // Ensure Go-Live Prep is always last
+        const modules = [...data];
+        const goLiveIndex = modules.findIndex(m => m.module.includes("Go-Live"));
+        let goLiveModule = null;
+        if (goLiveIndex !== -1) {
+          goLiveModule = modules.splice(goLiveIndex, 1)[0];
+        }
 
-            // Steps as collapsible How To
-            if (module.steps && module.steps.length > 0) {
-              module.steps.forEach(stepBlock => {
-                const details = document.createElement("details");
-                details.innerHTML = `<summary>📘 How to: ${stepBlock.title}</summary>`;
-                if (stepBlock.items) {
-                  const ul = document.createElement("ul");
-                  ul.className = "steps";
-                  stepBlock.items.forEach(item => {
-                    const li = document.createElement("li");
-                    li.textContent = item;
-                    ul.appendChild(li);
-                  });
-                  details.appendChild(ul);
-                }
-                moduleDiv.appendChild(details);
+        modules.forEach(module => {
+          const moduleDiv = document.createElement("div");
+          moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
+
+          // Steps (How To)
+          if (module.steps && module.steps.length > 0) {
+            const howTo = document.createElement("details");
+            howTo.innerHTML = `<summary>📘 How To</summary>`;
+            module.steps.forEach(step => {
+              const stepDetails = document.createElement("details");
+              stepDetails.innerHTML = `<summary>${step.title}</summary>`;
+              const ul = document.createElement("ul");
+              ul.className = "steps";
+              step.items.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                ul.appendChild(li);
               });
-            }
+              stepDetails.appendChild(ul);
+              howTo.appendChild(stepDetails);
+            });
+            moduleDiv.appendChild(howTo);
+          }
 
-            // FAQs
-            if (module.qa && module.qa.length > 0) {
-              module.qa.forEach(item => {
-                const qaDetails = document.createElement("details");
-                qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
-                moduleDiv.appendChild(qaDetails);
-              });
-            }
+          // FAQs
+          if (module.qa && module.qa.length > 0) {
+            const faq = document.createElement("details");
+            faq.innerHTML = `<summary>❓ FAQs</summary>`;
+            module.qa.forEach(item => {
+              const qDetails = document.createElement("details");
+              qDetails.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
+              faq.appendChild(qDetails);
+            });
+            moduleDiv.appendChild(faq);
+          }
 
-            container.appendChild(moduleDiv);
-          });
+          // Training Materials (universal)
+          const training = document.createElement("details");
+          training.innerHTML = `<summary>📂 Training Materials</summary>`;
+          
+          if (module.module.includes("Nurse") || module.module.includes("Inpatient Nurse")) {
+            const tipSheets = [
+              "Epic Essentials",
+              "IP Charges Tip Sheet - Copy",
+              "Inpatient Nurse - Orders",
+              "Inpatient Nurse - Review the Chart",
+              "Inpatient Nurse - Transfer",
+              "Inpatient Nurse - Vitals and Assessments",
+              "Inpatient Nurse - Work List",
+              "Isolation Order BPA",
+              "Iv infusion workflow",
+              "LVN RN Cosign Notes - Tip Sheet",
+              "MAR Administration - Tip Sheet",
+              "MAR Skin Sub - Tip Sheet",
+              "MAR Skin Sub - SCPA Wound",
+              "MRI Screening Form - Tip Sheet",
+              "Marking a deceased patient bed for cleaning",
+              "Med Admin CR",
+              "MyChart Signup TipSheet",
+              "Note Type tip sheet",
+              "Nurse Assessment",
+              "Nurse Quick Start Guide (Full-Page)",
+              "OnBase new tip sheet",
+              "Organ Donor - Tip Sheet",
+              "PPD Tip Sheet_2018",
+              "PT Movement to Psych",
+              "PTA Med Review Tipsheet - Prime",
+              "Patient Movement Discharge to SNF",
+              "Patient Movement Inpatient to Psych",
+              "Patient Movement Using Discharge Readmit Navigator",
+              "Preassign Nurses",
+              "Preferred Pharmacy",
+              "Psychotropic Medication E-consent",
+              "RN - Resulting a POCT",
+              "Record of Death tip sheet",
+              "Reprint label tip sheet",
+              "Restraint Work List tip sheet",
+              "Review PTA Meds Tip Sheet",
+              "Reviewing Charges - Tip Sheet",
+              "Scanning specimen tip sheet",
+              "Sepsis tip sheet",
+              "TB Test Documentation",
+              "The Work List",
+              "Tip Sheet Manual Chart Correction Flowsheets",
+              "Tip Sheet Manual Chart Correction Notes",
+              "Undo Discharge tip sheet",
+              "Unit Clerk - Admitting & Discharging & Transferring",
+              "Unreadable barcode tip sheet",
+              "Update Accommodation Code",
+              "Using Transport Clinical Staff",
+              "Wound RN Charging",
+              "ordering blood",
+              "psychotropic med tip sheet"
+            ];
+            tipSheets.forEach(title => {
+              const ts = document.createElement("details");
+              ts.innerHTML = `<summary>${title}</summary><p>[Placeholder – Tip Sheet coming soon]</p>`;
+              training.appendChild(ts);
+            });
+          } else {
+            training.innerHTML += `<p>[No materials uploaded yet]</p>`;
+          }
 
-        // Nursing Tip Sheets section
-        const nursingDiv = document.createElement("div");
-        nursingDiv.innerHTML = `<h2>Nursing Tip Sheets</h2>`;
-        const nursingSheets = [
-          "Epic Essentials",
-          "IP Charges Tip Sheet - Copy",
-          "Inpatient Nurse - Orders",
-          "Inpatient Nurse - Review the Chart",
-          "Inpatient Nurse - Transfer",
-          "Inpatient Nurse - Vitals and Assessments",
-          "Inpatient Nurse - Work List",
-          "Isolation Order BPA",
-          "Iv infusion workflow",
-          "LVN RN Cosign Notes - Tip Sheet",
-          "MAR Administration - Tip Sheet",
-          "MAR Skin Sub - Tip Sheet",
-          "MAR Skin Sub - SCPA Wound",
-          "MRI Screening Form - Tip Sheet",
-          "Marking a deceased patient bed for cleaning",
-          "Med Admin CR",
-          "MyChart Signup TipSheet",
-          "Note Type tip sheet",
-          "Nurse Assessment",
-          "Nurse Quick Start Guide (Full-Page)",
-          "OnBase new tip sheet",
-          "Organ Donor - Tip Sheet",
-          "PPD Tip Sheet_2018",
-          "PT Movement to Psych",
-          "PTA Med Review Tipsheet - Prime",
-          "Patient Movement Discharge to SNF",
-          "Patient Movement Inpatient to Psych",
-          "Patient Movement Using Discharge Readmit Navigator",
-          "Preassign Nurses",
-          "Preferred Pharmacy",
-          "Psychotropic Medication E-consent",
-          "RN - Resulting a POCT",
-          "Record of Death tip sheet",
-          "Reprint label tip sheet",
-          "Restraint Work List tip sheet",
-          "Review PTA Meds Tip Sheet",
-          "Reviewing Charges - Tip Sheet",
-          "Scanning specimen tip sheet",
-          "Sepsis tip sheet",
-          "TB Test Documentation",
-          "The Work List",
-          "Tip Sheet Manual Chart Correction Flowsheets",
-          "Tip Sheet Manual Chart Correction Notes",
-          "Undo Discharge tip sheet",
-          "Unit Clerk - Admitting & Discharging & Transferring",
-          "Unreadable barcode tip sheet",
-          "Update Accommodation Code",
-          "Using Transport Clinical Staff",
-          "Wound RN Charging",
-          "ordering blood",
-          "psychotropic med tip sheet"
-        ];
-        nursingSheets.forEach(title => {
-          const details = document.createElement("details");
-          details.innerHTML = `<summary>${title}</summary><p>[Placeholder – Tip Sheet coming soon]</p>`;
-          nursingDiv.appendChild(details);
+          moduleDiv.appendChild(training);
+
+          container.appendChild(moduleDiv);
         });
-        container.appendChild(nursingDiv);
 
-        // Go-Live Preparation always last
-        const goLive = data.find(m => m.module === "Go-Live Preparation");
-        if (goLive) {
+        // Add Go-Live at the end
+        if (goLiveModule) {
           const goDiv = document.createElement("div");
-          goDiv.innerHTML = `<h2>${goLive.module}</h2>`;
+          goDiv.innerHTML = `<h2>${goLiveModule.module}</h2>`;
 
-          if (goLive.steps && goLive.steps.length > 0) {
-            goLive.steps.forEach(stepBlock => {
-              const details = document.createElement("details");
-              details.innerHTML = `<summary>${stepBlock.title}</summary>`;
-              if (stepBlock.items) {
-                const ul = document.createElement("ul");
-                ul.className = "steps";
-                stepBlock.items.forEach(item => {
-                  const li = document.createElement("li");
-                  li.textContent = item;
-                  ul.appendChild(li);
-                });
-                details.appendChild(ul);
-              }
-              goDiv.appendChild(details);
+          if (goLiveModule.steps && goLiveModule.steps.length > 0) {
+            goLiveModule.steps.forEach(step => {
+              const stepDetails = document.createElement("details");
+              stepDetails.innerHTML = `<summary>${step.title}</summary>`;
+              const ul = document.createElement("ul");
+              ul.className = "steps";
+              step.items.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                ul.appendChild(li);
+              });
+              stepDetails.appendChild(ul);
+              goDiv.appendChild(stepDetails);
             });
           }
 
-          if (goLive.qa && goLive.qa.length > 0) {
-            goLive.qa.forEach(item => {
-              const qaDetails = document.createElement("details");
-              qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
-              goDiv.appendChild(qaDetails);
+          if (goLiveModule.qa && goLiveModule.qa.length > 0) {
+            const faq = document.createElement("details");
+            faq.innerHTML = `<summary>❓ FAQs</summary>`;
+            goLiveModule.qa.forEach(item => {
+              const qDetails = document.createElement("details");
+              qDetails.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
+              faq.appendChild(qDetails);
             });
+            goDiv.appendChild(faq);
           }
+
+          // Logistics placeholder
+          const logistics = document.createElement("details");
+          logistics.innerHTML = `<summary>📦 Logistics</summary><p>[Link to PDF or content coming soon]</p>`;
+          goDiv.appendChild(logistics);
+
+          // Study Materials placeholder
+          const study = document.createElement("details");
+          study.innerHTML = `<summary>📑 Study Materials</summary><p>[No study materials uploaded yet]</p>`;
+          goDiv.appendChild(study);
 
           container.appendChild(goDiv);
         }
