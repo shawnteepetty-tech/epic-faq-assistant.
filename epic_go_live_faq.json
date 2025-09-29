@@ -1,29 +1,65 @@
-{
-  "departments": [
-    {
-      "name": "Ambulatory",
-      "faq": [
-        {
-          "question": "Where do I find tip sheets for ambulatory workflows?",
-          "answer": "Press F1 → Learning Home Dashboard → select role → Tip Sheets section."
-        },
-        {
-          "question": "How do I set a patient’s preferred lab?",
-          "answer": "During rooming, in the Rooming Navigator, select Labs → mark preferred lab."
-        },
-        {
-          "question": "Why isn’t my Medicare Wellness form showing?",
-          "answer": "Scroll to bottom of Screenings Navigator; if missing, check visit type and provider setup."
-        },
-        {
-          "question": "What’s the difference between internal and external referrals?",
-          "answer": "Internal referrals often require prior auth and are routed in-system; external go outside Epic network."
-        },
-        {
-          "question": "A provider is missing from referral orders. What do I do?",
-          "answer": "Use the FIND tool to enroll the provider into Epic, or contact credentialing if not listed."
-        }
-      ]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epic Go-Live FAQ Assistant</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+    h1 { color: #003366; }
+    h2 { color: #0055aa; margin-top: 20px; }
+    .faq-item { 
+      margin-bottom: 15px; 
+      padding: 10px; 
+      background: #fff; 
+      border: 1px solid #ddd; 
+      border-radius: 6px; 
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
     }
-  ]
-}
+    .faq-question { font-weight: bold; margin-bottom: 5px; color: #003366; }
+    .faq-answer { white-space: pre-line; }
+    .error { color: red; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Epic Go-Live FAQ Assistant</h1>
+  <div id="faqs">Loading FAQs...</div>
+
+  <script>
+    fetch('epic_go_live_faq.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Failed to load FAQ file: " + response.status);
+        }
+        return response.json();
+      })
+      .then(data => {
+        const container = document.getElementById('faqs');
+        container.innerHTML = '';
+        if (!data.departments || data.departments.length === 0) {
+          container.innerHTML = '<p>No FAQs available.</p>';
+          return;
+        }
+        data.departments.forEach(dept => {
+          const deptHeader = document.createElement('h2');
+          deptHeader.textContent = dept.name;
+          container.appendChild(deptHeader);
+
+          dept.faq.forEach(faq => {
+            const div = document.createElement('div');
+            div.className = 'faq-item';
+            div.innerHTML = `
+              <div class="faq-question">Q: ${faq.question}</div>
+              <div class="faq-answer">A: ${faq.answer}</div>
+            `;
+            container.appendChild(div);
+          });
+        });
+      })
+      .catch(err => {
+        document.getElementById('faqs').innerHTML =
+          '<p class="error">⚠️ Error loading FAQs: ' + err.message + '</p>';
+      });
+  </script>
+</body>
+</html>
