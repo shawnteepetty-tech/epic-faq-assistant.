@@ -89,50 +89,116 @@
       }
     ],
     "qa": [
-      { "q": "What if a study doesn’t match any patient/order?", "a": "Use Link/Reconcile → search MRN → select correct order." },
-      { "q": "Can I trash a study that’s already Unconfirmed?", "a": "No, only Preliminary studies can be trashed." },
-      { "q": "How do I restore a deleted study?", "a": "Go to Trash view → select study → Restore (within 30 days)." }
+      {
+        "q": "What if a study doesn’t match any patient/order?",
+        "a": "Use Link/Reconcile → search MRN → select correct order."
+      },
+      {
+        "q": "Can I trash a study that’s already Unconfirmed?",
+        "a": "No, only Preliminary studies can be trashed."
+      },
+      {
+        "q": "How do I restore a deleted study?",
+        "a": "Go to Trash view → select study → Restore (within 30 days)."
+      }
     ]
   },
   {
     "module": "EVC (Telehealth / Video Consults)",
     "category": "Telehealth",
-    "roles": ["Provider", "Bedside Staff"],
+    "roles": ["Provider", "Staff"],
     "steps": [
       {
-        "title": "Launch a Consult",
+        "title": "Open Encounter",
         "items": [
-          "In Epic, open the MPage 'TV Kit Consults' or go to the Converge website.",
-          "Select patient/device.",
-          "Click Start Consult."
+          "Log into Epic (O2).",
+          "Open the patient’s encounter to begin.",
+          "Confirm correct patient chart is active."
         ]
       },
       {
-        "title": "Accept Call (Bedside)",
+        "title": "Locate Connect Section",
         "items": [
-          "On TV Kit 200S, click Accept.",
-          "Verify audio and video."
+          "Navigate to the Rooming tab or the Plan tab.",
+          "Find the Connect section."
         ]
       },
       {
-        "title": "Provider Controls",
+        "title": "Start Video Visit",
         "items": [
-          "Start/End video as needed.",
-          "Click Share Screen if presenting.",
-          "Use Chat for text messages."
+          "From the Connect section, click Start Video Visit.",
+          "If enabled, select Send to Haiku/Kanto for mobile devices."
         ]
       },
       {
-        "title": "Documentation",
+        "title": "Invite Participants",
         "items": [
-          "In Epic, open the Consult MPage.",
-          "Enter consult note → link to encounter → Sign."
+          "Click Send Direct Link to add participants.",
+          "For Providers: use Provider Invite option (pulls provider info from Epic).",
+          "For Guests: enter guest’s name, relationship, and email/phone → click Send."
+        ]
+      },
+      {
+        "title": "Verify Contact Info",
+        "items": [
+          "Double-check email/phone details before sending invite.",
+          "Correct errors before sending."
+        ]
+      },
+      {
+        "title": "Device Setup & Hardware Test",
+        "items": [
+          "On joining, set up microphone, webcam, and speakers.",
+          "Run hardware test (optional to skip for 18 hrs)."
+        ]
+      },
+      {
+        "title": "Admit Participants",
+        "items": [
+          "Click Admit when patient/provider/guest joins.",
+          "Use the menu to admit participants individually."
+        ]
+      },
+      {
+        "title": "Manage Participants",
+        "items": [
+          "Mute/unmute or toggle webcam.",
+          "Remove participant (note: removed users cannot rejoin)."
+        ]
+      },
+      {
+        "title": "Call Controls & Screen Sharing",
+        "items": [
+          "Use controls for microphone, webcam, and screen share.",
+          "Be cautious when sharing screens with PHI."
+        ]
+      },
+      {
+        "title": "End Call",
+        "items": [
+          "Click Leave Call → others remain.",
+          "Click End Call → ends for everyone.",
+          "Best practice: End Call once session is complete."
         ]
       }
     ],
     "qa": [
-      { "q": "What if patient can’t hear me?", "a": "Check mute, device volume, and TV Kit connection." },
-      { "q": "Where do I document the visit?", "a": "In Epic under the Consult MPage note linked to the encounter." }
+      {
+        "q": "Where can I start an EVC visit?",
+        "a": "In the patient’s encounter under the Rooming or Plan tab → Connect section."
+      },
+      {
+        "q": "Can I invite guests?",
+        "a": "Yes. Enter guest’s name, relationship, and email/phone → Send invite."
+      },
+      {
+        "q": "What happens if I remove a participant?",
+        "a": "They cannot rejoin unless reinvited."
+      },
+      {
+        "q": "Should I leave or end the call?",
+        "a": "Always click End Call to close the session for everyone."
+      }
     ]
   },
   {
@@ -158,16 +224,16 @@
       {
         "title": "Registration & Disposition",
         "items": [
-          "Registration column: ✔ = complete, X = incomplete (does not block discharge).",
-          "Disposition column = patient destination."
+          "✔ = Registration complete.",
+          "X = Registration incomplete (does not block discharge).",
+          "Disposition column shows patient destination."
         ]
       },
       {
         "title": "Layout Customization",
         "items": [
           "Click-drag column headers to rearrange.",
-          "Move items (e.g., Suicide Risk) to preferred position.",
-          "Save layout if available."
+          "Move items (e.g., Suicide Risk) to preferred position."
         ]
       },
       {
@@ -179,8 +245,14 @@
       }
     ],
     "qa": [
-      { "q": "What does an X in registration mean?", "a": "Registration incomplete. It won’t block discharge." },
-      { "q": "How do I see pending labs?", "a": "Check order columns: Placed, In Process, Completed." }
+      {
+        "q": "What does an X in registration mean?",
+        "a": "Registration incomplete. It won’t block discharge."
+      },
+      {
+        "q": "How do I see pending labs?",
+        "a": "Check order columns: Placed, In Process, Completed."
+      }
     ]
   },
   {
@@ -188,15 +260,58 @@
     "category": "Laboratory",
     "roles": ["Phlebotomist", "Lab Tech"],
     "steps": [
-      { "title": "Specimen Collection", "items": ["Check-in patient → enter orders.", "Print specimen labels.", "Scan wristband → scan specimen.", "Transport to lab."] },
-      { "title": "Receiving & Processing", "items": ["Scan barcode in Receiving.", "Verify orders/containers.", "Add FYIs or cancel/redraw if needed."] },
-      { "title": "Tech Workflow", "items": ["Use Outstanding List.", "Repeat tests if needed.", "Verify results.", "Document critical values."] },
-      { "title": "Send-Outs", "items": ["Create packing list.", "Add specimens.", "Assign destination.", "Mark ready/picked up."] },
-      { "title": "Reports", "items": ["Use Specimen Inquiry for status.", "Print reports or labels."] }
+      {
+        "title": "Specimen Collection",
+        "items": [
+          "Check-in patient → enter orders.",
+          "Print specimen labels.",
+          "Scan wristband → scan specimen.",
+          "Transport to lab."
+        ]
+      },
+      {
+        "title": "Receiving & Processing",
+        "items": [
+          "Scan barcode in Receiving.",
+          "Verify orders/containers.",
+          "Add FYIs or cancel/redraw if needed."
+        ]
+      },
+      {
+        "title": "Tech Workflow",
+        "items": [
+          "Use Outstanding List.",
+          "Repeat tests if needed.",
+          "Verify results.",
+          "Document critical values."
+        ]
+      },
+      {
+        "title": "Send-Outs",
+        "items": [
+          "Create packing list.",
+          "Add specimens.",
+          "Assign destination.",
+          "Mark ready/picked up."
+        ]
+      },
+      {
+        "title": "Reports",
+        "items": [
+          "Use Specimen Inquiry for status.",
+          "Print reports or labels."
+        ]
+      }
     ],
     "qa": [
-      { "q": "How do I reprint a specimen label?", "a": "Open the Order → select Reprint Label." },
-      { "q": "Where do I check pending tests?", "a": "Check the Outstanding List." }
+      {
+        "q": "How do I reprint a specimen label?",
+        "a": "Open the Order → select Reprint Label."
+      },
+      {
+        "q": "Where do I check pending tests?",
+        "a": "Check the Outstanding List."
+      }
     ]
   },
   {
@@ -204,15 +319,54 @@
     "category": "Surgery/Anesthesia",
     "roles": ["Anesthesiologist", "CRNA", "Resident"],
     "steps": [
-      { "title": "Login", "items": ["Enter Epic credentials.", "Confirm Department and Role."] },
-      { "title": "Electronic Consent", "items": ["Open Consent activity.", "Select consent type.", "Capture e-signatures.", "If refusal: print, ink sign, scan, send to HIM."] },
-      { "title": "Specimen Labeling", "items": ["Place order.", "Print labels.", "Scan wristband + specimen."] },
-      { "title": "Intra-Op Workflow", "items": ["Use Sidebar Quick Events: In Room, Procedure Start, etc.", "Document events as they occur."] },
-      { "title": "PACU Workflow", "items": ["Enter dressing and laterality.", "Add PACU comments."] }
+      {
+        "title": "Login",
+        "items": [
+          "Enter Epic credentials.",
+          "Confirm Department and Role."
+        ]
+      },
+      {
+        "title": "Electronic Consent",
+        "items": [
+          "Open Consent activity.",
+          "Select consent type.",
+          "Capture e-signatures.",
+          "If refusal: print, ink sign, scan, send to HIM."
+        ]
+      },
+      {
+        "title": "Specimen Labeling",
+        "items": [
+          "Place order.",
+          "Print labels.",
+          "Scan wristband + specimen."
+        ]
+      },
+      {
+        "title": "Intra-Op Workflow",
+        "items": [
+          "Use Sidebar Quick Events: In Room, Procedure Start, etc.",
+          "Document events as they occur."
+        ]
+      },
+      {
+        "title": "PACU Workflow",
+        "items": [
+          "Enter dressing and laterality.",
+          "Add PACU comments."
+        ]
+      }
     ],
     "qa": [
-      { "q": "How do I substitute a signer on consent?", "a": "Enter alternate signer name and add a nurse witness." },
-      { "q": "What if patient refuses e-signature?", "a": "Print the form, capture ink signature, scan, send to HIM." }
+      {
+        "q": "How do I substitute a signer on consent?",
+        "a": "Enter alternate signer name and add a nurse witness."
+      },
+      {
+        "q": "What if patient refuses e-signature?",
+        "a": "Print the form, capture ink signature, scan, send to HIM."
+      }
     ]
   },
   {
@@ -220,15 +374,54 @@
     "category": "Inpatient",
     "roles": ["Hospitalist", "Resident", "Consultant"],
     "steps": [
-      { "title": "Navigation", "items": ["Open My Lists.", "Review Storyboard: demographics, team, labs."] },
-      { "title": "Problem List & Orders", "items": ["Update/add/resolve problems.", "Place or review orders."] },
-      { "title": "Medication Reconciliation", "items": ["Perform at Admission.", "Repeat at Transfer.", "Finalize at Discharge."] },
-      { "title": "Discharge Workflow", "items": ["Review allergies/problems.", "Reconcile meds.", "Generate AVS."] },
-      { "title": "Consultant Workflow", "items": ["Create consult note.", "Use speed buttons/smart phrases.", "Sign note."] }
+      {
+        "title": "Navigation",
+        "items": [
+          "Open My Lists.",
+          "Review Storyboard: demographics, team, labs."
+        ]
+      },
+      {
+        "title": "Problem List & Orders",
+        "items": [
+          "Update/add/resolve problems.",
+          "Place or review orders."
+        ]
+      },
+      {
+        "title": "Medication Reconciliation",
+        "items": [
+          "Perform at Admission.",
+          "Repeat at Transfer.",
+          "Finalize at Discharge."
+        ]
+      },
+      {
+        "title": "Discharge Workflow",
+        "items": [
+          "Review allergies/problems.",
+          "Reconcile meds.",
+          "Generate AVS."
+        ]
+      },
+      {
+        "title": "Consultant Workflow",
+        "items": [
+          "Create consult note.",
+          "Use speed buttons/smart phrases.",
+          "Sign note."
+        ]
+      }
     ],
     "qa": [
-      { "q": "Where do I reconcile medications?", "a": "During admission, transfer, and discharge." },
-      { "q": "What if there’s a hard stop in an order set?", "a": "You must address it before proceeding." }
+      {
+        "q": "Where do I reconcile medications?",
+        "a": "During admission, transfer, and discharge."
+      },
+      {
+        "q": "What if there’s a hard stop in an order set?",
+        "a": "You must address it before proceeding."
+      }
     ]
   },
   {
@@ -236,15 +429,54 @@
     "category": "Pharmacy",
     "roles": ["Pharmacist", "Pharmacy Tech"],
     "steps": [
-      { "title": "Dashboard & In Basket", "items": ["Open Pharmacy Dashboard.", "Check In Basket: refills, reminders, time changes."] },
-      { "title": "Dispense Functions", "items": ["Click Dispense.", "Choose Prep, Cart Fill, Compounding, Repackaging, or Barcode Validation."] },
-      { "title": "Medication List & ADS Tab", "items": ["Open Medication List.", "Check ADS tab for IID.", "If blank, submit ticket."] },
-      { "title": "Cart Fill Troubleshooting", "items": ["Reprint missing labels via Dispense.", "If printer is down, reroute jobs.", "Remove rerouted printers when resolved."] },
-      { "title": "Barcode Validation", "items": ["Scan Cardinal deliveries.", "Verify NDC matches.", "Submit mismatches with details (name, strength, form, mfr, NDC, cost)."] }
+      {
+        "title": "Dashboard & In Basket",
+        "items": [
+          "Open Pharmacy Dashboard.",
+          "Check In Basket: refills, reminders, time changes."
+        ]
+      },
+      {
+        "title": "Dispense Functions",
+        "items": [
+          "Click Dispense.",
+          "Choose Prep, Cart Fill, Compounding, Repackaging, or Barcode Validation."
+        ]
+      },
+      {
+        "title": "Medication List & ADS Tab",
+        "items": [
+          "Open Medication List.",
+          "Check ADS tab for IID.",
+          "If blank, submit ticket."
+        ]
+      },
+      {
+        "title": "Cart Fill Troubleshooting",
+        "items": [
+          "Reprint missing labels via Dispense.",
+          "If printer is down, reroute jobs.",
+          "Remove rerouted printers when resolved."
+        ]
+      },
+      {
+        "title": "Barcode Validation",
+        "items": [
+          "Scan Cardinal deliveries.",
+          "Verify NDC matches.",
+          "Submit mismatches with details (name, strength, form, mfr, NDC, cost)."
+        ]
+      }
     ],
     "qa": [
-      { "q": "What if cart fill labels don’t print?", "a": "Manually reprint via the Dispense button." },
-      { "q": "What if IID is blank?", "a": "Submit a ticket for IID assignment." }
+      {
+        "q": "What if cart fill labels don’t print?",
+        "a": "Manually reprint via the Dispense button."
+      },
+      {
+        "q": "What if IID is blank?",
+        "a": "Submit a ticket for IID assignment."
+      }
     ]
   },
   {
@@ -252,31 +484,53 @@
     "category": "Outpatient/Ambulatory",
     "roles": ["Physician", "Medical Assistant", "Clinic Staff"],
     "steps": [
-      { "title": "Learning Home", "items": ["Press F1 in Epic.", "Access Learning Home Dashboard.", "Locate tip sheets/resources."] },
-      { "title": "Schedule & Status", "items": ["Open full clinic schedule.", "Track progress in Status column."] },
-      { "title": "Rooming Workflow", "items": ["Set preferred lab during rooming.", "Complete vitals and screenings."] },
-      { "title": "Charge Capture", "items": ["Automatic: meds, immunizations, POCT.", "Manual: procedures, supplies.", "Confirm billing provider."] },
-      { "title": "Referrals", "items": ["Internal vs external referrals.", "If provider missing, enroll using FIND tool."] }
+      {
+        "title": "Learning Home",
+        "items": [
+          "Press F1 in Epic.",
+          "Access Learning Home Dashboard.",
+          "Locate tip sheets/resources."
+        ]
+      },
+      {
+        "title": "Schedule & Status",
+        "items": [
+          "Open full clinic schedule.",
+          "Track progress in Status column."
+        ]
+      },
+      {
+        "title": "Rooming Workflow",
+        "items": [
+          "Set preferred lab during rooming.",
+          "Complete vitals and screenings."
+        ]
+      },
+      {
+        "title": "Charge Capture",
+        "items": [
+          "Automatic: meds, immunizations, POCT.",
+          "Manual: procedures, supplies.",
+          "Confirm billing provider."
+        ]
+      },
+      {
+        "title": "Referrals",
+        "items": [
+          "Internal vs external referrals.",
+          "If provider missing, enroll using FIND tool."
+        ]
+      }
     ],
     "qa": [
-      { "q": "How do I activate MyChart?", "a": "Send activation via text/email; valid 14 days." },
-      { "q": "How do I schedule telemedicine?", "a": "Use Telemedicine visit type." }
-    ]
-  },
-  {
-    "module": "Clin Doc (Clinical Documentation)",
-    "category": "Clinical Documentation",
-    "roles": ["Nurse", "Provider", "Case Manager"],
-    "steps": [
-      { "title": "SDOH Documentation", "items": ["Document risks in domains like financial or housing.", "BPA triggers consult order.", "Case management tracks follow-up."] },
-      { "title": "Specimen Collection", "items": ["Use specimen labels (not patient labels).", "Storyboard toggle (lab/unit) shows tasks.", "Mark specimens collected in Epic."] },
-      { "title": "Patient Expiration", "items": ["Use expiration navigator.", "Document death, donor status, body release.", "Forms auto-generate for signatures and scanning."] },
-      { "title": "Belongings & Medications", "items": ["Document belongings in navigator/flowsheets.", "Use e-signature forms for patient + staff.", "Reconcile/document home meds.", "Nurses mark Med list reviewed."] },
-      { "title": "Provider Notification", "items": ["Document provider notification in assessments.", "Critical values trigger cascading logic.", "Include read-back verification."] }
-    ],
-    "qa": [
-      { "q": "What if a BPA fires for SDOH?", "a": "Place the consult order and document follow-up." },
-      { "q": "Where do I document patient belongings?", "a": "In the belongings navigator or flowsheet with e-signature." }
+      {
+        "q": "How do I activate MyChart?",
+        "a": "Send activation via text/email; valid 14 days."
+      },
+      {
+        "q": "How do I schedule telemedicine?",
+        "a": "Use Telemedicine visit type."
+      }
     ]
   },
   {
@@ -284,16 +538,144 @@
     "category": "Implementation",
     "roles": ["All Staff"],
     "steps": [
-      { "title": "Go-Live Overview", "items": ["Go-live date: October 1.", "Saint Francis Evanston + Holy Family Medical Center.", "Holy Family is first LTACH (long-term care) in Prime."] },
-      { "title": "New Features", "items": ["Meds to Bed program.", "Epic Narrators for code, rapid response, sepsis, trauma, etc.", "E-signature replaces paper consents.", "Rovers not used for meds/wounds; use cameras + scanners."] },
-      { "title": "Specialty Workflows", "items": ["Wound care with Four Eyes Assessment.", "Device association in critical care.", "Therapies structured in navigators/flowsheets.", "Dietitian/malnutrition workflows with auto-calcs.", "Charge capture for dialysis and wound care."] },
-      { "title": "Case Management & Social Services", "items": ["Resolve admission vs observation conflicts.", "Follow up on SDOH BPAs.", "Track discharge milestones.", "Use CCSC navigator for referrals.", "Complete EMTALA for inter-facility transfers."] },
-      { "title": "Holy Family LTACH Workflows", "items": ["Complete LTCH care data set at admit/discharge.", "Transfers from Prime require discharge + readmit.", "Leave of Absence workflows for infusions/visits.", "Emergency transfers handled as discharges.", "MRI workflow includes checklist + e-signature.", "Infection control flags now result-triggered."] },
-      { "title": "Outstanding Items", "items": ["Updated tip sheets to be distributed.", "Finalize intake coordinator workflows.", "Help desk tickets for missing referral facilities.", "Include LTACH and MRI tip sheets in repository."] }
+      {
+        "title": "Go-Live Overview",
+        "items": [
+          "Go-live date: October 1.",
+          "Saint Francis Evanston + Holy Family Medical Center.",
+          "Holy Family is first LTACH (long-term care) in Prime."
+        ]
+      },
+      {
+        "title": "New Features",
+        "items": [
+          "Meds to Bed program.",
+          "Epic Narrators for code, rapid response, sepsis, trauma, etc.",
+          "E-signature replaces paper consents.",
+          "Rovers not used for meds/wounds; use cameras + scanners."
+        ]
+      },
+      {
+        "title": "Clinical Documentation",
+        "items": [
+          "SDOH with BPA-triggered consults.",
+          "Specimen collection with specimen labels.",
+          "Patient expiration navigator with donor forms.",
+          "Belongings tracked with e-signature.",
+          "Critical values documented with provider read-back."
+        ]
+      },
+      {
+        "title": "Specialty Workflows",
+        "items": [
+          "Wound care with Four Eyes Assessment.",
+          "Device association in critical care.",
+          "Therapies structured in navigators/flowsheets.",
+          "Dietitian/malnutrition workflows with auto-calcs.",
+          "Charge capture for dialysis and wound care."
+        ]
+      },
+      {
+        "title": "Case Management & Social Services",
+        "items": [
+          "Resolve admission vs observation conflicts.",
+          "Follow up on SDOH BPAs.",
+          "Track discharge milestones.",
+          "Use CCSC navigator for referrals.",
+          "Complete EMTALA for inter-facility transfers."
+        ]
+      },
+      {
+        "title": "Holy Family LTACH Workflows",
+        "items": [
+          "Complete LTCH care data set at admit/discharge.",
+          "Transfers from Prime require discharge + readmit.",
+          "Leave of Absence workflows for infusions/visits.",
+          "Emergency transfers handled as discharges.",
+          "MRI workflow includes checklist + e-signature.",
+          "Infection control flags now result-triggered."
+        ]
+      },
+      {
+        "title": "Outstanding Items",
+        "items": [
+          "Updated tip sheets to be distributed.",
+          "Finalize intake coordinator workflows.",
+          "Help desk tickets for missing referral facilities.",
+          "Include LTACH and MRI tip sheets in repository."
+        ]
+      }
     ],
     "qa": [
-      { "q": "What’s unique about Holy Family?", "a": "It’s the first Prime LTACH with distinct workflows." },
-      { "q": "Where can I find tip sheets?", "a": "They will be emailed and stored in the shared repository." }
+      {
+        "q": "What’s unique about Holy Family?",
+        "a": "It’s the first Prime LTACH with distinct workflows."
+      },
+      {
+        "q": "Where can I find tip sheets?",
+        "a": "They will be emailed and stored in the shared repository."
+      }
+    ]
+  },
+  {
+    "module": "Clin Doc",
+    "category": "Clinical Documentation",
+    "roles": ["Nurse", "Provider"],
+    "steps": [
+      {
+        "title": "SDOH Documentation",
+        "items": [
+          "Open SDOH section in navigator.",
+          "Document risks (housing, food, finance, etc.).",
+          "Save to trigger BPA if applicable."
+        ]
+      },
+      {
+        "title": "Specimen Collection",
+        "items": [
+          "Print specimen labels (not patient labels).",
+          "Collect specimen → mark as Collected in Epic.",
+          "Toggle Lab/Unit view in Storyboard if needed."
+        ]
+      },
+      {
+        "title": "Patient Expiration",
+        "items": [
+          "Open Expiration Navigator.",
+          "Complete death, donor, and body release documentation.",
+          "Generate forms → collect signatures → scan to HIM."
+        ]
+      },
+      {
+        "title": "Belongings & Meds",
+        "items": [
+          "Document belongings in Navigator or flowsheet.",
+          "Complete e-signature with patient/staff.",
+          "Reconcile home meds, mark Med List as reviewed."
+        ]
+      },
+      {
+        "title": "Provider Notification",
+        "items": [
+          "Document critical lab values in flowsheet.",
+          "Record provider notified + read-back verification.",
+          "If recollection required, follow prompts."
+        ]
+      }
+    ],
+    "qa": [
+      {
+        "q": "Where do I document SDOH risks?",
+        "a": "In the SDOH Navigator section; BPA triggers consult order."
+      },
+      {
+        "q": "How do I handle belongings?",
+        "a": "Use navigator/flowsheet with e-signature form for patient + staff."
+      },
+      {
+        "q": "What happens with critical values?",
+        "a": "Flowsheet prompts for provider notification and read-back documentation."
+      }
     ]
   }
 ]
