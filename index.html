@@ -1,88 +1,118 @@
-<script>
-  async function loadFAQs() {
-    try {
-      const response = await fetch("epic_go_live_faq.json");
-      const data = await response.json();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Epic Go-Live FAQ Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f7fa; margin: 0; padding: 0; color: #333; }
+    header { background: #003366; color: white; padding: 1rem; text-align: center; }
+    .container { max-width: 900px; margin: 2rem auto; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+    h2 { color: #003366; }
+    details { margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px; padding: 0.5rem 1rem; background: #fafafa; }
+    summary { cursor: pointer; font-weight: bold; color: #003366; }
+    .steps { margin: 0.5rem 0 0.5rem 1rem; padding-left: 1rem; border-left: 3px solid #003366; }
+    .steps li { margin: 0.3rem 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Epic Go-Live FAQ Assistant</h1>
+  </header>
+  <div class="container" id="content">
+    <p>Loading FAQs...</p>
+  </div>
 
-      const modules = data.modules || data; // handle both array and object
-      const container = document.getElementById("content");
-      container.innerHTML = "";
+  <script>
+    async function loadFAQs() {
+      try {
+        const response = await fetch("epic_go_live_faq.json");
+        const data = await response.json();
+        let modules = data.modules || data;
 
-      modules.forEach(module => {
-        const moduleDiv = document.createElement("div");
-        moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
+        // Always push Go-Live Preparation to the end
+        modules = modules.sort((a, b) => (a.module === "Go-Live Preparation" ? 1 : b.module === "Go-Live Preparation" ? -1 : 0));
 
-        // How To section
-        if (module.steps && module.steps.length > 0) {
-          const howToDetails = document.createElement("details");
-          howToDetails.innerHTML = `<summary>📘 How To</summary>`;
-          const ul = document.createElement("ul");
-          ul.className = "steps";
+        const container = document.getElementById("content");
+        container.innerHTML = "";
 
-          module.steps.forEach(step => {
-            if (step.title) {
-              const liTitle = document.createElement("li");
-              liTitle.innerHTML = `<strong>${step.title}</strong>`;
-              const innerUl = document.createElement("ul");
-              step.items.forEach(item => {
-                const innerLi = document.createElement("li");
-                innerLi.textContent = item;
-                innerUl.appendChild(innerLi);
-              });
-              liTitle.appendChild(innerUl);
-              ul.appendChild(liTitle);
-            } else {
+        modules.forEach(module => {
+          const moduleDiv = document.createElement("div");
+          moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
+
+          // How To steps
+          if (module.steps && module.steps.length > 0 && module.module !== "Go-Live Preparation") {
+            const howToDetails = document.createElement("details");
+            howToDetails.innerHTML = `<summary>📘 How To</summary>`;
+            const ul = document.createElement("ul");
+            ul.className = "steps";
+
+            module.steps.forEach(step => {
+              if (step.title) {
+                const liTitle = document.createElement("li");
+                liTitle.innerHTML = `<strong>${step.title}</strong>`;
+                const innerUl = document.createElement("ul");
+                step.items.forEach(item => {
+                  const innerLi = document.createElement("li");
+                  innerLi.textContent = item;
+                  innerUl.appendChild(innerLi);
+                });
+                liTitle.appendChild(innerUl);
+                ul.appendChild(liTitle);
+              } else {
+                const li = document.createElement("li");
+                li.textContent = step;
+                ul.appendChild(li);
+              }
+            });
+
+            howToDetails.appendChild(ul);
+            moduleDiv.appendChild(howToDetails);
+          }
+
+          // FAQs
+          if (module.qa && module.qa.length > 0) {
+            module.qa.forEach(item => {
+              const qaDetails = document.createElement("details");
+              qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
+              moduleDiv.appendChild(qaDetails);
+            });
+          }
+
+          // Training Materials
+          if (module.trainingMaterials && module.trainingMaterials.length > 0) {
+            const trainDetails = document.createElement("details");
+            trainDetails.innerHTML = `<summary>📂 Training Materials</summary>`;
+            const ul = document.createElement("ul");
+            ul.className = "steps";
+
+            module.trainingMaterials.forEach(mat => {
               const li = document.createElement("li");
-              li.textContent = step;
+              if (typeof mat === "string") {
+                li.textContent = mat;
+              } else {
+                const a = document.createElement("a");
+                a.textContent = mat.title;
+                a.href = mat.url;
+                a.target = "_blank";
+                li.appendChild(a);
+              }
               ul.appendChild(li);
-            }
-          });
+            });
 
-          howToDetails.appendChild(ul);
-          moduleDiv.appendChild(howToDetails);
-        }
+            trainDetails.appendChild(ul);
+            moduleDiv.appendChild(trainDetails);
+          }
 
-        // FAQs
-        if (module.qa && module.qa.length > 0) {
-          module.qa.forEach(item => {
-            const qaDetails = document.createElement("details");
-            qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
-            moduleDiv.appendChild(qaDetails);
-          });
-        }
-
-        // Training Materials
-        if (module.trainingMaterials && module.trainingMaterials.length > 0) {
-          const trainDetails = document.createElement("details");
-          trainDetails.innerHTML = `<summary>📂 Training Materials</summary>`;
-          const ul = document.createElement("ul");
-          ul.className = "steps";
-
-          module.trainingMaterials.forEach(mat => {
-            const li = document.createElement("li");
-            if (typeof mat === "string") {
-              li.textContent = mat; // fallback if old format
-            } else {
-              const a = document.createElement("a");
-              a.textContent = mat.title;
-              a.href = mat.url;
-              a.target = "_blank";
-              li.appendChild(a);
-            }
-            ul.appendChild(li);
-          });
-
-          trainDetails.appendChild(ul);
-          moduleDiv.appendChild(trainDetails);
-        }
-
-        container.appendChild(moduleDiv);
-      });
-    } catch (error) {
-      document.getElementById("content").innerHTML =
-        `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
+          container.appendChild(moduleDiv);
+        });
+      } catch (error) {
+        document.getElementById("content").innerHTML =
+          `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
+      }
     }
-  }
 
-  loadFAQs();
-</script>
+    loadFAQs();
+  </script>
+</body>
+</html>
