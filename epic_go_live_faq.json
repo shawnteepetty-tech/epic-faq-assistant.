@@ -1,175 +1,28 @@
 {
-  "modules": [
+  "departments": [
     {
-      "module": "CardioServer – Tech User",
-      "category": "Cardiology",
-      "roles": ["Tech User"],
-      "steps": [
+      "name": "Ambulatory",
+      "faq": [
         {
-          "title": "Access CardioServer",
-          "items": [
-            "In Epic, open the patient chart → click the CardioServer SmartLink/URL.",
-            "OR on the desktop, double-click the CardioServer icon.",
-            "OR in Citrix Workspace → CardioServer → Open.",
-            "On the login page, enter AD username + password.",
-            "Confirm header shows Role = Tech User."
-          ]
+          "question": "Where do I find tip sheets for ambulatory workflows?",
+          "answer": "Press F1 → Learning Home Dashboard → select role → Tip Sheets section."
         },
         {
-          "title": "Find & Filter Studies",
-          "items": [
-            "Open Worklist / Studies view.",
-            "Set Facility/Location filter.",
-            "Set Status filter: Preliminary / Unconfirmed / Confirmed / Stored.",
-            "Optional: set Date filter (Today, Last 7 Days, Custom).",
-            "Click Apply / Search."
-          ]
-        }
-      ],
-      "qa": [
-        {
-          "q": "What if a study doesn’t match any patient/order?",
-          "a": "Use Link/Reconcile → search MRN → select correct order."
-        }
-      ],
-      "trainingMaterials": [
-        { "title": "CardioServer Quick Guide", "url": "#" }
-      ]
-    },
-    {
-      "module": "Pharmacy (Willow)",
-      "category": "Pharmacy",
-      "roles": ["Pharmacist", "Pharmacy Tech"],
-      "steps": [
-        {
-          "title": "Dashboard & In Basket",
-          "items": [
-            "Open Pharmacy Dashboard.",
-            "Check In Basket: refills, reminders, time changes."
-          ]
-        }
-      ],
-      "qa": [
-        {
-          "q": "What if IID is blank?",
-          "a": "Submit a ticket for IID assignment."
-        }
-      ],
-      "trainingMaterials": [
-        { "title": "Willow Tip Sheet", "url": "#" }
-      ]
-    },
-    {
-      "module": "Nursing",
-      "category": "Inpatient",
-      "roles": ["Nurse"],
-      "steps": [
-        {
-          "title": "Navigation",
-          "items": [
-            "Use My Lists to locate patients.",
-            "Storyboard shows demographics, care team, and recent labs."
-          ]
-        }
-      ],
-      "qa": [
-        {
-          "q": "Where do I reconcile meds?",
-          "a": "At admission, transfer, and discharge."
-        }
-      ],
-      "trainingMaterials": [
-        { "title": "Epic Essentials", "url": "#" },
-        { "title": "IP Charges Tip Sheet", "url": "#" },
-        { "title": "Inpatient Nurse - Orders", "url": "#" },
-        { "title": "Inpatient Nurse - Review the Chart", "url": "#" },
-        { "title": "Inpatient Nurse - Transfer", "url": "#" },
-        { "title": "Inpatient Nurse - Vitals and Assessments", "url": "#" },
-        { "title": "Inpatient Nurse - Work List", "url": "#" },
-        { "title": "Isolation Order BPA", "url": "#" },
-        { "title": "IV Infusion Workflow", "url": "#" },
-        { "title": "LVN RN Cosign Notes Tip Sheet", "url": "#" },
-        { "title": "MAR Administration Tip Sheet", "url": "#" },
-        { "title": "MAR Skin Sub Tip Sheet", "url": "#" },
-        { "title": "MAR Skin Sub SCPA Wound", "url": "#" },
-        { "title": "MRI Screening Form Tip Sheet", "url": "#" },
-        { "title": "Marking a Deceased Patient Bed for Cleaning", "url": "#" },
-        { "title": "Med Admin CR", "url": "#" },
-        { "title": "MyChart Signup Tip Sheet", "url": "#" },
-        { "title": "Note Type Tip Sheet", "url": "#" },
-        { "title": "Nurse Assessment", "url": "#" },
-        { "title": "Nurse Quick Start Guide", "url": "#" },
-        { "title": "OnBase Tip Sheet", "url": "#" },
-        { "title": "Organ Donor Tip Sheet", "url": "#" },
-        { "title": "PPD Tip Sheet", "url": "#" },
-        { "title": "PT Movement to Psych", "url": "#" },
-        { "title": "PTA Med Review Tip Sheet", "url": "#" },
-        { "title": "Patient Movement - Discharge to SNF", "url": "#" },
-        { "title": "Patient Movement - Inpatient to Psych", "url": "#" },
-        { "title": "Patient Movement - Discharge Readmit Navigator", "url": "#" },
-        { "title": "Preassign Nurses", "url": "#" },
-        { "title": "Preferred Pharmacy", "url": "#" },
-        { "title": "Psychotropic Medication E-Consent", "url": "#" },
-        { "title": "RN - Resulting a POCT", "url": "#" },
-        { "title": "Record of Death Tip Sheet", "url": "#" },
-        { "title": "Reprint Label Tip Sheet", "url": "#" },
-        { "title": "Restraint Work List Tip Sheet", "url": "#" },
-        { "title": "Review PTA Meds Tip Sheet", "url": "#" },
-        { "title": "Reviewing Charges Tip Sheet", "url": "#" },
-        { "title": "Scanning Specimen Tip Sheet", "url": "#" },
-        { "title": "Sepsis Tip Sheet", "url": "#" },
-        { "title": "TB Test Documentation", "url": "#" },
-        { "title": "The Work List", "url": "#" },
-        { "title": "Manual Chart Correction - Flowsheets", "url": "#" },
-        { "title": "Manual Chart Correction - Notes", "url": "#" },
-        { "title": "Undo Discharge Tip Sheet", "url": "#" },
-        { "title": "Unit Clerk - Admit/Discharge/Transfer", "url": "#" },
-        { "title": "Unreadable Barcode Tip Sheet", "url": "#" },
-        { "title": "Update Accommodation Code", "url": "#" },
-        { "title": "Using Transport Clinical Staff", "url": "#" },
-        { "title": "Wound RN Charging", "url": "#" },
-        { "title": "Ordering Blood", "url": "#" },
-        { "title": "Psychotropic Med Tip Sheet", "url": "#" }
-      ]
-    },
-    {
-      "module": "Go-Live Preparation",
-      "category": "Implementation",
-      "roles": ["All Staff"],
-      "steps": [
-        {
-          "title": "Go-Live Overview",
-          "items": [
-            "Go-live date: October 1.",
-            "Saint Francis Evanston + Holy Family Medical Center.",
-            "Holy Family is Prime's first LTACH (long-term care)."
-          ]
+          "question": "How do I set a patient’s preferred lab?",
+          "answer": "During rooming, in the Rooming Navigator, select Labs → mark preferred lab."
         },
         {
-          "title": "New Features",
-          "items": [
-            "Meds to Bed program.",
-            "Epic Narrators for code/trauma/sepsis workflows.",
-            "E-signature replaces paper consents.",
-            "Barcode scanners replace Rover for meds/wounds."
-          ]
-        }
-      ],
-      "qa": [
-        {
-          "q": "What’s unique about Holy Family?",
-          "a": "It’s the first Prime LTACH with distinct workflows."
+          "question": "Why isn’t my Medicare Wellness form showing?",
+          "answer": "Scroll to bottom of Screenings Navigator; if missing, check visit type and provider setup."
         },
         {
-          "q": "Where can I find tip sheets?",
-          "a": "They will be emailed and stored in the shared repository."
+          "question": "What’s the difference between internal and external referrals?",
+          "answer": "Internal referrals often require prior auth and are routed in-system; external go outside Epic network."
+        },
+        {
+          "question": "A provider is missing from referral orders. What do I do?",
+          "answer": "Use the FIND tool to enroll the provider into Epic, or contact credentialing if not listed."
         }
-      ],
-      "studyMaterials": [
-        { "title": "Go-Live Study Deck", "url": "#" }
-      ],
-      "logistics": [
-        { "title": "Logistics Guide", "url": "#" }
       ]
     }
   ]
