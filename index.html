@@ -49,10 +49,6 @@
     .steps li {
       margin: 0.3rem 0;
     }
-    .step-title {
-      font-weight: bold;
-      margin-top: 0.5rem;
-    }
   </style>
 </head>
 <body>
@@ -67,39 +63,32 @@
     async function loadFAQs() {
       try {
         const response = await fetch("epic_go_live_faq.json");
-        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-        const raw = await response.json();
+        const data = await response.json();
 
-        const modules = raw.modules || raw;
         const container = document.getElementById("content");
         container.innerHTML = "";
+
+        const modules = data.modules || data;
 
         modules.forEach(module => {
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // Handle Steps (structured with titles)
+          // How To section
           if (module.steps && module.steps.length > 0) {
-            const howToDetails = document.createElement("details");
-            howToDetails.innerHTML = `<summary>📘 How To</summary>`;
-
-            module.steps.forEach(stepGroup => {
-              const stepTitle = document.createElement("div");
-              stepTitle.className = "step-title";
-              stepTitle.textContent = stepGroup.title;
-              howToDetails.appendChild(stepTitle);
-
+            module.steps.forEach(section => {
+              const details = document.createElement("details");
+              details.innerHTML = `<summary>📘 How To: ${section.title}</summary>`;
               const ul = document.createElement("ul");
               ul.className = "steps";
-              stepGroup.items.forEach(item => {
+              section.items.forEach(item => {
                 const li = document.createElement("li");
                 li.textContent = item;
                 ul.appendChild(li);
               });
-              howToDetails.appendChild(ul);
+              details.appendChild(ul);
+              moduleDiv.appendChild(details);
             });
-
-            moduleDiv.appendChild(howToDetails);
           }
 
           // FAQs
@@ -111,10 +100,32 @@
             });
           }
 
+          // Study Materials
+          const linksSection = document.createElement("details");
+          linksSection.innerHTML = `<summary>📎 Study Materials</summary>`;
+          const ul = document.createElement("ul");
+          ul.className = "steps";
+
+          if (module.links && module.links.length > 0) {
+            module.links.forEach(link => {
+              const li = document.createElement("li");
+              li.innerHTML = `<a href="${link.url}" target="_blank">${link.title}</a>`;
+              ul.appendChild(li);
+            });
+          } else {
+            const li = document.createElement("li");
+            li.textContent = "No study materials linked yet.";
+            ul.appendChild(li);
+          }
+
+          linksSection.appendChild(ul);
+          moduleDiv.appendChild(linksSection);
+
           container.appendChild(moduleDiv);
         });
       } catch (error) {
-        document.getElementById("content").innerHTML = `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
+        document.getElementById("content").innerHTML =
+          `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
       }
     }
 
