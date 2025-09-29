@@ -104,104 +104,6 @@
     ]
   },
   {
-    "module": "EVC (Telehealth / Video Consults)",
-    "category": "Telehealth",
-    "roles": ["Provider", "Staff"],
-    "steps": [
-      {
-        "title": "Open Encounter",
-        "items": [
-          "Log into Epic (O2).",
-          "Open the patient’s encounter to begin.",
-          "Confirm correct patient chart is active."
-        ]
-      },
-      {
-        "title": "Locate Connect Section",
-        "items": [
-          "Navigate to the Rooming tab or the Plan tab.",
-          "Find the Connect section."
-        ]
-      },
-      {
-        "title": "Start Video Visit",
-        "items": [
-          "From the Connect section, click Start Video Visit.",
-          "If enabled, select Send to Haiku/Kanto for mobile devices."
-        ]
-      },
-      {
-        "title": "Invite Participants",
-        "items": [
-          "Click Send Direct Link to add participants.",
-          "For Providers: use Provider Invite option (pulls provider info from Epic).",
-          "For Guests: enter guest’s name, relationship, and email/phone → click Send."
-        ]
-      },
-      {
-        "title": "Verify Contact Info",
-        "items": [
-          "Double-check email/phone details before sending invite.",
-          "Correct errors before sending."
-        ]
-      },
-      {
-        "title": "Device Setup & Hardware Test",
-        "items": [
-          "On joining, set up microphone, webcam, and speakers.",
-          "Run hardware test (optional to skip for 18 hrs)."
-        ]
-      },
-      {
-        "title": "Admit Participants",
-        "items": [
-          "Click Admit when patient/provider/guest joins.",
-          "Use the menu to admit participants individually."
-        ]
-      },
-      {
-        "title": "Manage Participants",
-        "items": [
-          "Mute/unmute or toggle webcam.",
-          "Remove participant (note: removed users cannot rejoin)."
-        ]
-      },
-      {
-        "title": "Call Controls & Screen Sharing",
-        "items": [
-          "Use controls for microphone, webcam, and screen share.",
-          "Be cautious when sharing screens with PHI."
-        ]
-      },
-      {
-        "title": "End Call",
-        "items": [
-          "Click Leave Call → others remain.",
-          "Click End Call → ends for everyone.",
-          "Best practice: End Call once session is complete."
-        ]
-      }
-    ],
-    "qa": [
-      {
-        "q": "Where can I start an EVC visit?",
-        "a": "In the patient’s encounter under the Rooming or Plan tab → Connect section."
-      },
-      {
-        "q": "Can I invite guests?",
-        "a": "Yes. Enter guest’s name, relationship, and email/phone → Send invite."
-      },
-      {
-        "q": "What happens if I remove a participant?",
-        "a": "They cannot rejoin unless reinvited."
-      },
-      {
-        "q": "Should I leave or end the call?",
-        "a": "Always click End Call to close the session for everyone."
-      }
-    ]
-  },
-  {
     "module": "ASAP (ED Track Board)",
     "category": "Emergency Department",
     "roles": ["Nurse", "Provider"],
@@ -224,16 +126,16 @@
       {
         "title": "Registration & Disposition",
         "items": [
-          "✔ = Registration complete.",
-          "X = Registration incomplete (does not block discharge).",
-          "Disposition column shows patient destination."
+          "Registration column: ✔ = complete, X = incomplete (does not block discharge).",
+          "Disposition column = patient destination."
         ]
       },
       {
         "title": "Layout Customization",
         "items": [
           "Click-drag column headers to rearrange.",
-          "Move items (e.g., Suicide Risk) to preferred position."
+          "Move items (e.g., Suicide Risk) to preferred position.",
+          "Save layout if available."
         ]
       },
       {
@@ -534,6 +436,54 @@
     ]
   },
   {
+    "module": "Clin Doc (Clinical Documentation)",
+    "category": "Documentation",
+    "roles": ["Nurse", "Provider"],
+    "steps": [
+      {
+        "title": "SDOH Documentation",
+        "items": [
+          "Document risks in SDOH domains.",
+          "If BPA triggers, place consult order.",
+          "Follow-up tracked by Case Management & Social Services."
+        ]
+      },
+      {
+        "title": "Specimen Collection",
+        "items": [
+          "Use specimen labels (not patient labels).",
+          "Toggle Storyboard: Lab vs Unit view.",
+          "Mark specimen as Collected in Epic."
+        ]
+      },
+      {
+        "title": "Patient Expiration",
+        "items": [
+          "Open Patient Expiration navigator.",
+          "Document death, donor status, and body release.",
+          "Forms generated → sign → scan into chart."
+        ]
+      },
+      {
+        "title": "Belongings & Medications",
+        "items": [
+          "Document belongings in navigator/flowsheets.",
+          "Capture patient + staff e-signatures.",
+          "Reconcile home medications.",
+          "Mark Med List as Reviewed."
+        ]
+      },
+      {
+        "title": "Provider Notification & Critical Values",
+        "items": [
+          "Enter critical results in flowsheet.",
+          "Document provider notification + read-back verification.",
+          "Cascade recollection orders if needed."
+        ]
+      }
+    ]
+  },
+  {
     "module": "Go-Live Preparation",
     "category": "Implementation",
     "roles": ["All Staff"],
@@ -553,16 +503,6 @@
           "Epic Narrators for code, rapid response, sepsis, trauma, etc.",
           "E-signature replaces paper consents.",
           "Rovers not used for meds/wounds; use cameras + scanners."
-        ]
-      },
-      {
-        "title": "Clinical Documentation",
-        "items": [
-          "SDOH with BPA-triggered consults.",
-          "Specimen collection with specimen labels.",
-          "Patient expiration navigator with donor forms.",
-          "Belongings tracked with e-signature.",
-          "Critical values documented with provider read-back."
         ]
       },
       {
@@ -614,67 +554,6 @@
       {
         "q": "Where can I find tip sheets?",
         "a": "They will be emailed and stored in the shared repository."
-      }
-    ]
-  },
-  {
-    "module": "Clin Doc",
-    "category": "Clinical Documentation",
-    "roles": ["Nurse", "Provider"],
-    "steps": [
-      {
-        "title": "SDOH Documentation",
-        "items": [
-          "Open SDOH section in navigator.",
-          "Document risks (housing, food, finance, etc.).",
-          "Save to trigger BPA if applicable."
-        ]
-      },
-      {
-        "title": "Specimen Collection",
-        "items": [
-          "Print specimen labels (not patient labels).",
-          "Collect specimen → mark as Collected in Epic.",
-          "Toggle Lab/Unit view in Storyboard if needed."
-        ]
-      },
-      {
-        "title": "Patient Expiration",
-        "items": [
-          "Open Expiration Navigator.",
-          "Complete death, donor, and body release documentation.",
-          "Generate forms → collect signatures → scan to HIM."
-        ]
-      },
-      {
-        "title": "Belongings & Meds",
-        "items": [
-          "Document belongings in Navigator or flowsheet.",
-          "Complete e-signature with patient/staff.",
-          "Reconcile home meds, mark Med List as reviewed."
-        ]
-      },
-      {
-        "title": "Provider Notification",
-        "items": [
-          "Document critical lab values in flowsheet.",
-          "Record provider notified + read-back verification.",
-          "If recollection required, follow prompts."
-        ]
-      }
-    ],
-    "qa": [
-      {
-        "q": "Where do I document SDOH risks?",
-        "a": "In the SDOH Navigator section; BPA triggers consult order."
-      },
-      {
-        "q": "How do I handle belongings?",
-        "a": "Use navigator/flowsheet with e-signature form for patient + staff."
-      },
-      {
-        "q": "What happens with critical values?",
-        "a": "Flowsheet prompts for provider notification and read-back documentation."
       }
     ]
   }
