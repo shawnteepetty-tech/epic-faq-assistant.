@@ -1,50 +1,198 @@
-<script>
-  fetch('epic_go_live_faq.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Failed to load FAQ file: " + response.status);
+[
+  {
+    "module": "CardioServer – Tech User",
+    "roles": ["Tech User"],
+    "steps": [
+      {
+        "title": "Access CardioServer",
+        "items": [
+          "In Epic, open the patient chart → click the CardioServer SmartLink/URL.",
+          "Or on desktop, double-click the CardioServer icon.",
+          "Or in Citrix Workspace → CardioServer → Open.",
+          "Login with AD credentials.",
+          "Confirm header shows Role = Tech User."
+        ]
+      },
+      {
+        "title": "Find & Filter Studies",
+        "items": [
+          "Open Worklist / Studies view.",
+          "Set Facility/Location filter.",
+          "Set Status filter: Preliminary / Unconfirmed / Confirmed / Stored.",
+          "Optional: filter by Date.",
+          "Click Apply / Search."
+        ]
+      },
+      {
+        "title": "Link Study to Patient/Order",
+        "items": [
+          "In Worklist, select study.",
+          "Click Link to Order/Reconcile.",
+          "Search MRN or Name → select patient.",
+          "If multiple orders: select correct order.",
+          "Click Save/Link."
+        ]
       }
-      return response.json();
-    })
-    .then(data => {
-      const container = document.getElementById('faqs');
-      container.innerHTML = '';
-
-      if (!Array.isArray(data) || data.length === 0) {
-        container.innerHTML = '<p>No FAQs available.</p>';
-        return;
+    ],
+    "qa": [
+      { "q": "What if a study doesn’t match any patient/order?", "a": "Use Link/Reconcile → search MRN → choose correct order." },
+      { "q": "Can I trash a study that’s already Unconfirmed?", "a": "No, only Preliminary can be trashed." }
+    ]
+  },
+  {
+    "module": "EVC (Telehealth / Video Consults)",
+    "roles": ["Provider", "Bedside Staff"],
+    "steps": [
+      {
+        "title": "Launch Consult",
+        "items": [
+          "From Epic MPage 'TV Kit Consults' or Converge website.",
+          "Select patient.",
+          "Click Start Consult."
+        ]
+      },
+      {
+        "title": "Accept Call (Bedside Staff)",
+        "items": [
+          "On TV Kit 200S, click Accept.",
+          "Verify audio and video are working."
+        ]
       }
-
-      data.forEach(section => {
-        // Module name
-        const deptHeader = document.createElement('h2');
-        deptHeader.textContent = section.module;
-        container.appendChild(deptHeader);
-
-        // Optional workflow description
-        if (section.workflow) {
-          const workflowDiv = document.createElement('div');
-          workflowDiv.style.marginBottom = "10px";
-          workflowDiv.textContent = "Workflow: " + section.workflow;
-          container.appendChild(workflowDiv);
-        }
-
-        // FAQs
-        if (section.qa && section.qa.length > 0) {
-          section.qa.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'faq-item';
-            div.innerHTML = `
-              <div class="faq-question">Q: ${item.q}</div>
-              <div class="faq-answer">A: ${item.a}</div>
-            `;
-            container.appendChild(div);
-          });
-        }
-      });
-    })
-    .catch(err => {
-      document.getElementById('faqs').innerHTML =
-        '<p class="error">⚠️ Error loading FAQs: ' + err.message + '</p>';
-    });
-</script>
+    ],
+    "qa": [
+      { "q": "How do I start a consult?", "a": "From Epic MPage 'TV Kit Consults' → select patient → Start Consult." },
+      { "q": "What if patient can’t hear me?", "a": "Check mute, device volume, and TV Kit connection." }
+    ]
+  },
+  {
+    "module": "ASAP (ED Track Board)",
+    "roles": ["Nurse", "Provider"],
+    "steps": [
+      {
+        "title": "Track Board Overview",
+        "items": [
+          "Open ED Track Board.",
+          "Review columns for Bed, Name, Age, Complaint, Acuity, Staff initials.",
+          "Hover over initials for full staff names."
+        ]
+      },
+      {
+        "title": "Order Status Icons",
+        "items": [
+          "Columns show status of EKGs, Meds, Labs, Imaging.",
+          "Counts under Placed, In Process, Completed."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "What does an X in registration mean?", "a": "Registration incomplete. It won’t block discharge." },
+      { "q": "How do I see pending labs?", "a": "Check order columns: placed, in process, completed." }
+    ]
+  },
+  {
+    "module": "Beaker (Lab Workflow)",
+    "roles": ["Phlebotomist", "Lab Tech"],
+    "steps": [
+      {
+        "title": "Specimen Collection",
+        "items": [
+          "Check-in patient.",
+          "Enter orders.",
+          "Print labels.",
+          "Scan wristband and specimen.",
+          "Transport specimen to lab."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "How do I reprint a specimen label?", "a": "Use Order → Reprint Label." },
+      { "q": "Where do I check pending tests?", "a": "Use the Outstanding List." }
+    ]
+  },
+  {
+    "module": "Optime Anesthesia",
+    "roles": ["Anesthesiologist", "CRNA", "Resident"],
+    "steps": [
+      {
+        "title": "Electronic Consent",
+        "items": [
+          "Consent → e-Signature → select consent type.",
+          "Capture signatures.",
+          "If refusal: Print → ink → scan → send to HIM."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "How do I substitute a signer on consent?", "a": "Enter name + nurse witness." },
+      { "q": "What if patient refuses e-signature?", "a": "Print, ink signature, scan, send to HIM." }
+    ]
+  },
+  {
+    "module": "Inpatient Provider Workflow",
+    "roles": ["Hospitalist", "Resident", "Consultant"],
+    "steps": [
+      {
+        "title": "Navigation",
+        "items": [
+          "Use My Lists and Storyboard.",
+          "Review demographics, teams, labs."
+        ]
+      },
+      {
+        "title": "Discharge Workflow",
+        "items": [
+          "Review allergies and problems.",
+          "Reconcile meds.",
+          "Generate AVS."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "Where do I reconcile meds?", "a": "During admission and discharge." },
+      { "q": "How do consultants document?", "a": "Consult note → use smart phrases or templates." }
+    ]
+  },
+  {
+    "module": "Pharmacy (Willow)",
+    "roles": ["Pharmacist", "Pharmacy Tech"],
+    "steps": [
+      {
+        "title": "Dashboard Functions",
+        "items": [
+          "In Basket messaging.",
+          "Card status printing.",
+          "Occupancy and tech reports."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "What if cart fill labels don’t print?", "a": "Reprint manually via Dispense button." },
+      { "q": "What if printer is down?", "a": "Reroute jobs, remove rerouted printers later." }
+    ]
+  },
+  {
+    "module": "Ambulatory Clinic",
+    "roles": ["Physician", "Medical Assistant", "Clinic Staff"],
+    "steps": [
+      {
+        "title": "Rooming Workflow",
+        "items": [
+          "Set Preferred Lab during rooming.",
+          "Complete vitals and screenings."
+        ]
+      },
+      {
+        "title": "Telemedicine Scheduling",
+        "items": [
+          "Use Telemedicine visit type.",
+          "Provider joins via Epic/Haiku.",
+          "Patient joins via MyChart/text/email."
+        ]
+      }
+    ],
+    "qa": [
+      { "q": "Where are tip sheets?", "a": "Learning Home Dashboard via F1." },
+      { "q": "How do I activate MyChart?", "a": "Send via text/email code (valid 14 days)." }
+    ]
+  }
+]
