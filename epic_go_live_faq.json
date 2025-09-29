@@ -1,65 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Epic Go-Live FAQ Assistant</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
-    h1 { color: #003366; }
-    h2 { color: #0055aa; margin-top: 20px; }
-    .faq-item { 
-      margin-bottom: 15px; 
-      padding: 10px; 
-      background: #fff; 
-      border: 1px solid #ddd; 
-      border-radius: 6px; 
-      box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
-    }
-    .faq-question { font-weight: bold; margin-bottom: 5px; color: #003366; }
-    .faq-answer { white-space: pre-line; }
-    .error { color: red; margin-top: 20px; }
-  </style>
-</head>
-<body>
-  <h1>Epic Go-Live FAQ Assistant</h1>
-  <div id="faqs">Loading FAQs...</div>
+<script>
+  fetch('epic_go_live_faq.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Failed to load FAQ file: " + response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      const container = document.getElementById('faqs');
+      container.innerHTML = '';
 
-  <script>
-    fetch('epic_go_live_faq.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Failed to load FAQ file: " + response.status);
-        }
-        return response.json();
-      })
-      .then(data => {
-        const container = document.getElementById('faqs');
-        container.innerHTML = '';
-        if (!data.departments || data.departments.length === 0) {
-          container.innerHTML = '<p>No FAQs available.</p>';
-          return;
-        }
-        data.departments.forEach(dept => {
-          const deptHeader = document.createElement('h2');
-          deptHeader.textContent = dept.name;
-          container.appendChild(deptHeader);
+      if (!Array.isArray(data) || data.length === 0) {
+        container.innerHTML = '<p>No FAQs available.</p>';
+        return;
+      }
 
-          dept.faq.forEach(faq => {
+      data.forEach(section => {
+        // Module name
+        const deptHeader = document.createElement('h2');
+        deptHeader.textContent = section.module;
+        container.appendChild(deptHeader);
+
+        // Optional workflow description
+        if (section.workflow) {
+          const workflowDiv = document.createElement('div');
+          workflowDiv.style.marginBottom = "10px";
+          workflowDiv.textContent = "Workflow: " + section.workflow;
+          container.appendChild(workflowDiv);
+        }
+
+        // FAQs
+        if (section.qa && section.qa.length > 0) {
+          section.qa.forEach(item => {
             const div = document.createElement('div');
             div.className = 'faq-item';
             div.innerHTML = `
-              <div class="faq-question">Q: ${faq.question}</div>
-              <div class="faq-answer">A: ${faq.answer}</div>
+              <div class="faq-question">Q: ${item.q}</div>
+              <div class="faq-answer">A: ${item.a}</div>
             `;
             container.appendChild(div);
           });
-        });
-      })
-      .catch(err => {
-        document.getElementById('faqs').innerHTML =
-          '<p class="error">⚠️ Error loading FAQs: ' + err.message + '</p>';
+        }
       });
-  </script>
-</body>
-</html>
+    })
+    .catch(err => {
+      document.getElementById('faqs').innerHTML =
+        '<p class="error">⚠️ Error loading FAQs: ' + err.message + '</p>';
+    });
+</script>
