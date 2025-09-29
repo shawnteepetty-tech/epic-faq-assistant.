@@ -70,7 +70,7 @@
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        // Put Go-Live Preparation last
+        // Move Go-Live Preparation to the bottom
         const modules = [...data.modules];
         const goLive = modules.find(m => m.module.includes("Go-Live Preparation"));
         const filtered = modules.filter(m => !m.module.includes("Go-Live Preparation"));
@@ -80,23 +80,29 @@
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // How To section
+          // How To (skip Go-Live Preparation)
           if (module.steps && module.steps.length > 0 && module.module !== "Go-Live Preparation") {
             const howToDetails = document.createElement("details");
             howToDetails.innerHTML = `<summary>📘 How To</summary>`;
+
             module.steps.forEach(section => {
               const sectionDetails = document.createElement("details");
               sectionDetails.innerHTML = `<summary>${section.title}</summary>`;
               const ul = document.createElement("ul");
               ul.className = "steps";
-              section.items.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item;
-                ul.appendChild(li);
-              });
+
+              if (section.items && section.items.length > 0) {
+                section.items.forEach(item => {
+                  const li = document.createElement("li");
+                  li.textContent = item;
+                  ul.appendChild(li);
+                });
+              }
+
               sectionDetails.appendChild(ul);
               howToDetails.appendChild(sectionDetails);
             });
+
             moduleDiv.appendChild(howToDetails);
           }
 
@@ -112,7 +118,7 @@
             moduleDiv.appendChild(faqDetails);
           }
 
-          // Training Materials (use links field as fallback)
+          // Training Materials
           if (module.trainingMaterials || module.links) {
             const mats = module.trainingMaterials || module.links;
             if (mats.length > 0) {
