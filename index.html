@@ -30,7 +30,7 @@
         const data = await response.json();
         let modules = data.modules || data;
 
-        // Always push Go-Live Preparation to the end
+        // Always put Go-Live Prep last
         modules = modules.sort((a, b) => (a.module === "Go-Live Preparation" ? 1 : b.module === "Go-Live Preparation" ? -1 : 0));
 
         const container = document.getElementById("content");
@@ -40,7 +40,7 @@
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // How To steps
+          // How To steps (skip Go-Live Prep)
           if (module.steps && module.steps.length > 0 && module.module !== "Go-Live Preparation") {
             const howToDetails = document.createElement("details");
             howToDetails.innerHTML = `<summary>📘 How To</summary>`;
@@ -59,10 +59,6 @@
                 });
                 liTitle.appendChild(innerUl);
                 ul.appendChild(liTitle);
-              } else {
-                const li = document.createElement("li");
-                li.textContent = step;
-                ul.appendChild(li);
               }
             });
 
@@ -88,20 +84,58 @@
 
             module.trainingMaterials.forEach(mat => {
               const li = document.createElement("li");
-              if (typeof mat === "string") {
-                li.textContent = mat;
-              } else {
-                const a = document.createElement("a");
-                a.textContent = mat.title;
-                a.href = mat.url;
-                a.target = "_blank";
-                li.appendChild(a);
-              }
+              const a = document.createElement("a");
+              a.textContent = mat.title;
+              a.href = mat.url;
+              a.target = "_blank";
+              li.appendChild(a);
               ul.appendChild(li);
             });
 
             trainDetails.appendChild(ul);
             moduleDiv.appendChild(trainDetails);
+          }
+
+          // Study Materials (Go-Live only)
+          if (module.studyMaterials && module.studyMaterials.length > 0) {
+            const studyDetails = document.createElement("details");
+            studyDetails.innerHTML = `<summary>📂 Study Materials</summary>`;
+            const ul = document.createElement("ul");
+            ul.className = "steps";
+
+            module.studyMaterials.forEach(mat => {
+              const li = document.createElement("li");
+              const a = document.createElement("a");
+              a.textContent = mat.title;
+              a.href = mat.url;
+              a.target = "_blank";
+              li.appendChild(a);
+              ul.appendChild(li);
+            });
+
+            studyDetails.appendChild(ul);
+            moduleDiv.appendChild(studyDetails);
+          }
+
+          // Logistics (Go-Live only)
+          if (module.logistics && module.logistics.length > 0) {
+            const logDetails = document.createElement("details");
+            logDetails.innerHTML = `<summary>📂 Logistics</summary>`;
+            const ul = document.createElement("ul");
+            ul.className = "steps";
+
+            module.logistics.forEach(mat => {
+              const li = document.createElement("li");
+              const a = document.createElement("a");
+              a.textContent = mat.title;
+              a.href = mat.url;
+              a.target = "_blank";
+              li.appendChild(a);
+              ul.appendChild(li);
+            });
+
+            logDetails.appendChild(ul);
+            moduleDiv.appendChild(logDetails);
           }
 
           container.appendChild(moduleDiv);
