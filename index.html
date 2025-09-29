@@ -1,241 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Epic Go-Live FAQ Assistant</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background: #003366;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
-    h2 {
-      color: #003366;
-    }
-    details {
-      margin-bottom: 0.6rem;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 0.4rem 0.8rem;
-      background: #fafafa;
-    }
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      color: #003366;
-    }
-    .steps {
-      margin: 0.5rem 0 0.5rem 1rem;
-      padding-left: 1rem;
-      border-left: 3px solid #003366;
-    }
-    .steps li {
-      margin: 0.3rem 0;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Epic Go-Live FAQ Assistant</h1>
-  </header>
-  <div class="container" id="content">
-    <p>Loading FAQs...</p>
-  </div>
+<script>
+  async function loadFAQs() {
+    try {
+      const response = await fetch("epic_go_live_faq.json");
+      const data = await response.json();
 
-  <script>
-    async function loadFAQs() {
-      try {
-        const response = await fetch("epic_go_live_faq.json");
-        const data = await response.json();
+      const modules = data.modules || data; // handle both array and object
+      const container = document.getElementById("content");
+      container.innerHTML = "";
 
-        const container = document.getElementById("content");
-        container.innerHTML = "";
+      modules.forEach(module => {
+        const moduleDiv = document.createElement("div");
+        moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-        // Ensure Go-Live Prep is always last
-        const modules = [...data];
-        const goLiveIndex = modules.findIndex(m => m.module.includes("Go-Live"));
-        let goLiveModule = null;
-        if (goLiveIndex !== -1) {
-          goLiveModule = modules.splice(goLiveIndex, 1)[0];
+        // How To section
+        if (module.steps && module.steps.length > 0) {
+          const howToDetails = document.createElement("details");
+          howToDetails.innerHTML = `<summary>📘 How To</summary>`;
+          const ul = document.createElement("ul");
+          ul.className = "steps";
+
+          module.steps.forEach(step => {
+            if (step.title) {
+              const liTitle = document.createElement("li");
+              liTitle.innerHTML = `<strong>${step.title}</strong>`;
+              const innerUl = document.createElement("ul");
+              step.items.forEach(item => {
+                const innerLi = document.createElement("li");
+                innerLi.textContent = item;
+                innerUl.appendChild(innerLi);
+              });
+              liTitle.appendChild(innerUl);
+              ul.appendChild(liTitle);
+            } else {
+              const li = document.createElement("li");
+              li.textContent = step;
+              ul.appendChild(li);
+            }
+          });
+
+          howToDetails.appendChild(ul);
+          moduleDiv.appendChild(howToDetails);
         }
 
-        modules.forEach(module => {
-          const moduleDiv = document.createElement("div");
-          moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
-
-          // Steps (How To)
-          if (module.steps && module.steps.length > 0) {
-            const howTo = document.createElement("details");
-            howTo.innerHTML = `<summary>📘 How To</summary>`;
-            module.steps.forEach(step => {
-              const stepDetails = document.createElement("details");
-              stepDetails.innerHTML = `<summary>${step.title}</summary>`;
-              const ul = document.createElement("ul");
-              ul.className = "steps";
-              step.items.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item;
-                ul.appendChild(li);
-              });
-              stepDetails.appendChild(ul);
-              howTo.appendChild(stepDetails);
-            });
-            moduleDiv.appendChild(howTo);
-          }
-
-          // FAQs
-          if (module.qa && module.qa.length > 0) {
-            const faq = document.createElement("details");
-            faq.innerHTML = `<summary>❓ FAQs</summary>`;
-            module.qa.forEach(item => {
-              const qDetails = document.createElement("details");
-              qDetails.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
-              faq.appendChild(qDetails);
-            });
-            moduleDiv.appendChild(faq);
-          }
-
-          // Training Materials (universal)
-          const training = document.createElement("details");
-          training.innerHTML = `<summary>📂 Training Materials</summary>`;
-          
-          if (module.module.includes("Nurse") || module.module.includes("Inpatient Nurse")) {
-            const tipSheets = [
-              "Epic Essentials",
-              "IP Charges Tip Sheet - Copy",
-              "Inpatient Nurse - Orders",
-              "Inpatient Nurse - Review the Chart",
-              "Inpatient Nurse - Transfer",
-              "Inpatient Nurse - Vitals and Assessments",
-              "Inpatient Nurse - Work List",
-              "Isolation Order BPA",
-              "Iv infusion workflow",
-              "LVN RN Cosign Notes - Tip Sheet",
-              "MAR Administration - Tip Sheet",
-              "MAR Skin Sub - Tip Sheet",
-              "MAR Skin Sub - SCPA Wound",
-              "MRI Screening Form - Tip Sheet",
-              "Marking a deceased patient bed for cleaning",
-              "Med Admin CR",
-              "MyChart Signup TipSheet",
-              "Note Type tip sheet",
-              "Nurse Assessment",
-              "Nurse Quick Start Guide (Full-Page)",
-              "OnBase new tip sheet",
-              "Organ Donor - Tip Sheet",
-              "PPD Tip Sheet_2018",
-              "PT Movement to Psych",
-              "PTA Med Review Tipsheet - Prime",
-              "Patient Movement Discharge to SNF",
-              "Patient Movement Inpatient to Psych",
-              "Patient Movement Using Discharge Readmit Navigator",
-              "Preassign Nurses",
-              "Preferred Pharmacy",
-              "Psychotropic Medication E-consent",
-              "RN - Resulting a POCT",
-              "Record of Death tip sheet",
-              "Reprint label tip sheet",
-              "Restraint Work List tip sheet",
-              "Review PTA Meds Tip Sheet",
-              "Reviewing Charges - Tip Sheet",
-              "Scanning specimen tip sheet",
-              "Sepsis tip sheet",
-              "TB Test Documentation",
-              "The Work List",
-              "Tip Sheet Manual Chart Correction Flowsheets",
-              "Tip Sheet Manual Chart Correction Notes",
-              "Undo Discharge tip sheet",
-              "Unit Clerk - Admitting & Discharging & Transferring",
-              "Unreadable barcode tip sheet",
-              "Update Accommodation Code",
-              "Using Transport Clinical Staff",
-              "Wound RN Charging",
-              "ordering blood",
-              "psychotropic med tip sheet"
-            ];
-            tipSheets.forEach(title => {
-              const ts = document.createElement("details");
-              ts.innerHTML = `<summary>${title}</summary><p>[Placeholder – Tip Sheet coming soon]</p>`;
-              training.appendChild(ts);
-            });
-          } else {
-            training.innerHTML += `<p>[No materials uploaded yet]</p>`;
-          }
-
-          moduleDiv.appendChild(training);
-
-          container.appendChild(moduleDiv);
-        });
-
-        // Add Go-Live at the end
-        if (goLiveModule) {
-          const goDiv = document.createElement("div");
-          goDiv.innerHTML = `<h2>${goLiveModule.module}</h2>`;
-
-          if (goLiveModule.steps && goLiveModule.steps.length > 0) {
-            goLiveModule.steps.forEach(step => {
-              const stepDetails = document.createElement("details");
-              stepDetails.innerHTML = `<summary>${step.title}</summary>`;
-              const ul = document.createElement("ul");
-              ul.className = "steps";
-              step.items.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item;
-                ul.appendChild(li);
-              });
-              stepDetails.appendChild(ul);
-              goDiv.appendChild(stepDetails);
-            });
-          }
-
-          if (goLiveModule.qa && goLiveModule.qa.length > 0) {
-            const faq = document.createElement("details");
-            faq.innerHTML = `<summary>❓ FAQs</summary>`;
-            goLiveModule.qa.forEach(item => {
-              const qDetails = document.createElement("details");
-              qDetails.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
-              faq.appendChild(qDetails);
-            });
-            goDiv.appendChild(faq);
-          }
-
-          // Logistics placeholder
-          const logistics = document.createElement("details");
-          logistics.innerHTML = `<summary>📦 Logistics</summary><p>[Link to PDF or content coming soon]</p>`;
-          goDiv.appendChild(logistics);
-
-          // Study Materials placeholder
-          const study = document.createElement("details");
-          study.innerHTML = `<summary>📑 Study Materials</summary><p>[No study materials uploaded yet]</p>`;
-          goDiv.appendChild(study);
-
-          container.appendChild(goDiv);
+        // FAQs
+        if (module.qa && module.qa.length > 0) {
+          module.qa.forEach(item => {
+            const qaDetails = document.createElement("details");
+            qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
+            moduleDiv.appendChild(qaDetails);
+          });
         }
 
-      } catch (error) {
-        document.getElementById("content").innerHTML =
-          `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
-      }
-    }
+        // Training Materials
+        if (module.trainingMaterials && module.trainingMaterials.length > 0) {
+          const trainDetails = document.createElement("details");
+          trainDetails.innerHTML = `<summary>📂 Training Materials</summary>`;
+          const ul = document.createElement("ul");
+          ul.className = "steps";
 
-    loadFAQs();
-  </script>
-</body>
-</html>
+          module.trainingMaterials.forEach(mat => {
+            const li = document.createElement("li");
+            if (typeof mat === "string") {
+              li.textContent = mat; // fallback if old format
+            } else {
+              const a = document.createElement("a");
+              a.textContent = mat.title;
+              a.href = mat.url;
+              a.target = "_blank";
+              li.appendChild(a);
+            }
+            ul.appendChild(li);
+          });
+
+          trainDetails.appendChild(ul);
+          moduleDiv.appendChild(trainDetails);
+        }
+
+        container.appendChild(moduleDiv);
+      });
+    } catch (error) {
+      document.getElementById("content").innerHTML =
+        `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
+    }
+  }
+
+  loadFAQs();
+</script>
