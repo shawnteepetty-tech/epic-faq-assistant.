@@ -68,70 +68,81 @@
         const container = document.getElementById("content");
         container.innerHTML = "";
 
-        // Always put Go-Live Preparation last
-        const sortedModules = [
-          ...data.modules.filter(m => m.module !== "Go-Live Preparation"),
-          ...data.modules.filter(m => m.module === "Go-Live Preparation")
-        ];
+        // Move Go-Live Preparation to bottom
+        const goLive = data.modules.find(m => m.module === "Go-Live Preparation");
+        const others = data.modules.filter(m => m.module !== "Go-Live Preparation");
+        const orderedModules = [...others, goLive];
 
-        sortedModules.forEach(module => {
+        orderedModules.forEach(module => {
           const moduleDiv = document.createElement("div");
           moduleDiv.innerHTML = `<h2>${module.module}</h2>`;
 
-          // How To section
-          if (module.steps && module.steps.length > 0) {
+          // 📘 How To (Steps)
+          if (module.steps && module.steps.length > 0 && module.module !== "Go-Live Preparation") {
             const howToDetails = document.createElement("details");
             howToDetails.innerHTML = `<summary>📘 How To</summary>`;
-            module.steps.forEach(step => {
-              const stepDetails = document.createElement("details");
-              stepDetails.innerHTML = `<summary>${step.title}</summary>`;
+            
+            module.steps.forEach(section => {
+              const sectionDetails = document.createElement("details");
+              sectionDetails.innerHTML = `<summary>${section.title}</summary>`;
               const ul = document.createElement("ul");
               ul.className = "steps";
-              step.items.forEach(item => {
+              section.items.forEach(item => {
                 const li = document.createElement("li");
                 li.textContent = item;
                 ul.appendChild(li);
               });
-              stepDetails.appendChild(ul);
-              howToDetails.appendChild(stepDetails);
+              sectionDetails.appendChild(ul);
+              howToDetails.appendChild(sectionDetails);
             });
+
             moduleDiv.appendChild(howToDetails);
           }
 
-          // FAQs
+          // ❓ FAQs
           if (module.qa && module.qa.length > 0) {
+            const faqDetails = document.createElement("details");
+            faqDetails.innerHTML = `<summary>❓ FAQs</summary>`;
             module.qa.forEach(item => {
               const qaDetails = document.createElement("details");
-              qaDetails.innerHTML = `<summary>❓ ${item.q}</summary><p>${item.a}</p>`;
-              moduleDiv.appendChild(qaDetails);
+              qaDetails.innerHTML = `<summary>${item.q}</summary><p>${item.a}</p>`;
+              faqDetails.appendChild(qaDetails);
             });
+            moduleDiv.appendChild(faqDetails);
           }
 
-          // Training Materials
+          // 📂 Training Materials
           if (module.trainingMaterials && module.trainingMaterials.length > 0) {
             const trainDetails = document.createElement("details");
             trainDetails.innerHTML = `<summary>📂 Training Materials</summary>`;
             const ul = document.createElement("ul");
             ul.className = "steps";
+
             module.trainingMaterials.forEach(mat => {
               const li = document.createElement("li");
-              const a = document.createElement("a");
-              a.textContent = mat.title;
-              a.href = mat.url;
-              a.target = "_blank";
-              li.appendChild(a);
+              if (typeof mat === "string") {
+                li.textContent = mat;
+              } else {
+                const a = document.createElement("a");
+                a.textContent = mat.title;
+                a.href = mat.url;
+                a.target = "_blank";
+                li.appendChild(a);
+              }
               ul.appendChild(li);
             });
+
             trainDetails.appendChild(ul);
             moduleDiv.appendChild(trainDetails);
           }
 
-          // Logistics (only Go-Live)
-          if (module.logistics && module.logistics.length > 0) {
+          // 📦 Logistics (ONLY for Go-Live Prep)
+          if (module.module === "Go-Live Preparation" && module.logistics && module.logistics.length > 0) {
             const logDetails = document.createElement("details");
             logDetails.innerHTML = `<summary>📦 Logistics</summary>`;
             const ul = document.createElement("ul");
             ul.className = "steps";
+
             module.logistics.forEach(log => {
               const li = document.createElement("li");
               const a = document.createElement("a");
@@ -141,6 +152,7 @@
               li.appendChild(a);
               ul.appendChild(li);
             });
+
             logDetails.appendChild(ul);
             moduleDiv.appendChild(logDetails);
           }
@@ -148,8 +160,7 @@
           container.appendChild(moduleDiv);
         });
       } catch (error) {
-        document.getElementById("content").innerHTML =
-          `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
+        document.getElementById("content").innerHTML = `<p style="color:red;">⚠️ Error loading FAQs: ${error.message}</p>`;
       }
     }
 
