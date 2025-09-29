@@ -1,31 +1,191 @@
 {
-  "module": "Nursing",
-  "category": "Inpatient",
-  "roles": ["RN", "LVN"],
-  "steps": [
+  "modules": [
     {
-      "title": "Vitals and Assessments",
-      "items": [
-        "Open patient chart.",
-        "Go to Vitals activity.",
-        "Enter data → Save."
-      ]
-    }
-  ],
-  "qa": [
-    {
-      "q": "How do I cosign a note?",
-      "a": "Open note → Add Cosign → Search RN/LVN → Save."
-    }
-  ],
-  "trainingMaterials": [
-    {
-      "title": "Inpatient Nurse - Orders",
-      "url": "https://raw.githubusercontent.com/USERNAME/REPO/main/Inpatient%20Nurse%20-%20Orders.pdf"
+      "module": "CardioServer – Tech User",
+      "category": "Cardiology",
+      "roles": ["Tech User"],
+      "steps": [
+        {
+          "title": "Access CardioServer",
+          "items": [
+            "In Epic, open the patient chart → click the CardioServer SmartLink/URL.",
+            "OR on the desktop, double-click the CardioServer icon.",
+            "OR in Citrix Workspace → CardioServer → Open.",
+            "On the login page, enter AD username + password.",
+            "Confirm header shows Role = Tech User."
+          ]
+        }
+      ],
+      "qa": [
+        { "q": "What if a study doesn’t match any patient/order?", "a": "Use Link/Reconcile → search MRN → select correct order." }
+      ],
+      "trainingMaterials": []
     },
     {
-      "title": "Inpatient Nurse - Vitals and Assessments",
-      "url": "https://raw.githubusercontent.com/USERNAME/REPO/main/Inpatient%20Nurse%20-%20Vitals%20and%20Assessments.pdf"
+      "module": "EVC (Telehealth / Video Consults)",
+      "category": "Telehealth",
+      "roles": ["Provider", "Bedside Staff"],
+      "steps": [
+        {
+          "title": "Launch a Consult",
+          "items": [
+            "In Epic, open the MPage 'TV Kit Consults' or go to the Converge website.",
+            "Select patient/device.",
+            "Click Start Consult."
+          ]
+        }
+      ],
+      "qa": [
+        { "q": "What if patient can’t hear me?", "a": "Check mute, device volume, and TV Kit connection." }
+      ],
+      "trainingMaterials": []
+    },
+    {
+      "module": "ASAP (ED Track Board)",
+      "category": "Emergency Department",
+      "roles": ["Nurse", "Provider"],
+      "steps": [
+        {
+          "title": "Track Board Overview",
+          "items": [
+            "Open ED Track Board.",
+            "Review columns for Bed, Name, Age, Complaint, Acuity, Staff initials.",
+            "Hover over initials for full staff names."
+          ]
+        }
+      ],
+      "qa": [
+        { "q": "What does an X in registration mean?", "a": "Registration incomplete. It won’t block discharge." }
+      ],
+      "trainingMaterials": []
+    },
+    {
+      "module": "Beaker (Lab Workflow)",
+      "category": "Laboratory",
+      "roles": ["Phlebotomist", "Lab Tech"],
+      "steps": [
+        {
+          "title": "Specimen Collection",
+          "items": ["Check-in patient → enter orders.", "Print specimen labels.", "Scan wristband → scan specimen.", "Transport to lab."]
+        }
+      ],
+      "qa": [
+        { "q": "How do I reprint a specimen label?", "a": "Open the Order → select Reprint Label." }
+      ],
+      "trainingMaterials": []
+    },
+    {
+      "module": "Optime Anesthesia",
+      "category": "Surgery/Anesthesia",
+      "roles": ["Anesthesiologist", "CRNA", "Resident"],
+      "steps": [
+        {
+          "title": "Electronic Consent",
+          "items": ["Open Consent activity.", "Select consent type.", "Capture e-signatures.", "If refusal: print, ink sign, scan, send to HIM."]
+        }
+      ],
+      "qa": [
+        { "q": "What if patient refuses e-signature?", "a": "Print the form, capture ink signature, scan, send to HIM." }
+      ],
+      "trainingMaterials": []
+    },
+    {
+      "module": "Inpatient Provider Workflow",
+      "category": "Inpatient",
+      "roles": ["Hospitalist", "Resident", "Consultant"],
+      "steps": [
+        {
+          "title": "Medication Reconciliation",
+          "items": ["Perform at Admission.", "Repeat at Transfer.", "Finalize at Discharge."]
+        }
+      ],
+      "qa": [
+        { "q": "Where do I reconcile medications?", "a": "During admission, transfer, and discharge." }
+      ],
+      "trainingMaterials": []
+    },
+    {
+      "module": "Pharmacy (Willow)",
+      "category": "Pharmacy",
+      "roles": ["Pharmacist", "Pharmacy Tech"],
+      "steps": [
+        {
+          "title": "Dashboard & In Basket",
+          "items": ["Open Pharmacy Dashboard.", "Check In Basket: refills, reminders, time changes."]
+        }
+      ],
+      "qa": [
+        { "q": "What if IID is blank?", "a": "Submit a ticket for IID assignment." }
+      ],
+      "trainingMaterials": []
+    },
+    {
+      "module": "Nursing",
+      "category": "Inpatient Nursing",
+      "roles": ["RN", "LVN", "Unit Clerk"],
+      "steps": [
+        {
+          "title": "Orders",
+          "items": ["Review orders in Orders activity.", "Sign or cosign orders as required."]
+        }
+      ],
+      "qa": [
+        { "q": "How do I result a POCT?", "a": "Go to POCT Resulting activity → enter results → mark as Final." }
+      ],
+      "trainingMaterials": [
+        { "title": "Epic Essentials", "url": "#" },
+        { "title": "IP Charges Tip Sheet - Copy", "url": "#" },
+        { "title": "Inpatient Nurse - Orders", "url": "#" },
+        { "title": "Inpatient Nurse - Review the Chart", "url": "#" }
+      ]
+    },
+    {
+      "module": "Clin Doc",
+      "category": "Clinical Documentation",
+      "roles": ["Nurse", "Provider"],
+      "steps": [
+        {
+          "title": "Documenting SDOH",
+          "items": ["Open Flowsheets.", "Locate SDOH domain.", "Document findings.", "Save to chart."]
+        }
+      ],
+      "qa": [
+        { "q": "Where do I document belongings?", "a": "Use belongings navigator and flow sheets with e-signature." }
+      ],
+      "trainingMaterials": []
+    },
+    {
+      "module": "Ambulatory Clinic",
+      "category": "Outpatient/Ambulatory",
+      "roles": ["Physician", "Medical Assistant", "Clinic Staff"],
+      "steps": [
+        {
+          "title": "Learning Home",
+          "items": ["Press F1 in Epic.", "Access Learning Home Dashboard.", "Locate tip sheets/resources."]
+        }
+      ],
+      "qa": [
+        { "q": "How do I schedule telemedicine?", "a": "Use Telemedicine visit type." }
+      ],
+      "trainingMaterials": []
+    },
+    {
+      "module": "Go-Live Preparation",
+      "category": "Implementation",
+      "roles": ["All Staff"],
+      "steps": [
+        {
+          "title": "Go-Live Overview",
+          "items": ["Go-live date: October 1.", "Saint Francis Evanston + Holy Family Medical Center.", "Holy Family is first LTACH in Prime."]
+        }
+      ],
+      "qa": [
+        { "q": "What’s unique about Holy Family?", "a": "It’s the first Prime LTACH with distinct workflows." }
+      ],
+      "trainingMaterials": [
+        { "title": "Study Materials", "url": "#" },
+        { "title": "Logistics", "url": "#" }
+      ]
     }
   ]
 }
