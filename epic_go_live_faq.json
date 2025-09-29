@@ -14,6 +14,16 @@
             "On the login page, enter AD username + password.",
             "Confirm header shows Role = Tech User."
           ]
+        },
+        {
+          "title": "Find & Filter Studies",
+          "items": [
+            "Open Worklist / Studies view.",
+            "Set Facility/Location filter.",
+            "Set Status filter: Preliminary / Unconfirmed / Confirmed / Stored.",
+            "Optional: set Date filter (Today, Last 7 Days, Custom).",
+            "Click Apply / Search."
+          ]
         }
       ],
       "qa": [
@@ -22,11 +32,8 @@
           "a": "Use Link/Reconcile → search MRN → select correct order."
         }
       ],
-      "links": [
-        {
-          "title": "Study Materials Placeholder",
-          "url": "#"
-        }
+      "trainingMaterials": [
+        { "title": "Study Materials Placeholder", "url": "#" }
       ]
     },
     {
@@ -37,23 +44,20 @@
         {
           "title": "Launch a Consult",
           "items": [
-            "In Epic, open the MPage 'TV Kit Consults' or go to the Converge website.",
-            "Select patient/device.",
-            "Click Start Consult."
+            "In Epic, open the Connect section from Rooming or Plan tab.",
+            "Select patient encounter.",
+            "Click Start Video Visit."
           ]
         }
       ],
       "qa": [
         {
           "q": "What if patient can’t hear me?",
-          "a": "Check mute, device volume, and TV Kit connection."
+          "a": "Check mute, device volume, and network connection."
         }
       ],
-      "links": [
-        {
-          "title": "Study Materials Placeholder",
-          "url": "#"
-        }
+      "trainingMaterials": [
+        { "title": "Study Materials Placeholder", "url": "#" }
       ]
     },
     {
@@ -76,11 +80,8 @@
           "a": "Registration incomplete. It won’t block discharge."
         }
       ],
-      "links": [
-        {
-          "title": "Study Materials Placeholder",
-          "url": "#"
-        }
+      "trainingMaterials": [
+        { "title": "Study Materials Placeholder", "url": "#" }
       ]
     },
     {
@@ -104,11 +105,8 @@
           "a": "Open the Order → select Reprint Label."
         }
       ],
-      "links": [
-        {
-          "title": "Study Materials Placeholder",
-          "url": "#"
-        }
+      "trainingMaterials": [
+        { "title": "Study Materials Placeholder", "url": "#" }
       ]
     },
     {
@@ -117,10 +115,12 @@
       "roles": ["Anesthesiologist", "CRNA", "Resident"],
       "steps": [
         {
-          "title": "Login",
+          "title": "Electronic Consent",
           "items": [
-            "Enter Epic credentials.",
-            "Confirm Department and Role."
+            "Open Consent activity.",
+            "Select consent type.",
+            "Capture e-signatures.",
+            "If refusal: print, ink sign, scan, send to HIM."
           ]
         }
       ],
@@ -130,11 +130,8 @@
           "a": "Enter alternate signer name and add a nurse witness."
         }
       ],
-      "links": [
-        {
-          "title": "Study Materials Placeholder",
-          "url": "#"
-        }
+      "trainingMaterials": [
+        { "title": "Study Materials Placeholder", "url": "#" }
       ]
     },
     {
@@ -156,11 +153,8 @@
           "a": "During admission, transfer, and discharge."
         }
       ],
-      "links": [
-        {
-          "title": "Study Materials Placeholder",
-          "url": "#"
-        }
+      "trainingMaterials": [
+        { "title": "Study Materials Placeholder", "url": "#" }
       ]
     },
     {
@@ -182,11 +176,8 @@
           "a": "Manually reprint via the Dispense button."
         }
       ],
-      "links": [
-        {
-          "title": "Study Materials Placeholder",
-          "url": "#"
-        }
+      "trainingMaterials": [
+        { "title": "Study Materials Placeholder", "url": "#" }
       ]
     },
     {
@@ -209,11 +200,8 @@
           "a": "Send activation via text/email; valid 14 days."
         }
       ],
-      "links": [
-        {
-          "title": "Study Materials Placeholder",
-          "url": "#"
-        }
+      "trainingMaterials": [
+        { "title": "Study Materials Placeholder", "url": "#" }
       ]
     },
     {
@@ -236,11 +224,11 @@
           "a": "It’s the first Prime LTACH with distinct workflows."
         }
       ],
-      "links": [
-        {
-          "title": "Study Materials Placeholder",
-          "url": "#"
-        }
+      "trainingMaterials": [
+        { "title": "Study Materials Placeholder", "url": "#" }
+      ],
+      "logistics": [
+        { "title": "Go-Live Logistics PDF Placeholder", "url": "#" }
       ]
     }
   ]
