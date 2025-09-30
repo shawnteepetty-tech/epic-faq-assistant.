@@ -15,7 +15,6 @@
             "Confirm header shows Role = Tech User."
           ]
         }
-        // ... other CardioServer steps ...
       ],
       "qa": [
         { "q": "What if a study doesn’t match a patient?", "a": "Use Link/Reconcile → search MRN → select correct order." },
@@ -30,7 +29,14 @@
       "category": "Telehealth",
       "roles": ["Provider", "Bedside Staff"],
       "steps": [
-        // ...EVC steps here...
+        {
+          "title": "Accessing & Navigating EVC",
+          "items": [
+            "Open patient encounter in Epic.",
+            "Locate Connect section (Rooming tab or Plan tab).",
+            "Start video visit."
+          ]
+        }
       ],
       "qa": [
         { "q": "How do I invite a guest?", "a": "Enter guest’s name, relationship, and email/phone." },
@@ -38,93 +44,6 @@
       ],
       "trainingMaterials": [
         { "title": "EVC Training Placeholder", "url": "#" }
-      ]
-    },
-    {
-      "module": "ASAP (ED Track Board)",
-      "category": "Emergency Department",
-      "roles": ["Nurse", "Provider"],
-      "steps": [
-        // ...ASAP steps...
-      ],
-      "qa": [
-        { "q": "What does X in registration mean?", "a": "Registration incomplete; won’t block discharge." }
-      ],
-      "trainingMaterials": [
-        { "title": "ED Track Board Placeholder", "url": "#" }
-      ]
-    },
-    {
-      "module": "Beaker (Lab Workflow)",
-      "category": "Laboratory",
-      "roles": ["Phlebotomist", "Lab Tech"],
-      "steps": [
-        // ...Beaker steps...
-      ],
-      "qa": [
-        { "q": "How do I reprint a specimen label?", "a": "Open Order → Reprint Label." }
-      ],
-      "trainingMaterials": [
-        { "title": "Lab Placeholder", "url": "#" }
-      ]
-    },
-    {
-      "module": "Optime Anesthesia",
-      "category": "Surgery/Anesthesia",
-      "roles": ["Anesthesiologist", "CRNA", "Resident"],
-      "steps": [
-        // ...Optime steps...
-      ],
-      "qa": [
-        { "q": "What if patient refuses e-sig?", "a": "Print, ink sign, scan, and send to HIM." }
-      ],
-      "trainingMaterials": [
-        { "title": "Optime Placeholder", "url": "#" }
-      ]
-    },
-    {
-      "module": "Inpatient Provider Workflow",
-      "category": "Inpatient",
-      "roles": ["Hospitalist", "Resident", "Consultant"],
-      "steps": [
-        // ...Inpatient steps...
-      ],
-      "qa": [
-        { "q": "Where do I reconcile meds?", "a": "At admission, transfer, and discharge." }
-      ],
-      "trainingMaterials": [
-        { "title": "Inpatient Provider Placeholder", "url": "#" }
-      ]
-    },
-    {
-      "module": "Clinical Documentation (Clin Doc)",
-      "category": "Clinical Documentation",
-      "roles": ["Nursing", "Providers"],
-      "steps": [
-        // ...Clin Doc steps...
-      ],
-      "qa": [
-        { "q": "What’s required for wound documentation?", "a": "Four Eyes Assessment (2 staff, not always RNs)." }
-      ],
-      "trainingMaterials": [
-        { "title": "Clin Doc Placeholder", "url": "#" }
-      ]
-    },
-    {
-      "module": "Go-Live Preparation",
-      "category": "Implementation",
-      "roles": ["All Staff"],
-      "steps": [
-        // ...Go-Live steps...
-      ],
-      "qa": [
-        { "q": "What’s unique about Holy Family?", "a": "First LTACH; workflows for LOA, transfers, and LTCH dataset." }
-      ],
-      "trainingMaterials": [
-        { "title": "Go-Live Placeholder", "url": "#" }
-      ],
-      "logistics": [
-        { "title": "Go-Live Logistics Placeholder", "url": "#" }
       ]
     },
     {
