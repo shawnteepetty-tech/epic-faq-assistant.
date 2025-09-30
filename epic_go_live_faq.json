@@ -14,6 +14,59 @@
             "On the login page, enter AD username + password.",
             "Confirm header shows Role = Tech User."
           ]
+        },
+        {
+          "title": "Find & Filter Studies",
+          "items": [
+            "Open Worklist / Studies.",
+            "Set Facility/Location filter.",
+            "Set Status filter: Preliminary / Unconfirmed / Confirmed / Stored.",
+            "Optional: Date filter.",
+            "Click Apply / Search."
+          ]
+        },
+        {
+          "title": "Link Study to Patient & Order",
+          "items": [
+            "Click study → Link to Order/Reconcile.",
+            "Search MRN or Name.",
+            "Select patient + correct order.",
+            "Click Save / Link."
+          ]
+        },
+        {
+          "title": "Assign Study to Provider",
+          "items": [
+            "Open study → Provider/Assign field.",
+            "Type/select provider.",
+            "Click Save/Update."
+          ]
+        },
+        {
+          "title": "Trash & Restore Studies",
+          "items": [
+            "Open study with Status = Preliminary.",
+            "Click More Actions → Move to Trash.",
+            "To restore ≤30 days: open Trash → Restore."
+          ]
+        },
+        {
+          "title": "Manual Upload – ECG",
+          "items": [
+            "Click Upload/Import → ECG Upload.",
+            "Browse → select ECG file.",
+            "Enter MRN → Upload/Import.",
+            "Link to order + assign provider."
+          ]
+        },
+        {
+          "title": "Manual Upload – Stress Test",
+          "items": [
+            "Click Upload/Import → Stress Upload.",
+            "Browse → select stress file.",
+            "Enter MRN → Upload/Import.",
+            "Assign provider."
+          ]
         }
       ],
       "qa": [
@@ -36,6 +89,32 @@
             "Locate Connect section (Rooming tab or Plan tab).",
             "Start video visit."
           ]
+        },
+        {
+          "title": "Inviting Participants",
+          "items": [
+            "Click Send Direct Link.",
+            "Providers: invite via Epic directory.",
+            "Guests: enter name, relationship, and email/phone.",
+            "Verify contact details before sending."
+          ]
+        },
+        {
+          "title": "Joining & Managing Calls",
+          "items": [
+            "Set up mic, webcam, and speakers.",
+            "Admit patient via Admit button or Open menu.",
+            "Mute/unmute or disable webcam as needed.",
+            "Remove participants if necessary."
+          ]
+        },
+        {
+          "title": "Call Controls",
+          "items": [
+            "Use toolbar (mic, webcam, screen share).",
+            "Be cautious with screen sharing.",
+            "End call when session is complete."
+          ]
         }
       ],
       "qa": [
@@ -47,119 +126,250 @@
       ]
     },
     {
-      "module": "Clin Doc – Physician",
-      "category": "Physician Documentation",
-      "roles": ["Physician"],
-      "faqs": [],
+      "module": "ASAP (ED Track Board)",
+      "category": "Emergency Department",
+      "roles": ["Nurse", "Provider"],
       "steps": [
         {
-          "title": "Logging In & Patient Selection",
+          "title": "Track Board Overview",
           "items": [
-            "Log into Epic and select the Clin Doc module from the main dashboard.",
-            "Trainer Note: Always confirm you are in the correct patient chart before documenting.",
-            "Open the Patient List and choose the correct patient.",
-            "Trainer Note: Verify identity with two identifiers (name + DOB)."
+            "Open ED Track Board.",
+            "Review columns: bed, name, complaint, acuity, staff.",
+            "Hover initials for details."
           ]
         },
         {
-          "title": "Creating & Managing Notes",
+          "title": "Order Status Icons",
           "items": [
-            "From the patient chart, click the Clinical Documentation tab in the left-hand menu.",
-            "Trainer Note: This is the hub for all narrative documentation workflows.",
-            "Select Create New Note from the toolbar.",
-            "Trainer Note: Templates may be pre-assigned, but confirm before documenting.",
-            "Choose the appropriate Note Type (Admission, Progress, or Discharge).",
-            "Trainer Note: Selecting the wrong type can cause reporting errors downstream.",
-            "Begin typing directly into the note editor.",
-            "Trainer Note: Document in real time when possible; templates help save time."
+            "Check columns for EKG, Meds, Labs, Imaging.",
+            "Counts show Placed, In Process, Completed."
           ]
         },
         {
-          "title": "Using SmartTools for Efficiency",
+          "title": "Registration & Disposition",
           "items": [
-            "Insert SmartPhrases or SmartLinks to pull patient information automatically.",
-            "Trainer Note: This ensures accuracy and reduces repetitive typing.",
-            "Review the pre-populated text and make edits where needed.",
-            "Trainer Note: Imported data should always be validated before saving or signing.",
-            "Save the note using Save/Accept.",
-            "Trainer Note: Notes can be saved in progress and finalized later."
+            "✔ = registration complete.",
+            "X = incomplete (does not block discharge).",
+            "Disposition = destination."
           ]
         },
         {
-          "title": "Flowsheets & Structured Documentation",
+          "title": "Layout Customization",
           "items": [
-            "Open the Flowsheets tab from the patient chart.",
-            "Trainer Note: Flowsheets allow structured data capture alongside narrative notes.",
-            "Select the correct documentation template from the dropdown.",
-            "Trainer Note: Templates vary by specialty and encounter type; double-check before documenting.",
-            "Enter vital signs and assessments into structured fields.",
-            "Trainer Note: Accurate entries feed into decision-support tools and compliance reporting."
+            "Drag/drop columns to rearrange.",
+            "Save custom layout if available."
           ]
         },
         {
-          "title": "Linking Orders with Documentation",
+          "title": "Views",
           "items": [
-            "Navigate to the Orders tab.",
-            "Trainer Note: Review existing orders before creating new documentation.",
-            "Select Add New Order and choose the relevant Order Set.",
-            "Trainer Note: Using order sets supports standardized care.",
-            "Complete the documentation fields tied to the order.",
-            "Trainer Note: Ensure accuracy, as this impacts billing and compliance."
-          ]
-        },
-        {
-          "title": "Finalizing & Signing Notes",
-          "items": [
-            "Review the complete note, including any imported data.",
-            "Trainer Note: Always validate pre-populated sections before finalizing.",
-            "Save and sign the note to complete documentation.",
-            "Trainer Note: Signed notes are visible to the full care team; drafts remain editable but hidden."
-          ]
-        },
-        {
-          "title": "Create a SmartPhrase",
-          "items": [
-            "Open a Note editor (e.g., Progress Note) in a patient chart.",
-            "Go to Tools → SmartTool Editors → My SmartPhrases.",
-            "Click New and enter a short name (used with a period ‘.’ to expand).",
-            "Add a description for reference.",
-            "Enter the boilerplate text in the Content box. Use *** for fields you fill each time; press F2 to jump between them.",
-            "Trainer Note: Templates and SmartPhrases reduce repetitive typing and maintain consistency.",
-            "Click Accept/Save."
-          ]
-        },
-        {
-          "title": "Insert SmartLinks",
-          "items": [
-            "In the SmartPhrase editor or a note, place your cursor where the data should go.",
-            "Click Insert SmartLink or use the SmartLink lookup.",
-            "Search by keyword (e.g., name, dob, allergies, meds).",
-            "Insert the chosen SmartLink. It appears as a placeholder.",
-            "Preview in a test patient to confirm the data pulls correctly.",
-            "Trainer Note: SmartLinks pull live patient data directly from the chart, ensuring accuracy.",
-            "Save the phrase."
-          ]
-        },
-        {
-          "title": "Use a SmartPhrase in Documentation",
-          "items": [
-            "In a note editor, type ‘.’ followed by your phrase name, then press Space/Enter to expand.",
-            "Fill in required sections using F2 to navigate.",
-            "Edit text as needed.",
-            "Trainer Note: Always review SmartLink data for accuracy before signing.",
-            "Save or sign the note when finished."
-          ]
-        },
-        {
-          "title": "Request a New SmartLink",
-          "items": [
-            "End-users cannot create new SmartLinks.",
-            "Identify the exact data you need (e.g., last A1c with date).",
-            "Submit a request/ticket to the Epic analyst team.",
-            "Analysts create SmartLinks from SmartData Elements (SDEs).",
-            "Trainer Note: Properly built SmartLinks ensure consistent data use across reporting, flowsheets, and notes."
+            "Toggle Side-by-Side or Summary view.",
+            "Click magnifying glass for more details."
           ]
         }
+      ],
+      "qa": [
+        { "q": "What does X in registration mean?", "a": "Registration incomplete; won’t block discharge." }
+      ],
+      "trainingMaterials": [
+        { "title": "ED Track Board Placeholder", "url": "#" }
+      ]
+    },
+    {
+      "module": "Beaker (Lab Workflow)",
+      "category": "Laboratory",
+      "roles": ["Phlebotomist", "Lab Tech"],
+      "steps": [
+        {
+          "title": "Specimen Collection",
+          "items": [
+            "Check in patient → enter orders.",
+            "Print specimen labels.",
+            "Scan wristband → scan specimen.",
+            "Transport to lab."
+          ]
+        },
+        {
+          "title": "Processing",
+          "items": [
+            "Scan barcode in Receiving.",
+            "Verify orders and containers.",
+            "Cancel/redraw as needed."
+          ]
+        },
+        {
+          "title": "Tech Workflow",
+          "items": [
+            "Use Outstanding List.",
+            "Perform repeats if needed.",
+            "Verify results.",
+            "Document critical values."
+          ]
+        }
+      ],
+      "qa": [
+        { "q": "How do I reprint a specimen label?", "a": "Open Order → Reprint Label." }
+      ],
+      "trainingMaterials": [
+        { "title": "Lab Placeholder", "url": "#" }
+      ]
+    },
+    {
+      "module": "Optime Anesthesia",
+      "category": "Surgery/Anesthesia",
+      "roles": ["Anesthesiologist", "CRNA", "Resident"],
+      "steps": [
+        {
+          "title": "Electronic Consent",
+          "items": [
+            "Open Consent activity.",
+            "Select consent type.",
+            "Capture e-signatures.",
+            "If refused: print, ink, scan, send to HIM."
+          ]
+        },
+        {
+          "title": "Specimen Labeling",
+          "items": [
+            "Place order.",
+            "Print labels.",
+            "Scan wristband + specimen."
+          ]
+        },
+        {
+          "title": "Intra-Op Workflow",
+          "items": [
+            "Use Sidebar Quick Events (In Room, Procedure Start, etc.).",
+            "Document events as they occur."
+          ]
+        }
+      ],
+      "qa": [
+        { "q": "What if patient refuses e-sig?", "a": "Print, ink sign, scan, and send to HIM." }
+      ],
+      "trainingMaterials": [
+        { "title": "Optime Placeholder", "url": "#" }
+      ]
+    },
+    {
+      "module": "Inpatient Provider Workflow",
+      "category": "Inpatient",
+      "roles": ["Hospitalist", "Resident", "Consultant"],
+      "steps": [
+        {
+          "title": "Navigation & Storyboard",
+          "items": [
+            "Open My Lists.",
+            "Review Storyboard: demographics, team, labs."
+          ]
+        },
+        {
+          "title": "Problem List & Orders",
+          "items": [
+            "Add/update/resolve problems.",
+            "Place/review orders."
+          ]
+        },
+        {
+          "title": "Medication Reconciliation",
+          "items": [
+            "Admission: reconcile home meds.",
+            "Transfer: reconcile again.",
+            "Discharge: finalize reconciliation."
+          ]
+        },
+        {
+          "title": "Discharge & AVS",
+          "items": [
+            "Review allergies, orders, problems.",
+            "Finalize discharge orders.",
+            "Generate AVS → Print/Send."
+          ]
+        }
+      ],
+      "qa": [
+        { "q": "Where do I reconcile meds?", "a": "At admission, transfer, and discharge." }
+      ],
+      "trainingMaterials": [
+        { "title": "Inpatient Provider Placeholder", "url": "#" }
+      ]
+    },
+    {
+      "module": "Clinical Documentation (Clin Doc)",
+      "category": "Clinical Documentation",
+      "roles": ["Nursing", "Providers"],
+      "steps": [
+        {
+          "title": "SDOH",
+          "items": [
+            "Document SDOH risks in flowsheets.",
+            "BPAs trigger consult orders.",
+            "Case mgmt/social services track follow-up."
+          ]
+        },
+        {
+          "title": "Patient Expiration",
+          "items": [
+            "Open Patient Expiration navigator.",
+            "Document death, donor status, body release.",
+            "Forms generated for signature & scan."
+          ]
+        },
+        {
+          "title": "Belongings & Meds",
+          "items": [
+            "Document belongings in navigator/flowsheets.",
+            "Use e-sig for patient/staff.",
+            "Mark Med List reviewed."
+          ]
+        }
+      ],
+      "qa": [
+        { "q": "What’s required for wound documentation?", "a": "Four Eyes Assessment (2 staff, not always RNs)." }
+      ],
+      "trainingMaterials": [
+        { "title": "Clin Doc Placeholder", "url": "#" }
+      ]
+    },
+    {
+      "module": "Go-Live Preparation",
+      "category": "Implementation",
+      "roles": ["All Staff"],
+      "steps": [
+        {
+          "title": "Go-Live Overview",
+          "items": [
+            "Go-Live = October 1.",
+            "Sites: Saint Francis Evanston + Holy Family LTACH."
+          ]
+        },
+        {
+          "title": "New Features",
+          "items": [
+            "Meds to Bed program.",
+            "Epic Narrators for codes & emergencies.",
+            "E-signature replaces paper consents.",
+            "Rovers not used for meds/wounds; use scanners."
+          ]
+        },
+        {
+          "title": "Specialty Workflows",
+          "items": [
+            "Wound Care: Four Eyes Assessment.",
+            "Device association validation.",
+            "Therapies structured in navigators.",
+            "Dietitian + malnutrition documentation."
+          ]
+        }
+      ],
+      "qa": [
+        { "q": "What’s unique about Holy Family?", "a": "First LTACH; workflows for LOA, transfers, and LTCH dataset." }
+      ],
+      "trainingMaterials": [
+        { "title": "Go-Live Placeholder", "url": "#" }
+      ],
+      "logistics": [
+        { "title": "Go-Live Logistics Placeholder", "url": "#" }
       ]
     }
   ]
